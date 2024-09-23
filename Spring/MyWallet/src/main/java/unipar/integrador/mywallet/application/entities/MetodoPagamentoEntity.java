@@ -5,6 +5,8 @@ import lombok.*;
 import unipar.integrador.mywallet.application.enums.MetodoPagamentoEnum;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "MetodoPagamento")
 @Data
@@ -12,12 +14,15 @@ import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class MetodoPagamentoEntity extends Base {
+public class MetodoPagamentoEntity {
+
+    @Id
+    @Column(name = "Id", nullable = false, updatable = false)
+    private UUID id;
 
     @Column(name = "MetodoPagamento", nullable = false)
     @Enumerated(EnumType.STRING)
-    public MetodoPagamentoEnum metodoPagamentoEnum;
+    public MetodoPagamentoEnum metodoPagamento;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "StatusRegistro", nullable = false)
