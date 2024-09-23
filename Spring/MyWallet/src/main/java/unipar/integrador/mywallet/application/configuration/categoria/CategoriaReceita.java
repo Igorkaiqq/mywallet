@@ -1,5 +1,6 @@
 package unipar.integrador.mywallet.application.configuration.categoria;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import unipar.integrador.mywallet.application.entities.CategoriaPadraoEntity;
 import unipar.integrador.mywallet.application.entities.TipoTransacaoEntity;
@@ -13,7 +14,8 @@ import java.util.UUID;
 @Component
 public class CategoriaReceita {
 
-    private TipoTransacaoRepository tipoTransacaoRepository;
+    @Autowired
+    private  TipoTransacaoRepository tipoTransacaoRepository;
 
     public List<CategoriaPadraoEntity> getCategoriasReceitaPadrao() {
         TipoTransacaoEntity receitaId = tipoTransacaoRepository.findById(UUID.fromString("2B8285B8-97AD-4727-AF3A-E39D2ECE52E7"))

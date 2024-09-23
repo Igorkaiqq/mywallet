@@ -4,24 +4,29 @@ import jakarta.persistence.*;
 import lombok.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "CategoriaUsuario")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class CategoriaUsuarioEntity extends Base {
+public class CategoriaUsuarioEntity{
+
+    @Id
+    @Column(name = "Id", nullable = false, updatable = false)
+    private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "UsuarioId", nullable = false)
+    @JoinColumn(name = "UsuarioId", referencedColumnName = "id", nullable = false)
     private UsuarioEntity usuarioEntity;
 
     @ManyToOne
-    @JoinColumn(name = "TipoTransacaoId", nullable = false)
+    @JoinColumn(name = "TipoTransacaoId", referencedColumnName = "id", nullable = false)
     private TipoTransacaoEntity tipoTransacaoEntity;
 
     @ManyToOne
-    @JoinColumn(name = "CategoriaPadraoId", nullable = true)
+    @JoinColumn(name = "CategoriaPadraoId", referencedColumnName = "id", nullable = true)
     private CategoriaPadraoEntity categoriaPadraoEntity;
 
     @Column(name = "Nome", length = 70, nullable = false)
