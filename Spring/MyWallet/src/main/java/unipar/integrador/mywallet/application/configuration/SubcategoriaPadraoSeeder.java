@@ -2,6 +2,7 @@ package unipar.integrador.mywallet.application.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import unipar.integrador.mywallet.application.configuration.subcategoria.despesa.*;
 import unipar.integrador.mywallet.application.configuration.subcategoria.receita.SubcategoriaInvestimento;
@@ -15,6 +16,7 @@ import unipar.integrador.mywallet.infrastructure.repository.SubcategoriaPadraoRe
 import java.util.List;
 import java.util.Optional;
 
+@Order(4)
 @Component
 public class SubcategoriaPadraoSeeder  implements CommandLineRunner {
 

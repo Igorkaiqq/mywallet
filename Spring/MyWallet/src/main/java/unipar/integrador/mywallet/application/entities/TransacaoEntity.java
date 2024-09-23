@@ -5,14 +5,18 @@ import lombok.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "Transacao")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class TransacaoEntity extends Base {
+public class TransacaoEntity {
+
+    @Id
+    @Column(name = "Id", nullable = false, updatable = false)
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "UsuarioId", nullable = false)
