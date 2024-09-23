@@ -45,9 +45,10 @@ public class CategoriaPadraoSeeder implements CommandLineRunner {
 
             if (categoriaExistente.isPresent()) {
                 CategoriaPadraoEntity existente = categoriaExistente.get();
-                if (!existente.getNome().equals(categoria.getNome()) ||
+                if (   !existente.getNome().equals(categoria.getNome()) ||
                         existente.getTipoTransacao().getId().equals(categoria.getTipoTransacao().getId()) ||
-                        existente.getStatusRegistro() != categoria.getStatusRegistro()) {
+                        existente.getStatusRegistro() != categoria.getStatusRegistro()
+                ){
                     existente.setNome(categoria.getNome());
                     existente.setTipoTransacao(categoria.getTipoTransacao());
                     existente.setStatusRegistro(categoria.getStatusRegistro());
