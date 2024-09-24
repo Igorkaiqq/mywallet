@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import unipar.integrador.mywallet.application.configuration.categoria.CategoriaDespesa;
 import unipar.integrador.mywallet.application.configuration.categoria.CategoriaReceita;
 import unipar.integrador.mywallet.application.entities.CategoriaPadraoEntity;
-import unipar.integrador.mywallet.application.entities.TipoTransacaoEntity;
-import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.infrastructure.repository.CategoriaPadraoRepository;
 import unipar.integrador.mywallet.infrastructure.repository.TipoTransacaoRepository;
 

@@ -1,7 +1,56 @@
 package unipar.integrador.mywallet.api.controllers;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
+import unipar.integrador.mywallet.application.entities.TransacaoEntity;
+import unipar.integrador.mywallet.application.services.TransacaoService;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@RestController
 public class TransacaoController {
+
+    @Autowired
+    private TransacaoService transacaoService;
+
+    @PostMapping
+    public ResponseEntity<TransacaoEntity> create(@RequestBody TransacaoDTO dto) {
+        TransacaoEntity transacao = transacaoService.save(dto);
+        return new ResponseEntity<>(transacao, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TransacaoEntity> findById(@PathVariable UUID id) {
+        Optional<TransacaoEntity> transacao = transacaoService.findById(id);
+        return transacao.map(ResponseEntity::ok)
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TransacaoEntity>> findAll() {
+        List<TransacaoEntity> transacoes = transacaoService.findAll();
+        return new ResponseEntity<>(transacoes, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TransacaoEntity> update(@PathVariable UUID id, @RequestBody TransacaoDTO dto) {
+        Optional<TransacaoEntity> existingTransacao = transacaoService.findById(id);
+        if (existingTransacao.isPresent()) {
+            TransacaoEntity updatedTransacao = transacaoService.update(existingTransacao.get());
+            return new ResponseEntity<>(updatedTransacao, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        transacaoService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

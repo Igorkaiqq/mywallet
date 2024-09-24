@@ -2,14 +2,11 @@ package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.*;
-import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.interfaces.ISubcategoriaUsuario;
 import unipar.integrador.mywallet.infrastructure.repository.SubcategoriaUsuarioRepository;
 import unipar.integrador.mywallet.infrastructure.repository.CategoriaUsuarioRepository;
-import unipar.integrador.mywallet.infrastructure.repository.UsuarioRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,10 +21,6 @@ public class SubcategoriaUsuarioService implements ISubcategoriaUsuario {
     @Autowired
     private CategoriaUsuarioRepository categoriaUsuarioRepository;
 
-
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
 
     @Override
     public SubcategoriaUsuarioEntity save(SubcategoriaUsuarioDTO dto) {

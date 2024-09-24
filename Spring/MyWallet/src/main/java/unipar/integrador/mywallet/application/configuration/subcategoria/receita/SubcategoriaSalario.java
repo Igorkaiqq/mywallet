@@ -6,7 +6,6 @@ import unipar.integrador.mywallet.application.entities.CategoriaPadraoEntity;
 import unipar.integrador.mywallet.application.entities.SubcategoriaPadraoEntity;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.infrastructure.repository.CategoriaPadraoRepository;
-import unipar.integrador.mywallet.infrastructure.repository.SubcategoriaPadraoRepository;
 
 import java.util.Arrays;
 import java.util.List;

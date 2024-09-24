@@ -1,9 +1,7 @@
 package unipar.integrador.mywallet.application.interfaces;
 
 import unipar.integrador.mywallet.application.dto.metodoPagamento.MetodoPagamentoDTO;
-import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.MetodoPagamentoEntity;
-import unipar.integrador.mywallet.application.entities.SubcategoriaUsuarioEntity;
 
 import java.util.List;
 import java.util.Optional;
