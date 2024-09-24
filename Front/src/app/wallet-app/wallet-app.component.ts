@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wallet',
@@ -49,5 +50,11 @@ export class WalletAppComponent implements OnInit {
 
   onCancel() {
     this.walletAppForm.reset();
+  }
+
+  constructor(private router: Router) {} //
+
+  goToCadReceita() {
+    this.router.navigate(['/cad-receita']); //
   }
 }
