@@ -26,9 +26,8 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
     @Override
     public CategoriaUsuarioEntity save(CategoriaUsuarioDTO dto) {
         CategoriaUsuarioEntity categoriaUsuario = new CategoriaUsuarioEntity();
-        categoriaUsuario.setId(UUID.randomUUID()); // Gerar novo UUID
+        categoriaUsuario.setId(UUID.randomUUID());
 
-        // Criar instâncias vazias e setar o UUID manualmente
         UsuarioEntity usuarioEntity = new UsuarioEntity();
         usuarioEntity.setId(dto.usuarioId());
         categoriaUsuario.setUsuarioEntity(usuarioEntity);

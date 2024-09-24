@@ -2,7 +2,6 @@ package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import unipar.integrador.mywallet.application.dto.categoriaPadrao.CategoriaPadraoDTO;
 import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDto;
@@ -10,7 +9,6 @@ import unipar.integrador.mywallet.application.entities.*;
 import unipar.integrador.mywallet.application.enums.GeneroEnum;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.interfaces.IUsuario;
-import unipar.integrador.mywallet.infrastructure.repository.CategoriaUsuarioRepository;
 import unipar.integrador.mywallet.infrastructure.repository.UsuarioRepository;
 
 import java.time.LocalDate;
@@ -85,7 +83,6 @@ public class UsuarioService implements IUsuario {
 
                 SubcategoriaUsuarioDTO subcategoriaUsuarioDto = subcategoriaUsuarioService.convertToDto(subcategoriaUsuario);
 
-                // Salvar a subcategoria do usuário
                 subcategoriaUsuarioService.save(subcategoriaUsuarioDto);
             }
         }

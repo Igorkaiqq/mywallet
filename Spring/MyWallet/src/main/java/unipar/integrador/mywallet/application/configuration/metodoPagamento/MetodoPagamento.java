@@ -1,11 +1,9 @@
 package unipar.integrador.mywallet.application.configuration.metodoPagamento;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import unipar.integrador.mywallet.application.entities.MetodoPagamentoEntity;
 import unipar.integrador.mywallet.application.enums.MetodoPagamentoEnum;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
-import unipar.integrador.mywallet.infrastructure.repository.MetodoPagamentoRepository;
 
 import java.util.Arrays;
 import java.util.List;

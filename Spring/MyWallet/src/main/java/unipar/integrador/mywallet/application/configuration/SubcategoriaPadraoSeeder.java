@@ -8,9 +8,7 @@ import unipar.integrador.mywallet.application.configuration.subcategoria.despesa
 import unipar.integrador.mywallet.application.configuration.subcategoria.receita.SubcategoriaInvestimento;
 import unipar.integrador.mywallet.application.configuration.subcategoria.receita.SubcategoriaOutros;
 import unipar.integrador.mywallet.application.configuration.subcategoria.receita.SubcategoriaSalario;
-import unipar.integrador.mywallet.application.entities.CategoriaPadraoEntity;
 import unipar.integrador.mywallet.application.entities.SubcategoriaPadraoEntity;
-import unipar.integrador.mywallet.infrastructure.repository.CategoriaPadraoRepository;
 import unipar.integrador.mywallet.infrastructure.repository.SubcategoriaPadraoRepository;
 
 import java.util.List;
@@ -19,9 +17,6 @@ import java.util.Optional;
 @Order(4)
 @Component
 public class SubcategoriaPadraoSeeder  implements CommandLineRunner {
-
-    @Autowired
-    CategoriaPadraoRepository categoriaPadraoRepository;
 
     @Autowired
     SubcategoriaPadraoRepository subcategoriaPadraoRepository;
