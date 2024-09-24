@@ -2,7 +2,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { CadastroUsuarioComponent } from "./cadastro-usuario/cadastro-usuario.component";
 import { LoginComponent } from "./login/login.component";
 import { WalletAppComponent } from "./wallet-app/wallet-app.component";
-import { MovimentacaoOverlayComponent } from "./movimentacao-overlay/movimentacao-overlay.component";
+import { CadReceitaComponent } from "./cad-receita/cad-receita.component";
 
 export const routes: Routes = [
     {
@@ -14,10 +14,13 @@ export const routes: Routes = [
         component: WalletAppComponent
     },
     {
+        path: 'cad-receita',
+        component: CadReceitaComponent
+    },
+    {
         path: '**',
         component: LoginComponent
     }
 ];
-
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

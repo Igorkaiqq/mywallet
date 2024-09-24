@@ -1,0 +1,70 @@
+.cad-receita-container {
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    padding: 20px;
+    width: 600px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 3%; 
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    background-color: limegreen;
+    padding: 10px;
+    border-radius: 10px 10px 10px 10px;
+    color: white;
+  }
+  
+  .value-section h2 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  .header-buttons button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  label {
+    margin: 3px 0 5px;
+    font-weight: bold;
+  }
+  
+  input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+  }
+  
+  .date-buttons button, .launch-type-buttons button {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 0px;
+    border-radius: 5px;
+    cursor: pointer; 
+    width: 170px;
+    height: 60px;
+  }
+  
+  .date-buttons, .launch-type-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .date-buttons button:hover, .launch-type-buttons button:hover {
+    background-color: rgb(150, 255, 150);
+  }
+  
