@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-criar-conta',
@@ -10,19 +11,35 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 })
 export class CadastroUsuarioComponent implements OnInit {
   criarContaForm = new FormGroup({
+    nome: new FormControl('', Validators.required),
     username: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
-    confirmPassword: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required)
+    telefone: new FormControl('', Validators.required),
+    cpf: new FormControl('', [Validators.required, Validators.pattern(/^\d{11}$/)]), // CPF com 11 dígitos
+    genero: new FormControl(''),
+    dataNascimento: new FormControl('', Validators.required),
+    pergunta1: new FormControl('', Validators.required),
+    pergunta2: new FormControl('', Validators.required)
   });
 
+  private httpClient = inject(HttpClient);
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.httpClient.get('http://localhost:8080').subscribe({
+      next: (response) => {
+        console.log(response)
+      }
+    })
+  }
 
   onSubmit() {
     if (this.criarContaForm.valid) {
-      console.log('Form Data: ', this.criarContaForm.value);
-      // Lógica para salvar a conta
+      this.httpClient.post('http://localhost:8080', {usuario : this.criarContaForm.value}).subscribe({
+        next: (response) => {
+          console.log(response);
+        }
+      });
     } else {
       console.log('Form inválido');
     }
