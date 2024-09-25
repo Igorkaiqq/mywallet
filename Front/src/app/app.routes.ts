@@ -3,6 +3,7 @@ import { CadastroUsuarioComponent } from "./cadastro-usuario/cadastro-usuario.co
 import { LoginComponent } from "./login/login.component";
 import { WalletAppComponent } from "./wallet-app/wallet-app.component";
 import { CadReceitaComponent } from "./cad-receita/cad-receita.component";
+// import { HttpClienteModule } from '@angular/common/http';
 
 export const routes: Routes = [
     {

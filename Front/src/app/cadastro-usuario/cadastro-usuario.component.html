@@ -3,23 +3,36 @@
     <h1>CRIAR CONTA</h1>
     <form [formGroup]="criarContaForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="username">Nome de Usuário:</label>
+        
+        <label for="nome">Nome:</label>
+        <input id="nome" class="form-control" formControlName="nome" type="text" />
+        
+        <label for="username">Apelido:</label>
         <input id="username" class="form-control" formControlName="username" type="text" />
-      </div>
-
-      <div class="form-group">
+        
+        <label for="email">E-mail:</label>
+        <input id="email" class="form-control" formControlName="email" type="text" />
+        
         <label for="password">Senha:</label>
         <input id="password" class="form-control" formControlName="password" type="password" />
-      </div>
+        
+        <label for="telefone">Telefone:</label>
+        <input id="telefone" class="form-control" formControlName="telefone" type="text" />
+        
+        <label for="cpf">CPF:</label>
+        <input id="cpf" class="form-control" formControlName="cpf" type="text" />
+        
+        <label for="genero">Gênero:</label>
+        <input id="genero" class="form-control" formControlName="genero" type="text" />
+        
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input id="dataNascimento" class="form-control" formControlName="dataNascimento" type="date" />
 
-      <div class="form-group">
-        <label for="confirmPassword">Repita a Senha:</label>
-        <input id="confirmPassword" class="form-control" formControlName="confirmPassword" type="password" />
-      </div>
+        <label for="pergunta1">Pergunta de Recuperação de senha 1:</label>
+        <input id="pergunta1" class="form-control" formControlName="pergunta1" type="text"/>
 
-      <div class="form-group">
-        <label for="email">E-mail:</label>
-        <input id="email" class="form-control" formControlName="email" type="email" />
+        <label for="pergunta2">Pergunta de Recuperação de senha 2:</label>
+        <input id="pergunta2" class="form-control" formControlName="pergunta2" type="text"/>
       </div>
 
       <div class="buttons">

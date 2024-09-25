@@ -16,9 +16,9 @@
 
     <label>Data:</label>
     <div class="date-buttons">
-      <button type="button">HOJE</button>
-      <button type="button">ONTEM</button>
-      <button type="button">SELECIONAR DATA</button>
+        <button type="button" [ngClass]="{'selected': selectedDate === 'hoje'}" (click)="selectDate('hoje')">HOJE</button>
+        <button type="button" [ngClass]="{'selected': selectedDate === 'ontem'}" (click)="selectDate('ontem')">ONTEM</button>
+        <button type="button" [ngClass]="{'selected': selectedDate === 'selecionar'}" (click)="selectDate('selecionar')">SELECIONAR DATA</button>
     </div>
 
     <label for="categoria">Categoria:</label>
@@ -38,9 +38,9 @@
 
     <label>Lançamento:</label>
     <div class="launch-type-buttons">
-      <button type="button">ÚNICO</button>
-      <button type="button">RECORRENTE</button>
-      <button type="button">PARCELADO</button>
+      <button type="button" [ngClass]="{'selected': selectedLaunch === 'unico'}" (click)="selectLaunch('unico')">ÚNICO</button>
+      <button type="button" [ngClass]="{'selected': selectedLaunch === 'recorrente'}" (click)="selectLaunch('recorrente')">RECORRENTE</button>
+      <button type="button" [ngClass]="{'selected': selectedLaunch === 'parcelado'}" (click)="selectLaunch('parcelado')">PARCELADO</button>
     </div>
   </form>
 </div>

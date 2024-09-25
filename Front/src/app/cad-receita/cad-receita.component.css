@@ -21,6 +21,13 @@
     margin: 0;
     font-size: 1.5em;
   }
+
+  .selected {
+    background-color: rgb(150, 255, 150) !important;
+    color: black;
+    border: none;
+}
+
   
   .header-buttons button {
     background: none;
@@ -57,6 +64,7 @@
     cursor: pointer; 
     width: 170px;
     height: 60px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
   
   .date-buttons, .launch-type-buttons {
