@@ -1,6 +1,7 @@
 package unipar.integrador.mywallet.application.interfaces;
 
-import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDto;
+import unipar.integrador.mywallet.application.dto.usuario.AtualizarUsuarioDTO;
+import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.UsuarioEntity;
 
 import java.util.List;
@@ -10,10 +11,10 @@ import java.util.UUID;
 
 public interface IUsuario {
 
-    UsuarioEntity save(CadastroUsuarioDto dto);
+    UsuarioEntity save(CadastroUsuarioDTO dto);
     Optional<UsuarioEntity> findById(UUID id);
     List<UsuarioEntity> findAll();
-    UsuarioEntity update(UsuarioEntity usuarioEntity);
+    UsuarioEntity update(UUID id, AtualizarUsuarioDTO dto);
     void deleteById(UUID id);
 
 }

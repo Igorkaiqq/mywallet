@@ -17,18 +17,4 @@ public class MyWalletApplication {
         SpringApplication.run(MyWalletApplication.class, args);
     }
 
-    @EventListener(ContextRefreshedEvent.class)
-    public void openSwaggerUI() {
-        try {
-            String url = "http://localhost:8080/swagger-ui/index.html";
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().browse(new URI(url));
-            } else {
-                Runtime runtime = Runtime.getRuntime();
-                runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

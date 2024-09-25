@@ -1,18 +1,24 @@
 package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import unipar.integrador.mywallet.application.converters.usuario.UsuarioConverterDTO;
 import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
-import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDto;
+import unipar.integrador.mywallet.application.dto.usuario.AtualizarUsuarioDTO;
+import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.*;
 import unipar.integrador.mywallet.application.enums.GeneroEnum;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
+import unipar.integrador.mywallet.application.exception.CamposDuplicadosUsuarioException;
+import unipar.integrador.mywallet.application.exception.ExceptionUtils;
+import unipar.integrador.mywallet.application.exception.GlobalExceptionHandler;
+import unipar.integrador.mywallet.application.exception.UsuarioNaoEncontradoException;
 import unipar.integrador.mywallet.application.interfaces.IUsuario;
+import unipar.integrador.mywallet.application.services.subservice.CategoriaSubcategoriaService;
 import unipar.integrador.mywallet.infrastructure.repository.UsuarioRepository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,66 +33,23 @@ public class UsuarioService implements IUsuario {
     private CategoriaPadraoService categoriaPadraoService;
 
     @Autowired
-    private CategoriaUsuarioService categoriaUsuarioService;
-
-    @Autowired
-    private SubcategoriaPadraoService subcategoriaPadraoService;
-
-    @Autowired
-    private SubcategoriaUsuarioService subcategoriaUsuarioService;
+    private CategoriaSubcategoriaService categoriaSubcategoriaService;
 
     @Override
-    public UsuarioEntity save(CadastroUsuarioDto dto) {
-        UsuarioEntity usuarioEntity = new UsuarioEntity();
-        usuarioEntity.setNome(dto.nome());
-        usuarioEntity.setUsername(dto.username());
-        usuarioEntity.setEmail(dto.email());
-        usuarioEntity.setSenha(dto.senha());
-        usuarioEntity.setTelefone(dto.telefone());
-        usuarioEntity.setCpf(dto.cpf());
-        usuarioEntity.setGenero(GeneroEnum.valueOf(dto.genero()));
-        usuarioEntity.setDataNascimento(LocalDate.parse(dto.dataNascimento()));
-        usuarioEntity.setDataCadastro(LocalDateTime.now());
-        usuarioEntity.setPerguntaSecreta(dto.perguntaSecreta());
-        usuarioEntity.setRespostaSecreta(dto.respostaSecreta());
-        usuarioEntity.setStatusRegistro(StatusRegistroEnum.ATIVO);
-        UsuarioEntity usuarioSalvo = usuarioRepository.save(usuarioEntity);
+    public UsuarioEntity save(CadastroUsuarioDTO dto) {
 
-        List<CategoriaPadraoEntity> categoriasPadrao = categoriaPadraoService.findAllCategoriasAtivasEntities();
+        try {
+            UsuarioEntity usuarioEntity = UsuarioConverterDTO.toEntity(dto);
+            UsuarioEntity usuarioSalvo = usuarioRepository.save(usuarioEntity);
 
-        for (CategoriaPadraoEntity categoriaPadrao : categoriasPadrao) {
-            CategoriaUsuarioEntity categoriaUsuario = new CategoriaUsuarioEntity();
-            categoriaUsuario.setUsuarioEntity(usuarioSalvo);
-            categoriaUsuario.setTipoTransacaoEntity(categoriaPadrao.getTipoTransacao());
-            categoriaUsuario.setCategoriaPadraoEntity(categoriaPadrao);
-            categoriaUsuario.setNome(categoriaPadrao.getNome());
-            categoriaUsuario.setStatusRegistro(StatusRegistroEnum.ATIVO);
+            List<CategoriaPadraoEntity> categoriasPadrao = categoriaPadraoService.findAllCategoriasAtivasEntities();
+            categoriaSubcategoriaService.associarCategoriasComUsuario(usuarioSalvo, categoriasPadrao);
 
-            CategoriaUsuarioDTO categoriaUsuarioDto = categoriaUsuarioService.convertToDto(categoriaUsuario);
-
-            CategoriaUsuarioEntity categoriaSalva = categoriaUsuarioService.save(categoriaUsuarioDto);
-
-            List<SubcategoriaPadraoEntity> subcategoriasPadrao = subcategoriaPadraoService.findAllSubcategoriasAtivasByCategoriaId(categoriaPadrao.getId());
-
-            for (SubcategoriaPadraoEntity subcategoriaPadrao : subcategoriasPadrao) {
-                SubcategoriaUsuarioEntity subcategoriaUsuario = new SubcategoriaUsuarioEntity();
-
-                subcategoriaUsuario.setUsuarioEntity(usuarioSalvo);
-                subcategoriaUsuario.setCategoriaUsuario(categoriaSalva);
-
-                SubcategoriaPadraoEntity subcategoriaPadraoEntity = new SubcategoriaPadraoEntity();
-                subcategoriaPadraoEntity.setId(subcategoriaPadrao.getId());
-                subcategoriaUsuario.setSubcategoriaPadrao(subcategoriaPadraoEntity);
-
-                subcategoriaUsuario.setNome(subcategoriaPadrao.getNome());
-                subcategoriaUsuario.setStatusRegistro(StatusRegistroEnum.ATIVO);
-
-                SubcategoriaUsuarioDTO subcategoriaUsuarioDto = subcategoriaUsuarioService.convertToDto(subcategoriaUsuario);
-
-                subcategoriaUsuarioService.save(subcategoriaUsuarioDto);
-            }
+            return usuarioSalvo;
+        } catch (DataIntegrityViolationException e) {
+            String camposDuplicados = ExceptionUtils.extractDuplicatedFields(e.getMessage());
+            throw new CamposDuplicadosUsuarioException(camposDuplicados);
         }
-        return usuarioSalvo;
     }
 
     @Override
@@ -100,13 +63,23 @@ public class UsuarioService implements IUsuario {
     }
 
     @Override
-    public UsuarioEntity update (UsuarioEntity usuarioEntity){
-        return usuarioRepository.save(usuarioEntity);
+    public UsuarioEntity update (UUID id, AtualizarUsuarioDTO atualizarUsuarioDTO){
+
+        UsuarioEntity usuarioExistente = usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado"));
+
+        usuarioExistente.setNome(atualizarUsuarioDTO.nome());
+        usuarioExistente.setEmail(atualizarUsuarioDTO.email());
+        usuarioExistente.setSenha(atualizarUsuarioDTO.senha());
+        usuarioExistente.setTelefone(atualizarUsuarioDTO.telefone());
+
+        return usuarioRepository.save(usuarioExistente);
     }
 
     @Override
     public void deleteById (UUID id){
-        UsuarioEntity usuarioEntity = usuarioRepository.findById(id).orElseThrow();
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário com ID " + id + " não encontrado"));
         usuarioEntity.setStatusRegistro(StatusRegistroEnum.DELETADO);
         usuarioRepository.save(usuarioEntity);
     }
