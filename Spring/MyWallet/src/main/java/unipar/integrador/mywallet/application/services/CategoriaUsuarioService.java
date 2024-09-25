@@ -89,6 +89,11 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
         );
     }
 
+    public Optional<CategoriaUsuarioEntity> findByUsuarioIdAndCategoriaPadraoId(UUID usuarioId, UUID categoriaPadraoId) {
+        return categoriaUsuarioRepository.findByUsuarioEntityIdAndCategoriaPadraoEntityId(usuarioId, categoriaPadraoId);
+    }
+
+
     public boolean isCategoriaRegistrada(UUID usuarioId, UUID categoriaPadraoId) {
         return categoriaUsuarioRepository.existsByUsuarioEntityIdAndCategoriaPadraoEntityId(usuarioId, categoriaPadraoId);
     }

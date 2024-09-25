@@ -1,12 +1,12 @@
 package unipar.integrador.mywallet.application.entities;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.*;
 import unipar.integrador.mywallet.application.enums.GeneroEnum;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Usuario")
@@ -14,24 +14,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Transactional
 public class UsuarioEntity extends Base {
 
     @Column(name = "Nome", length = 70, nullable = false)
     private String nome;
 
-    @Column(name = "Username", length = 70, nullable = false)
+    @Column(name = "Username", length = 70, nullable = false, unique = true)
     private String username;
 
-    @Column(name = "Email", length = 70, nullable = false)
+    @Column(name = "Email", length = 70, nullable = false, unique = true)
     private String email;
 
     @Column(name = "Senha", length = 255, nullable = false)
     private String senha;
 
-    @Column(name = "Telefone", length = 15, nullable = false)
+    @Column(name = "Telefone", length = 15, nullable = false, unique = true)
     private String telefone;
 
-    @Column(name = "Cpf", length = 14, nullable = false)
+    @Column(name = "Cpf", length = 14, nullable = false, unique = true)
     private String cpf;
 
     @Column(name = "Genero", length = 10, nullable = false)
@@ -43,7 +44,7 @@ public class UsuarioEntity extends Base {
     private LocalDate dataNascimento;
 
     @Column(name = "DataCadastro", nullable = false)
-    private LocalDateTime dataCadastro;
+    private LocalDate dataCadastro;
 
     @Column(name = "PerguntaSecreta", length = 70, nullable = false)
     private String perguntaSecreta;

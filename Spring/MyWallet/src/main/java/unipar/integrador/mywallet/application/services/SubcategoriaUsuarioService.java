@@ -80,4 +80,10 @@ public class SubcategoriaUsuarioService implements ISubcategoriaUsuario {
         );
     }
 
+    public Optional<SubcategoriaUsuarioEntity> findByUsuarioIdAndCategoriaUsuarioIdAndSubcategoriaPadraoId(
+            UUID usuarioId, UUID categoriaUsuarioId, UUID subcategoriaPadraoId) {
+        return subcategoriaUsuarioRepository.findByUsuarioEntityIdAndCategoriaUsuarioIdAndSubcategoriaPadraoId(
+                usuarioId, categoriaUsuarioId, subcategoriaPadraoId);
+    }
+
 }
