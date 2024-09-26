@@ -1,12 +1,34 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   standalone: true,
-  imports: [RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'],
+  imports: [FormsModule]
 })
 export class LoginComponent {
+  emailOuUsername: string = '';
+  senha: string = '';
+
+  constructor(private loginService: LoginService, private router: Router) {}
+
+  onSubmit() {
+    const credentials = {
+      emailOuUsername: this.emailOuUsername,
+      senha: this.senha
+    };
+
+    this.loginService.login(credentials).subscribe(
+      response => {
+        this.router.navigate(['/wallet']);
+      },
+      error => {
+        alert('Usuário ou senha inválidos');
+      }
+    );
+  }
 }
