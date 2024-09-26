@@ -13,8 +13,9 @@ import unipar.integrador.mywallet.application.services.UsuarioService;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/usuarios")
+@RequestMapping("/api/v1/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -40,7 +41,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioEntity> atualizarUsuario(UUID id, @Valid @RequestBody AtualizarUsuarioDTO dto){
+    public ResponseEntity<UsuarioEntity> atualizarUsuario(@PathVariable UUID id, @Valid @RequestBody AtualizarUsuarioDTO dto){
         UsuarioEntity usuario = usuarioService.update(id, dto);
         return ResponseEntity.ok(usuario);
     }
