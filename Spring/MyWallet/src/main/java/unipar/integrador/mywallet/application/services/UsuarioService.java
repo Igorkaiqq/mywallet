@@ -2,6 +2,8 @@ package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.converters.usuario.UsuarioConverterDTO;
 import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
@@ -18,6 +20,7 @@ import unipar.integrador.mywallet.application.exception.UsuarioNaoEncontradoExce
 import unipar.integrador.mywallet.application.interfaces.IUsuario;
 import unipar.integrador.mywallet.application.services.subservice.CategoriaSubcategoriaService;
 import unipar.integrador.mywallet.infrastructure.repository.UsuarioRepository;
+import unipar.integrador.mywallet.application.dto.usuario.LoginDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +37,7 @@ public class UsuarioService implements IUsuario {
 
     @Autowired
     private CategoriaSubcategoriaService categoriaSubcategoriaService;
+
 
     @Override
     public UsuarioEntity save(CadastroUsuarioDTO dto) {
@@ -83,5 +87,27 @@ public class UsuarioService implements IUsuario {
         usuarioEntity.setStatusRegistro(StatusRegistroEnum.DELETADO);
         usuarioRepository.save(usuarioEntity);
     }
+
+    public Optional<UsuarioEntity> findByEmailOuUsername(String email, String username) {
+        return usuarioRepository.findByEmailOrUsername(email, username);
+    }
+
+    public ResponseEntity<UsuarioEntity> getEmailOuUsername(String emailOuUsername, String senha) {
+        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findByEmailOrUsername(emailOuUsername, emailOuUsername);
+
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(null);
+        }
+
+        UsuarioEntity usuario = usuarioOpt.get();
+        if (!usuario.getSenha().equals(senha)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(null);
+        }
+
+        return ResponseEntity.ok(usuario);
+    }
+
 
 }

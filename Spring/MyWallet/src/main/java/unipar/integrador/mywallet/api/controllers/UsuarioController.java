@@ -2,15 +2,18 @@ package unipar.integrador.mywallet.api.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unipar.integrador.mywallet.application.dto.usuario.AtualizarUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDTO;
+import unipar.integrador.mywallet.application.dto.usuario.LoginDTO;
 import unipar.integrador.mywallet.application.entities.UsuarioEntity;
 import unipar.integrador.mywallet.application.exception.UsuarioNaoEncontradoException;
 import unipar.integrador.mywallet.application.services.UsuarioService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -51,5 +54,29 @@ public class UsuarioController {
         usuarioService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> validarLogin(@Valid @RequestBody LoginDTO loginDto) {
+        String nomeOuEmail = loginDto.getEmailOuUsername();
+        String senha = loginDto.getSenha();
+
+
+        Optional<UsuarioEntity> usuarioOpt = usuarioService.findByEmailOuUsername(nomeOuEmail, nomeOuEmail);
+
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Username ou e-mail inválido.");
+        }
+        UsuarioEntity usuario = usuarioOpt.get();
+
+        if (!usuario.getSenha().equals(senha)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Senha inválida.");
+        }
+
+        return ResponseEntity.ok("Login realizado com sucesso.");
+    }
+
+
 
 }
