@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -43,7 +43,7 @@ public class TransacaoEntity {
 
     @Column(name = "Data", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date data;
+    private LocalDate data;
 
     @Column(name = "Descricao", length = 200)
     private String descricao;

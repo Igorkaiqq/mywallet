@@ -2,9 +2,11 @@ package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import unipar.integrador.mywallet.application.converters.transacao.TransacaoConveterDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
 import unipar.integrador.mywallet.application.entities.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
+import unipar.integrador.mywallet.application.exception.EntityNotFoundException;
 import unipar.integrador.mywallet.application.interfaces.ITransacao;
 import unipar.integrador.mywallet.infrastructure.repository.TransacaoRepository;
 
@@ -22,34 +24,7 @@ public class TransacaoService implements ITransacao {
     @Override
     public TransacaoEntity save(TransacaoDTO dto) {
 
-        TransacaoEntity transacao = new TransacaoEntity();
-        transacao.setId(UUID.randomUUID());
-
-        UsuarioEntity usuario = new UsuarioEntity();
-        usuario.setId(dto.usuarioId());
-        transacao.setUsuario(usuario);
-
-        TipoTransacaoEntity tipoTransacao = new TipoTransacaoEntity();
-        tipoTransacao.setId(dto.tipoTransacaoId());
-        transacao.setTipoTransacao(tipoTransacao);
-
-        CategoriaUsuarioEntity categoriaUsuario = new CategoriaUsuarioEntity();
-        categoriaUsuario.setId(dto.categoriaId());
-        transacao.setCategoriaUsuario(categoriaUsuario);
-
-        SubcategoriaUsuarioEntity subcategoriaUsuario = new SubcategoriaUsuarioEntity();
-        subcategoriaUsuario.setId(dto.subcategoriaId());
-        transacao.setSubcategoriaUsuario(subcategoriaUsuario);
-
-        MetodoPagamentoEntity metodoPagamento = new MetodoPagamentoEntity();
-        metodoPagamento.setId(dto.metodoPagamentoID());
-        transacao.setMetodoPagamento(metodoPagamento);
-
-        transacao.setValor(dto.valor());
-        transacao.setData(new Date());
-        transacao.setDescricao(dto.descricao());
-        transacao.setStatusRegistro(StatusRegistroEnum.ATIVO);
-
+        TransacaoEntity transacao = TransacaoConveterDTO.toEntity(dto);
 
         return transacaoRepository.save(transacao);
     }
@@ -65,15 +40,32 @@ public class TransacaoService implements ITransacao {
     }
 
     @Override
-    public TransacaoEntity update(TransacaoEntity transacao) {;
-        return transacaoRepository.save(transacao);
+    public TransacaoEntity update(UUID id, TransacaoDTO dto) {
+        TransacaoEntity existingTransacao = transacaoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Transação com ID " + id + " não encontrada."));
+
+        existingTransacao.setValor(dto.valor());
+        existingTransacao.setDescricao(dto.descricao());
+
+        return transacaoRepository.save(existingTransacao);
     }
 
     @Override
     public void deleteById(UUID id) {
 
-        TransacaoEntity transacaoEntity = transacaoRepository.findById(id).orElseThrow();
+        TransacaoEntity transacaoEntity = transacaoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Transação não encontrada."));
         transacaoEntity.setStatusRegistro(StatusRegistroEnum.DELETADO);
         transacaoRepository.save(transacaoEntity);
+    }
+
+    @Override
+    public List<TransacaoEntity> findByUsuarioId(UUID id) {
+        return List.of();
+    }
+
+    @Override
+    public List<TransacaoEntity> findByusuarioIdAndCategoriaId(UUID usuarioId, UUID categoriaId) {
+        return List.of();
     }
 }
