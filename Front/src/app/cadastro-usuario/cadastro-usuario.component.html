@@ -23,8 +23,8 @@
         </div>
 
         <label for="password">Senha:</label>
-        <input id="password" class="form-control" formControlName="password" type="password" />
-        <div *ngIf="criarContaForm.get('password')?.invalid && criarContaForm.get('password')?.touched">
+        <input id="senha" class="form-control" formControlName="senha" type="password" />
+        <div *ngIf="criarContaForm.get('senha')?.invalid && criarContaForm.get('senha')?.touched">
           <small class="text-danger">Campo obrigatório</small>
         </div>
 
@@ -53,14 +53,14 @@
         </div>
 
         <label for="pergunta">Pergunta de segurança:</label>
-        <input id="pergunta" class="form-control" formControlName="pergunta" type="text"/>
-        <div *ngIf="criarContaForm.get('pergunta')?.invalid && criarContaForm.get('pergunta')?.touched">
+        <input id="pergunta" class="form-control" formControlName="perguntaSecreta" type="text"/>
+        <div *ngIf="criarContaForm.get('perguntaSecreta')?.invalid && criarContaForm.get('perguntaSecreta')?.touched">
           <small class="text-danger">Campo obrigatório</small>
         </div>
 
         <label for="resposta">Resposta de segurança:</label>
-        <input id="resposta" class="form-control" formControlName="resposta" type="text"/>
-        <div *ngIf="criarContaForm.get('resposta')?.invalid && criarContaForm.get('resposta')?.touched">
+        <input id="resposta" class="form-control" formControlName="respostaSecreta" type="text"/>
+        <div *ngIf="criarContaForm.get('respostaSecreta')?.invalid && criarContaForm.get('respostaSecreta')?.touched">
           <small class="text-danger">Campo obrigatório</small>
         </div>
 

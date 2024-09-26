@@ -23,13 +23,13 @@ export class CadastroUsuarioComponent implements OnInit {
       nome: new FormControl('', Validators.required),
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
+      senha: new FormControl('', Validators.required),
       telefone: new FormControl('', Validators.required),
       cpf: new FormControl('', [Validators.required, Validators.pattern(/^\d{11}$/)]),
       genero: new FormControl(''),
       dataNascimento: new FormControl('', Validators.required),
-      pergunta: new FormControl('', Validators.required),
-      resposta: new FormControl('', Validators.required)
+      perguntaSecreta: new FormControl('', Validators.required),
+      respostaSecreta: new FormControl('', Validators.required)
     });
   }
 
