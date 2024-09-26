@@ -42,7 +42,6 @@ public class TransacaoEntity {
     private Double valor;
 
     @Column(name = "Data", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate data;
 
     @Column(name = "Descricao", length = 200)

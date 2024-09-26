@@ -3,41 +3,71 @@
     <h1>CRIAR CONTA</h1>
     <form [formGroup]="criarContaForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        
+
         <label for="nome">Nome:</label>
         <input id="nome" class="form-control" formControlName="nome" type="text" />
-        
-        <label for="username">Apelido:</label>
+        <div *ngIf="criarContaForm.get('nome')?.invalid && criarContaForm.get('nome')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
+
+        <label for="username">Username:</label>
         <input id="username" class="form-control" formControlName="username" type="text" />
-        
+        <div *ngIf="criarContaForm.get('username')?.invalid && criarContaForm.get('username')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
+
         <label for="email">E-mail:</label>
         <input id="email" class="form-control" formControlName="email" type="text" />
-        
+        <div *ngIf="criarContaForm.get('email')?.invalid && criarContaForm.get('email')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
+
         <label for="password">Senha:</label>
         <input id="password" class="form-control" formControlName="password" type="password" />
-        
+        <div *ngIf="criarContaForm.get('password')?.invalid && criarContaForm.get('password')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
+
         <label for="telefone">Telefone:</label>
-        <input id="telefone" class="form-control" formControlName="telefone" type="text" />
-        
+        <input id="telefone" class="form-control" formControlName="telefone" mask="(00) 00000-0000" type="text" />
+        <div *ngIf="criarContaForm.get('telefone')?.invalid && criarContaForm.get('telefone')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
+
         <label for="cpf">CPF:</label>
-        <input id="cpf" class="form-control" formControlName="cpf" type="text" />
-        
+        <input id="cpf" class="form-control" formControlName="cpf" mask="000.000.000-00" type="text" />
+        <div *ngIf="criarContaForm.get('cpf')?.invalid && criarContaForm.get('cpf')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
+
         <label for="genero">Gênero:</label>
         <input id="genero" class="form-control" formControlName="genero" type="text" />
-        
+        <div *ngIf="criarContaForm.get('genero')?.invalid && criarContaForm.get('genero')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
+
         <label for="dataNascimento">Data de Nascimento:</label>
         <input id="dataNascimento" class="form-control" formControlName="dataNascimento" type="date" />
+        <div *ngIf="criarContaForm.get('dataNascimento')?.invalid && criarContaForm.get('dataNascimento')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
 
-        <label for="pergunta1">Pergunta de Recuperação de senha 1:</label>
-        <input id="pergunta1" class="form-control" formControlName="pergunta1" type="text"/>
+        <label for="pergunta">Pergunta de segurança:</label>
+        <input id="pergunta" class="form-control" formControlName="pergunta" type="text"/>
+        <div *ngIf="criarContaForm.get('pergunta')?.invalid && criarContaForm.get('pergunta')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
 
-        <label for="pergunta2">Pergunta de Recuperação de senha 2:</label>
-        <input id="pergunta2" class="form-control" formControlName="pergunta2" type="text"/>
-      </div>
+        <label for="resposta">Resposta de segurança:</label>
+        <input id="resposta" class="form-control" formControlName="resposta" type="text"/>
+        <div *ngIf="criarContaForm.get('resposta')?.invalid && criarContaForm.get('resposta')?.touched">
+          <small class="text-danger">Campo obrigatório</small>
+        </div>
 
       <div class="buttons">
-        <button type="submit" class="btn btn-success">SALVAR</button>
-        <button type="button" class="btn btn-danger" (click)="goToLogin()">CANCELAR</button>
+        <button type="submit" class="btn btn-success" [disabled]="criarContaForm.invalid">Salvar</button>
+        <button type="button" class="btn btn-danger" (click)="goToLogin()">Cancelar</button>
+      </div>
       </div>
     </form>
   </div>
