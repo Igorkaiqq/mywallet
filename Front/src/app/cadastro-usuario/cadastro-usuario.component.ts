@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-criar-conta',
@@ -47,5 +48,11 @@ export class CadastroUsuarioComponent implements OnInit {
 
   onCancel() {
     this.criarContaForm.reset();
+  }
+
+  constructor(private router: Router) {}
+
+  goToLogin() {
+    this.router.navigate(['']);
   }
 }

@@ -57,4 +57,8 @@ export class WalletAppComponent implements OnInit {
   goToCadReceita() {
     this.router.navigate(['/cad-receita']); //
   }
+
+  goLogin(){
+    this.router.navigate(['']);
+  }
 }
