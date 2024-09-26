@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cad-receita',
@@ -22,4 +23,9 @@ selectLaunch(option: string) {
   this.selectedLaunch = option;
 }
 
+constructor(private router: Router) {}
+
+goCancel() {
+  this.router.navigate(['/wallet']);
+}
 }

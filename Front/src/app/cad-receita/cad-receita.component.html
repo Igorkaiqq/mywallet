@@ -4,10 +4,6 @@
       <p>Valor:</p>
       <h2>R$ 0,00</h2>
     </div>
-    <div class="header-buttons">
-      <button class="check-btn">&#10003;</button>
-      <button class="close-btn">&#10006;</button>
-    </div>
   </div>
 
   <form>
@@ -41,6 +37,11 @@
       <button type="button" [ngClass]="{'selected': selectedLaunch === 'unico'}" (click)="selectLaunch('unico')">ÚNICO</button>
       <button type="button" [ngClass]="{'selected': selectedLaunch === 'recorrente'}" (click)="selectLaunch('recorrente')">RECORRENTE</button>
       <button type="button" [ngClass]="{'selected': selectedLaunch === 'parcelado'}" (click)="selectLaunch('parcelado')">PARCELADO</button>
+    </div>
+
+    <div class="buttons">
+      <button type="submit" class="btn btn-success">SALVAR</button>
+      <button type="button" class="btn btn-danger" (click)="goCancel()">CANCELAR</button>
     </div>
   </form>
 </div>

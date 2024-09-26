@@ -9,12 +9,13 @@
 <body>
 
     <div class="header">
-        <h1>Expert Wallet</h1>
+        <h1 (click)="goLogin()">Expert Wallet</h1>
         <div class="buttons">
             <button class="button-criar" (click)="goToCadReceita()">Criar Movimentação</button>
             <button class="button-visualizar">Visualizar Movimentações</button>
         </div>
     </div>
+
     <div class="container">
         <div class="main">
             <div class="card-row">
@@ -31,50 +32,32 @@
                     <p>R$</p>
                 </div>
             </div>
-            <div class="card-row">
-                <div class="card">
-                    <h3>Moradia</h3>
-                    <p>R$</p>
-                </div>
-                <div class="card">
-                    <h3>Cartão</h3>
-                    <p>R$</p>
-                </div>
-                <div class="card">
-                    <h3>Transporte</h3>
-                    <p>R$</p>
-                </div>
-                <div class="card">
-                    <h3>Lazer</h3>
-                    <p>R$</p>
-                </div>
-            </div>
-            <div class="card-row">
-                <div class="card">
-                    <h3>Top 5 Despesas</h3>
-                </div>
-                <div class="card">
-                    <h3>Top 5 Receitas</h3>
-                </div>
-            </div>
+        </div>
+
+        <div class="table-section">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Categoria</th>
+                        <th>Sub-Categoria</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <!-- <div class="overlay" id="overlay">
-        <div class="overlay-content">
-            <div class="overlay-button">
-                <div class="receita" onclick="toggleOverlay()">RECEITA</div>
-                <div class="despesa" onclick="toggleOverlay()">DESPESAS</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function toggleOverlay() {
-            const overlay = document.getElementById('overlay');
-            overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
-        }
-    </script> -->
 </body>
 
 </html>
