@@ -32,6 +32,24 @@ export class CadastroUsuarioComponent implements OnInit {
         console.log(response)
       }
     })
+  criarContaForm: FormGroup;
+
+  private usuarioService = inject(UsuarioService);
+  private router = inject(Router);
+
+  constructor() {
+    this.criarContaForm = new FormGroup({
+      nome: new FormControl('', Validators.required),
+      username: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      senha: new FormControl('', Validators.required),
+      telefone: new FormControl('', Validators.required),
+      cpf: new FormControl('', [Validators.required, Validators.pattern(/^\d{11}$/)]),
+      genero: new FormControl(''),
+      dataNascimento: new FormControl('', Validators.required),
+      perguntaSecreta: new FormControl('', Validators.required),
+      respostaSecreta: new FormControl('', Validators.required)
+    });
   }
 
   onSubmit() {
