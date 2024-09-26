@@ -1,5 +1,6 @@
 package unipar.integrador.mywallet.api.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class TransacaoController {
     private TransacaoService transacaoService;
 
     @PostMapping
-    public ResponseEntity<TransacaoEntity> create(@RequestBody TransacaoDTO dto) {
+    public ResponseEntity<TransacaoEntity> create(@Valid @RequestBody TransacaoDTO dto) {
         TransacaoEntity transacao = transacaoService.save(dto);
         return new ResponseEntity<>(transacao, HttpStatus.CREATED);
     }
@@ -38,13 +39,9 @@ public class TransacaoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TransacaoEntity> update(@PathVariable UUID id, @RequestBody TransacaoDTO dto) {
-        Optional<TransacaoEntity> existingTransacao = transacaoService.findById(id);
-        if (existingTransacao.isPresent()) {
-            TransacaoEntity updatedTransacao = transacaoService.update(existingTransacao.get());
-            return new ResponseEntity<>(updatedTransacao, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<TransacaoEntity> update(@PathVariable UUID id, @Valid @RequestBody TransacaoDTO dto) {
+        TransacaoEntity updatedTransacao = transacaoService.update(id, dto);
+        return new ResponseEntity<>(updatedTransacao, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
