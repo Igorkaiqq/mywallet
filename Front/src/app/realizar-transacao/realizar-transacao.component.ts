@@ -7,6 +7,7 @@ import {TipoTransacaoService} from "../service/tipoTransacao/tipo-transacao.serv
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule} from "ng2-currency-mask";
+import {Router} from "@angular/router";
 
 interface TipoTransacao {
   tipoTransacaoEnum: string;
@@ -77,7 +78,8 @@ export class RealizarTransacaoComponent implements OnInit {
     private subcategoriaService: SubcategoriaService,
     private metodoPagamentoService: MetodoPagamentoService,
     private transacaoService: TransacaoService,
-    private tipotransacaoService: TipoTransacaoService
+    private tipotransacaoService: TipoTransacaoService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -104,19 +106,30 @@ export class RealizarTransacaoComponent implements OnInit {
 
   onTipoTransacaoChange(event: any): void {
 
-    this.categoriaService.getCategoriasPorUsuarioId().subscribe(categorias => {
-      this.categorias = categorias;
-      sessionStorage.setItem('categorias', JSON.stringify(categorias));
-    });
+    const tipoTransacaoId = this.transacao.tipoTransacaoId;
 
+    if (tipoTransacaoId){
+      this.categoriaService.getCategoriasPorUsuarioId(tipoTransacaoId).subscribe(categorias => {
+        this.categorias = categorias;
+        sessionStorage.setItem('categorias', JSON.stringify(categorias));
+      }, error => {
+        console.error('Erro ao buscar categorias', error);
+      });
+    }
   }
 
   onCategoriaChange(event: any): void {
 
-    this.subcategoriaService.getSubcategoriasUsuario().subscribe(subcategorias => {
-      this.subcategorias = subcategorias;
-      sessionStorage.setItem('subcategorias', JSON.stringify(subcategorias));
-    });
+    const categoriaId = this.transacao.categoriaId;
+
+    if (categoriaId){
+      this.subcategoriaService.getSubcategoriasPorCategoriaId(categoriaId).subscribe(subcategorias => {
+        this.subcategorias = subcategorias;
+        sessionStorage.setItem('subcategorias', JSON.stringify(subcategorias));
+      }, error => {
+        console.error('Erro ao buscar subcategorias', error);
+      });
+      }
   }
 
   salvarTransacao(): void {
@@ -126,6 +139,7 @@ export class RealizarTransacaoComponent implements OnInit {
 
     this.transacaoService.salvarTransacao(this.transacao).subscribe(response => {
       console.log('Transação salva com sucesso', response);
+      this.router.navigate(['/wallet']);
     }, error => {
       console.error('Erro ao salvar transação', error);
     });
