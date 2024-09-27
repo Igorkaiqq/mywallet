@@ -17,7 +17,7 @@ public record TransacaoDTO(
         UUID subcategoriaId,
 
         @NotNull(message = "Método de Pagamento é obrigatório.")
-        UUID metodoPagamentoID,
+        UUID metodoPagamentoId,
 
         @Positive(message = "Valor deve ser positivo.")
         double valor,

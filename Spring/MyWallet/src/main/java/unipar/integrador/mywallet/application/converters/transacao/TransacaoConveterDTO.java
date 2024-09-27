@@ -5,7 +5,6 @@ import unipar.integrador.mywallet.application.entities.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
 public class TransacaoConveterDTO {
@@ -31,7 +30,7 @@ public class TransacaoConveterDTO {
         transacao.setSubcategoriaUsuario(subcategoriaUsuario);
 
         MetodoPagamentoEntity metodoPagamento = new MetodoPagamentoEntity();
-        metodoPagamento.setId(dto.metodoPagamentoID());
+        metodoPagamento.setId(dto.metodoPagamentoId());
         transacao.setMetodoPagamento(metodoPagamento);
 
         transacao.setValor(dto.valor());

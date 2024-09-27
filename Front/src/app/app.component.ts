@@ -3,9 +3,9 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   templateUrl: './app.component.html',
   imports: [RouterOutlet],
+  standalone: true
 })
 export class AppComponent {
   title = 'Integrador';

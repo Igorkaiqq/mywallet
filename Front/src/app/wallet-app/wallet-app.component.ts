@@ -54,8 +54,8 @@ export class WalletAppComponent implements OnInit {
 
   constructor(private router: Router) {} //
 
-  goToCadReceita() {
-    this.router.navigate(['/cad-receita']); //
+  goToCadTransacao() {
+    this.router.navigate(['/realizar-transacao']);
   }
 
   goLogin(){

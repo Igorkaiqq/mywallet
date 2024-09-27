@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlserver://localhost;database=mywallet</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="mywallet@localhost [2]" uuid="b3ea9e34-ebb1-47d7-b3a2-1325ba47bfe0">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://localhost;database=mywallet</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
