@@ -19,6 +19,9 @@ export class CadastroUsuarioComponent implements OnInit {
   private usuarioService = inject(UsuarioService);
   private router = inject(Router);
 
+  successMessage: string = '';
+  errorMessages: string[] = [];
+
   constructor() {
     this.criarContaForm = new FormGroup({
       nome: new FormControl('', Validators.required),
@@ -43,15 +46,20 @@ export class CadastroUsuarioComponent implements OnInit {
       this.usuarioService.cadastrarUsuario(this.criarContaForm.value).subscribe({
         next: (response) => {
           console.log('Cadastro realizado com sucesso', response);
-          this.router.navigate(['/usuarios']);
+          this.successMessage = 'Conta criada com sucesso!';
+          this.errorMessages = [];
+          setTimeout(() => {
+            this.router.navigate(['/usuarios']);
+          }, 2000)
         },
         error: (error) => {
-          console.error('Erro no cadastro', error);
-          if (error.status === 400 && error.error && Array.isArray(error.error.messages)) {
-            this.backendErrors = error.error.messages;
+          if (error.error) {
+            const errors = error.error;
+            this.errorMessages = Object.keys(errors).map((key) => errors[key]);
           } else {
-            this.backendErrors = ['Erro desconhecido. Tente novamente mais tarde.'];
+            this.errorMessages = ['Erro ao realizar a o cadastro de conta. Tente novamente.'];
           }
+          this.successMessage = '';
         }
       });
     } else {

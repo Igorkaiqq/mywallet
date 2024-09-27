@@ -1,6 +1,16 @@
 <div class="transaction-form">
   <h2>Realizar Transação</h2>
 
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
+    <ul>
+      <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
+    </ul>
+  </div>
+
   <form (ngSubmit)="salvarTransacao()">
     <div class="form-group">
       <label>Tipo de Transação:</label>

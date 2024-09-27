@@ -73,6 +73,9 @@ export class RealizarTransacaoComponent implements OnInit {
   subcategorias: Subcategoria[] = [];
   metodosPagamento: MetodoPagamento[] = [];
 
+  successMessage: string = '';
+  errorMessages: string[] = [];
+
   constructor(
     private categoriaService: CategoriaService,
     private subcategoriaService: SubcategoriaService,
@@ -137,12 +140,25 @@ export class RealizarTransacaoComponent implements OnInit {
     const valorNumerico = String(this.transacao.valor).replace('R$', '').replace('.', '').replace(',', '.').trim();
     this.transacao.valor = valorNumerico;
 
-    this.transacaoService.salvarTransacao(this.transacao).subscribe(response => {
-      console.log('Transação salva com sucesso', response);
-      this.router.navigate(['/wallet']);
-    }, error => {
-      console.error('Erro ao salvar transação', error);
+    this.transacaoService.salvarTransacao(this.transacao).subscribe({
+      next: (response) => {
+        this.successMessage = 'Transação realizada com sucesso!';
+        this.errorMessages = [];
+        setTimeout(() => {
+          this.router.navigate(['/wallet']);
+        }, 2000)
+      },
+      error: (error) => {
+        if (error.error) {
+          const errors = error.error;
+          this.errorMessages = Object.keys(errors).map((key) => errors[key]);
+        } else {
+          this.errorMessages = ['Erro ao realizar a transação. Tente novamente.'];
+        }
+        this.successMessage = '';
+      }
     });
+
   }
 
 }
