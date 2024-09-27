@@ -4,16 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.converters.transacao.TransacaoConveterDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
+import unipar.integrador.mywallet.application.dto.transacao.TransacaoUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.exception.EntityNotFoundException;
 import unipar.integrador.mywallet.application.interfaces.ITransacao;
 import unipar.integrador.mywallet.infrastructure.repository.TransacaoRepository;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class TransacaoService implements ITransacao {
@@ -60,12 +58,29 @@ public class TransacaoService implements ITransacao {
     }
 
     @Override
-    public List<TransacaoEntity> findByUsuarioId(UUID id) {
-        return List.of();
+    public List<TransacaoUsuarioDTO> findByUsuarioId(UUID id) {
+
+        return transacaoRepository.findByUsuario_Id(id).stream()
+                .map(this::convertToDto)
+                .toList();
     }
 
     @Override
     public List<TransacaoEntity> findByusuarioIdAndCategoriaId(UUID usuarioId, UUID categoriaId) {
         return List.of();
     }
+
+
+    public TransacaoUsuarioDTO convertToDto(TransacaoEntity transacao) {
+        return new TransacaoUsuarioDTO(
+                transacao.getId(),
+                transacao.getData(),
+                transacao.getTipoTransacao().getTipoTransacaoEnum().name(),
+                transacao.getCategoriaUsuario().getNome(),
+                transacao.getSubcategoriaUsuario().getNome(),
+                transacao.getDescricao(),
+                transacao.getValor()
+        );
+    }
+
 }

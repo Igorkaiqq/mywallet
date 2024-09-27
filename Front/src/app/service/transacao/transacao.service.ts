@@ -27,4 +27,18 @@ export class TransacaoService {
     });
   }
 
+  buscarTransacoesPorUsuarioId(): Observable<any> {
+
+    const usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+    if (usuarioLogado) {
+      const usuario = JSON.parse(usuarioLogado);
+      const usuarioId = usuario.id;
+
+      return this.http.get(`${this.apiUrl}/transacao/usuario/${usuarioId}`);
+    } else {
+      throw new Error('Usuário não logado');
+    }
+  }
+
 }

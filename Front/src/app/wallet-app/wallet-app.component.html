@@ -39,17 +39,19 @@
                 <thead>
                     <tr>
                         <th>Data</th>
+                        <th>Tipo</th>
                         <th>Categoria</th>
                         <th>Sub-Categoria</th>
                         <th>Descrição</th>
                         <th>Valor</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let transacao of transacoes">
+                        <td>{{ transacao.data | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ transacao.nomeTransacao }}</td>
+                        <td>{{ transacao.nomeCategoria }}</td>
+                        <td>{{ transacao.nomeSubcategoria }}</td>
+                        <td>{{ transacao.descricao }}</td>
+                        <td>{{ transacao.valor | currency:'BRL' }}</td>
                     </tr>
                 </thead>
                 <tbody>
