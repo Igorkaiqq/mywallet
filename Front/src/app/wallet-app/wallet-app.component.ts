@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {TransacaoService} from "../service/transacao/transacao.service";
+import {CommonModule, CurrencyPipe, DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-wallet',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CurrencyPipe, DatePipe, CommonModule],
   templateUrl: './wallet-app.component.html',
   styleUrls: ['./wallet-app.component.css']
 })
@@ -15,6 +17,8 @@ export class WalletAppComponent implements OnInit {
     receitas: new FormControl(8000.00, Validators.required),
     despesas: new FormControl(3000.00, Validators.required)
   });
+
+  transacoes: any[] = [];
 
   categoriasDespesas = [
     { nome: 'Moradia', valor: 1200.00, icone: 'bi-house' },
@@ -37,12 +41,14 @@ export class WalletAppComponent implements OnInit {
     { nome: 'Investimentos', valor: 1000.00 }
   ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.buscarTransacoes();
+  }
 
   onSubmit() {
     if (this.walletAppForm.valid) {
       console.log('Form Data: ', this.walletAppForm.value);
-      // Lógica para salvar os dados do wallet
+
     } else {
       console.log('Form inválido');
     }
@@ -52,7 +58,10 @@ export class WalletAppComponent implements OnInit {
     this.walletAppForm.reset();
   }
 
-  constructor(private router: Router) {} //
+  constructor(
+    private router: Router,
+    private transacaoService: TransacaoService
+  ) {}
 
   goToCadTransacao() {
     this.router.navigate(['/realizar-transacao']);
@@ -61,4 +70,16 @@ export class WalletAppComponent implements OnInit {
   goLogin(){
     this.router.navigate(['']);
   }
+
+  buscarTransacoes() {
+
+      this.transacaoService.buscarTransacoesPorUsuarioId().subscribe({
+        next: (transacoes) => {
+          this.transacoes = transacoes;
+        },
+        error: (error) => {
+          console.error('Erro ao buscar transações: ', error);
+        }
+      });
+    }
 }
