@@ -5,6 +5,7 @@ import { provideHttpClient } from "@angular/common/http";
 import {NgxMaskDirective, NgxMaskPipe, provideNgxMask} from "ngx-mask";
 import { ENVIRONMENT_INITIALIZER, InjectionToken} from "@angular/core";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {FormsModule} from "@angular/forms";
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 const urlApi = 'http://localhost:8080/api/v1';
@@ -14,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideNgxMask(),
-    { provide: API_BASE_URL, useValue: urlApi }, provideAnimationsAsync(),
-  ],
+    { provide: API_BASE_URL, useValue: urlApi },
+    provideAnimationsAsync(),
+  ]
 };

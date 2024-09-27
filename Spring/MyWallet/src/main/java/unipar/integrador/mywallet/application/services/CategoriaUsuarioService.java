@@ -78,9 +78,15 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
                 .collect(Collectors.toList());
     }
 
+    public List<CategoriaUsuarioDTO> findByUsuarioId(UUID usuarioId) {
+        return categoriaUsuarioRepository.findByUsuarioEntityId(usuarioId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
 
     public CategoriaUsuarioDTO convertToDto(CategoriaUsuarioEntity categoriaUsuarioEntity) {
         return new CategoriaUsuarioDTO(
+                categoriaUsuarioEntity.getId(),
                 categoriaUsuarioEntity.getUsuarioEntity().getId(),
                 categoriaUsuarioEntity.getTipoTransacaoEntity().getId(),
                 categoriaUsuarioEntity.getCategoriaPadraoEntity() != null ? categoriaUsuarioEntity.getCategoriaPadraoEntity().getId() : null,

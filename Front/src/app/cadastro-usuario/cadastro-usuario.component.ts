@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { UsuarioService } from '../usuario.service';
+import { UsuarioService } from '../service/usuario/usuario.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-criar-conta',
   standalone: true,
-  imports: [ReactiveFormsModule, NgxMaskDirective, NgxMaskPipe, CommonModule],
+  imports: [ReactiveFormsModule, NgxMaskDirective, NgxMaskPipe, CommonModule, FormsModule],
   templateUrl: './cadastro-usuario.component.html',
   styleUrls: ['./cadastro-usuario.component.css']
 })
@@ -48,7 +48,7 @@ export class CadastroUsuarioComponent implements OnInit {
         error: (error) => {
           console.error('Erro no cadastro', error);
           if (error.status === 400 && error.error && Array.isArray(error.error.messages)) {
-            this.backendErrors = error.error.messages; // Populando erros com as mensagens corretas
+            this.backendErrors = error.error.messages;
           } else {
             this.backendErrors = ['Erro desconhecido. Tente novamente mais tarde.'];
           }

@@ -14,6 +14,8 @@ public interface CategoriaUsuarioRepository extends JpaRepository<CategoriaUsuar
 
     List<CategoriaUsuarioEntity> findByStatusRegistro(StatusRegistroEnum statusRegistro);
 
+    List<CategoriaUsuarioEntity> findByUsuarioEntityId(UUID usuarioId);
+
     boolean existsByUsuarioEntityIdAndCategoriaPadraoEntityId(UUID usuarioId, UUID categoriaPadraoId);
 
     Optional<CategoriaUsuarioEntity> findByUsuarioEntityIdAndCategoriaPadraoEntityId(UUID usuarioId, UUID categoriaPadraoId);
