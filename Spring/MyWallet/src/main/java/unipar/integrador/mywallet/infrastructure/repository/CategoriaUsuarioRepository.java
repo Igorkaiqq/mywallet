@@ -20,4 +20,6 @@ public interface CategoriaUsuarioRepository extends JpaRepository<CategoriaUsuar
 
     Optional<CategoriaUsuarioEntity> findByUsuarioEntityIdAndCategoriaPadraoEntityId(UUID usuarioId, UUID categoriaPadraoId);
 
+    List<CategoriaUsuarioEntity> findByUsuarioEntityIdAndTipoTransacaoEntityId(UUID usuarioId, UUID tipoTransacaoId);
+
 }

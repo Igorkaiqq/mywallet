@@ -14,14 +14,6 @@ export class TransacaoService {
 
   salvarTransacao(transacao: any): Observable<any> {
 
-    console.log(transacao.usuarioId)
-    console.log(transacao.tipoTransacaoId)
-    console.log(transacao.categoriaId)
-    console.log(transacao.subcategoriaId)
-    console.log(transacao.metodoPagamentoId)
-    console.log(transacao.valor)
-    console.log(transacao.descricao)
-
     return this.http.post(`${this.apiUrl}/transacao`, transacao, {
       headers: { 'Content-Type': 'application/json' }
     });

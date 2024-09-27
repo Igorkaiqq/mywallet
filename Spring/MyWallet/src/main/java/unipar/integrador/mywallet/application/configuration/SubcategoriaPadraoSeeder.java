@@ -39,6 +39,8 @@ public class SubcategoriaPadraoSeeder  implements CommandLineRunner {
     SubcategoriaSaude subcategoriaSaude;
     @Autowired
     SubcategoriaTransporte subcategoriaTransporte;
+    @Autowired
+    SubcategoriaLazer subcategoriaLazer;
 
     public void run(String... args) throws Exception {
 
@@ -50,6 +52,7 @@ public class SubcategoriaPadraoSeeder  implements CommandLineRunner {
         processarSubcategorias(subcategoriaMoradia.getSubcategorias());
         processarSubcategorias(subcategoriaSaude.getSubcategorias());
         processarSubcategorias(subcategoriaTransporte.getSubcategorias());
+        processarSubcategorias(subcategoriaLazer.getSubcategorias());
 
     }
 

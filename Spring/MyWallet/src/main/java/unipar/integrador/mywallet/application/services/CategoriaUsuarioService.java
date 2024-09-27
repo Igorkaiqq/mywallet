@@ -99,6 +99,12 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
         return categoriaUsuarioRepository.findByUsuarioEntityIdAndCategoriaPadraoEntityId(usuarioId, categoriaPadraoId);
     }
 
+    public List<CategoriaUsuarioDTO> findByUsuarioIdAndTipoTransacaoId(UUID usuarioId, UUID tipoTransacaoId) {
+        return categoriaUsuarioRepository.findByUsuarioEntityIdAndTipoTransacaoEntityId(usuarioId, tipoTransacaoId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
 
     public boolean isCategoriaRegistrada(UUID usuarioId, UUID categoriaPadraoId) {
         return categoriaUsuarioRepository.existsByUsuarioEntityIdAndCategoriaPadraoEntityId(usuarioId, categoriaPadraoId);
