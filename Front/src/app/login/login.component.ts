@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink} from "@angular/router";
 
 @Component({
   selector: 'login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [FormsModule]
+  imports: [FormsModule, RouterLink]
 })
 export class LoginComponent {
   emailOuUsername: string = '';
@@ -24,6 +25,9 @@ export class LoginComponent {
 
     this.loginService.login(credentials).subscribe(
       response => {
+
+        sessionStorage.setItem('usuarioLogado', JSON.stringify(response));
+
         this.router.navigate(['/wallet']);
       },
       error => {

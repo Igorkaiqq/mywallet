@@ -56,25 +56,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> validarLogin(@Valid @RequestBody LoginDTO loginDto) {
-        String nomeOuEmail = loginDto.getEmailOuUsername();
-        String senha = loginDto.getSenha();
-
-
-        Optional<UsuarioEntity> usuarioOpt = usuarioService.findByEmailOuUsername(nomeOuEmail, nomeOuEmail);
-
-        if (usuarioOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Username ou e-mail inválido.");
-        }
-        UsuarioEntity usuario = usuarioOpt.get();
-
-        if (!usuario.getSenha().equals(senha)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Senha inválida.");
-        }
-
-        return ResponseEntity.ok("Login realizado com sucesso.");
+    public ResponseEntity<UsuarioEntity> validarLogin(@Valid @RequestBody LoginDTO loginDto) {
+        return ResponseEntity.ok(usuarioService.realizarLogin(loginDto));
     }
 
 
