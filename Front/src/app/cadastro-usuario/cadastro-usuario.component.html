@@ -64,6 +64,12 @@
           <small class="text-danger">Campo obrigatório</small>
         </div>
 
+        <div *ngIf="backendErrors.length > 0" class="alert alert-danger">
+          <ul>
+            <li *ngFor="let error of backendErrors">{{ error }}</li>
+          </ul>
+        </div>
+
       <div class="buttons">
         <button type="submit" class="btn btn-success" [disabled]="criarContaForm.invalid">Salvar</button>
         <button type="button" class="btn btn-danger" (click)="goToLogin()">Cancelar</button>

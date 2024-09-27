@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CadastroUsuarioComponent implements OnInit {
   criarContaForm: FormGroup;
+  backendErrors: string[] = [];
 
   private usuarioService = inject(UsuarioService);
   private router = inject(Router);
@@ -38,7 +39,6 @@ export class CadastroUsuarioComponent implements OnInit {
   onSubmit() {
     if (this.criarContaForm.valid) {
       this.criarContaForm.markAllAsTouched();
-      console.log("Formulário de cadastro de usuário válido");
 
       this.usuarioService.cadastrarUsuario(this.criarContaForm.value).subscribe({
         next: (response) => {
@@ -47,12 +47,19 @@ export class CadastroUsuarioComponent implements OnInit {
         },
         error: (error) => {
           console.error('Erro no cadastro', error);
+          if (error.status === 400 && error.error && Array.isArray(error.error.messages)) {
+            this.backendErrors = error.error.messages; // Populando erros com as mensagens corretas
+          } else {
+            this.backendErrors = ['Erro desconhecido. Tente novamente mais tarde.'];
+          }
         }
       });
     } else {
+
       console.log("Formulário de cadastro de usuário inválido");
     }
   }
+
 
   onCancel() {
     this.criarContaForm.reset();

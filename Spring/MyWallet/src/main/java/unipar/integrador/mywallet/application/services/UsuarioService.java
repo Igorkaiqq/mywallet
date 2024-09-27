@@ -5,6 +5,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 import unipar.integrador.mywallet.application.converters.usuario.UsuarioConverterDTO;
 import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
@@ -88,25 +90,17 @@ public class UsuarioService implements IUsuario {
         usuarioRepository.save(usuarioEntity);
     }
 
-    public Optional<UsuarioEntity> findByEmailOuUsername(String email, String username) {
-        return usuarioRepository.findByEmailOrUsername(email, username);
-    }
+    @Override
+    public UsuarioEntity realizarLogin(LoginDTO loginDto) {
 
-    public ResponseEntity<UsuarioEntity> getEmailOuUsername(String emailOuUsername, String senha) {
-        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findByEmailOrUsername(emailOuUsername, emailOuUsername);
+        UsuarioEntity usuario = usuarioRepository.findByEmailOrUsername(loginDto.emailOuUsername(), loginDto.emailOuUsername())
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado"));
 
-        if (usuarioOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(null);
+        if (!usuario.getSenha().equals(loginDto.senha())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Senha inválida");
         }
 
-        UsuarioEntity usuario = usuarioOpt.get();
-        if (!usuario.getSenha().equals(senha)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(null);
-        }
-
-        return ResponseEntity.ok(usuario);
+        return usuario;
     }
 
 
