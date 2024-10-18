@@ -38,6 +38,10 @@ public class TransacaoEntity {
     @JoinColumn(name = "MetodoPagamentoId", nullable = false)
     private MetodoPagamentoEntity metodoPagamento;
 
+    @ManyToOne
+    @JoinColumn(name = "ContaBancariaId", nullable = false)
+    private ContaBancariaEntity contaBancaria;
+
     @Column(name = "Valor", nullable = false)
     private Double valor;
 
