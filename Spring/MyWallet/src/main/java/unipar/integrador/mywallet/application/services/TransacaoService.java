@@ -7,6 +7,7 @@ import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
+import unipar.integrador.mywallet.application.enums.TipoTransacaoEnum;
 import unipar.integrador.mywallet.application.exception.EntityNotFoundException;
 import unipar.integrador.mywallet.application.interfaces.ITransacao;
 import unipar.integrador.mywallet.infrastructure.repository.TransacaoRepository;
@@ -19,17 +20,46 @@ public class TransacaoService implements ITransacao {
     @Autowired
     TransacaoRepository transacaoRepository;
 
+    @Autowired
+    ContaBancariaService contaBancariaService;
+
+    @Autowired
+    CaixaService caixaService;
+
+    @Autowired
+    TipoTransacaoService tipoTransacaoService;
+
     @Override
     public TransacaoEntity save(TransacaoDTO dto) {
 
         TransacaoEntity transacao = TransacaoConveterDTO.toEntity(dto);
 
+        ContaBancariaEntity contaBancaria = contaBancariaService.findById(dto.contaBancariaId())
+                .orElseThrow(() -> new EntityNotFoundException("Conta Bancária não encontrada."));
+
+        CaixaEntity caixa = caixaService.findById(dto.usuarioId())
+                .orElseThrow(() -> new EntityNotFoundException("Caixa não encontrado para o usuário."));
+
+        double valorTransacao = dto.valor();
+        TipoTransacaoEntity tipoTransacao = tipoTransacaoService.findById(dto.tipoTransacaoId())
+                .orElseThrow(() -> new EntityNotFoundException("Tipo de Transação não encontrado."));
+
+        if (tipoTransacao.getTipoTransacaoEnum() == TipoTransacaoEnum.RECEITA) {
+            contaBancaria.setSaldo(contaBancaria.getSaldo() + valorTransacao);
+            caixa.setSaldoTotal(caixa.getSaldoTotal() + valorTransacao);
+        } else if (tipoTransacao.getTipoTransacaoEnum() == TipoTransacaoEnum.DESPESA) {
+            contaBancaria.setSaldo(contaBancaria.getSaldo() - valorTransacao);
+            caixa.setSaldoTotal(caixa.getSaldoTotal() - valorTransacao);
+        }
+
+        contaBancariaService.update(contaBancaria);
+        caixaService.update(caixa);
         return transacaoRepository.save(transacao);
     }
 
     @Override
     public Optional<TransacaoEntity> findById(UUID id) {
-        return transacaoRepository.findById(id);
+        return Optional.empty();
     }
 
     @Override

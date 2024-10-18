@@ -19,6 +19,9 @@ public record TransacaoDTO(
         @NotNull(message = "Método de Pagamento é obrigatório.")
         UUID metodoPagamentoId,
 
+        @NotNull(message = "Conta Bancária é obrigatória.")
+        UUID contaBancariaId,
+
         @Positive(message = "Valor deve ser positivo.")
         double valor,
 
