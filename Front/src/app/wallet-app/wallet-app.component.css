@@ -1,9 +1,12 @@
+html,
 body {
+  height: 100%;
   margin: 0;
-  padding: 0 20px;
+  padding: 0;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background: linear-gradient(#1A2440, #335AA6);
 }
+
 
 .header {
   position: fixed;
@@ -12,13 +15,11 @@ body {
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 11px 20px;
   background-color: #bdbdbd;
-  border-radius: 0 0 5px 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
-
 
 .wallet-box {
   text-align: center;
@@ -57,13 +58,15 @@ body {
   cursor: pointer;
 }
 
-.container {
+.container-fluid {
+  min-height: calc(109.2vh - 85px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
-  gap: 20px;
+  gap: 30px;
+  width: 100%;
+
 }
 
 
@@ -87,15 +90,16 @@ body {
   background-color: #d1d0d0;
   border-radius: 5px;
   text-align: center;
+  margin-top: 20px;
 }
 
 .card.saldo {
-  background-color: #6c8cf7;
+  background-color: #6a6a6a;
   color: #fff;
 }
 
 .card.receitas {
-  background-color: #78e08f;
+  background-color: #198754;
   color: #fff;
 }
 
@@ -118,7 +122,7 @@ table {
   background-color: #fff;
 }
 
-table th{
+table th {
   padding: 15px;
   text-align: left;
   border: 1px solid #ccc;
@@ -131,51 +135,16 @@ table td {
   background-color: #d6d4d46d;
 }
 
-/* .overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2000;
-  justify-content: center;
-  align-items: center;
-}
-
-.overlay-content {
-  background-color: #ccc;
-  padding: 20px;
-  border-radius: 10px;
+.grafico-section {
+  margin-top: 20px;
   text-align: center;
-  width: 300px;
 }
 
-.overlay-button {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
+.grafico-section h3 {
+  margin-bottom: 10px;
 }
 
-.overlay-button div {
-  padding: 20px;
-  border-radius: 10px;
-  cursor: pointer;
-} */
-
-/* .receita {
-  color: green;
-  border: 2px solid green;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.2em;
-  cursor: pointer;
+canvas {
+  max-width: 100%;
+  height: auto;
 }
-
-.despesa {
-  color: red;
-  border: 2px solid red;
-} */
