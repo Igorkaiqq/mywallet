@@ -3,6 +3,7 @@ import { CadastroUsuarioComponent } from "./cadastro-usuario/cadastro-usuario.co
 import { LoginComponent } from "./login/login.component";
 import { WalletAppComponent } from "./wallet-app/wallet-app.component";
 import {RealizarTransacaoComponent} from "./realizar-transacao/realizar-transacao.component";
+import { MovimentacaoDashboardComponent } from "./movimentacao-dashboard/movimentacao-dashboard.component";
 // import { HttpClienteModule } from '@angular/common/http';
 
 export const routes: Routes = [
@@ -19,9 +20,14 @@ export const routes: Routes = [
         component: RealizarTransacaoComponent
     },
     {
+        path: 'movimentacoes',
+        component: MovimentacaoDashboardComponent
+    },
+    {
         path: '**',
         component: LoginComponent
     }
+    
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

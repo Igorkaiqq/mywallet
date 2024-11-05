@@ -1,85 +1,81 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {TransacaoService} from "../service/transacao/transacao.service";
-import {CommonModule, CurrencyPipe, DatePipe} from "@angular/common";
+import { Chart } from 'chart.js';
+import { ApiService } from '../../app/service/graficos/api.service';
 
 @Component({
   selector: 'app-wallet',
-  standalone: true,
-  imports: [ReactiveFormsModule, CurrencyPipe, DatePipe, CommonModule],
   templateUrl: './wallet-app.component.html',
   styleUrls: ['./wallet-app.component.css']
 })
 export class WalletAppComponent implements OnInit {
-  walletAppForm = new FormGroup({
-    saldo: new FormControl(15000.00, Validators.required),
-    receitas: new FormControl(8000.00, Validators.required),
-    despesas: new FormControl(3000.00, Validators.required)
-  });
+  public receitaChart: any;
+  public despesaChart: any;
 
-  transacoes: any[] = [];
-
-  categoriasDespesas = [
-    { nome: 'Moradia', valor: 1200.00, icone: 'bi-house' },
-    { nome: 'Cartão', valor: 800.00, icone: 'bi-credit-card' },
-    { nome: 'Transporte', valor: 500.00, icone: 'bi-car-front' },
-    { nome: 'Lazer', valor: 400.00, icone: 'bi-tree' }
-  ];
-
-  topDespesas = [
-    { nome: 'Aluguel', valor: 1200.00 },
-    { nome: 'Mercado', valor: 600.00 },
-    { nome: 'Transporte', valor: 300.00 },
-    { nome: 'Entretenimento', valor: 200.00 },
-    { nome: 'Academia', valor: 100.00 }
-  ];
-
-  topReceitas = [
-    { nome: 'Salário', valor: 5000.00 },
-    { nome: 'Freelance', valor: 2000.00 },
-    { nome: 'Investimentos', valor: 1000.00 }
-  ];
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
-    this.buscarTransacoes();
+    this.initReceitaChart();
+    this.initDespesaChart();
   }
 
-  onSubmit() {
-    if (this.walletAppForm.valid) {
-      console.log('Form Data: ', this.walletAppForm.value);
-
-    } else {
-      console.log('Form inválido');
-    }
-  }
-
-  onCancel() {
-    this.walletAppForm.reset();
-  }
-
-  constructor(
-    private router: Router,
-    private transacaoService: TransacaoService
-  ) {}
-
+  // Método para navegação para a página de realizar transação
   goToCadTransacao() {
     this.router.navigate(['/realizar-transacao']);
   }
 
-  goLogin(){
+  goToMovimentacao(){
+    this.router.navigate(['/movimentacoes']);
+  }
+
+  // Método para navegação para a página de login
+  goLogin() {
     this.router.navigate(['']);
   }
 
-  buscarTransacoes() {
-
-      this.transacaoService.buscarTransacoesPorUsuarioId().subscribe({
-        next: (transacoes) => {
-          this.transacoes = transacoes;
+  private initReceitaChart(): void {
+    this.apiService.getReceitas().subscribe(data => {
+      this.receitaChart = new Chart('graficoReceitasCanvas', {
+        type: 'bar',
+        data: {
+          labels: data.map((item: any) => item.nome),
+          datasets: [
+            {
+              label: 'Receitas',
+              data: data.map((item: any) => item.valor),
+              backgroundColor: 'rgba(0, 123, 255, 0.5)',
+              borderColor: 'rgba(0, 123, 255, 1)',
+              borderWidth: 1
+            }
+          ]
         },
-        error: (error) => {
-          console.error('Erro ao buscar transações: ', error);
+        options: {
+          responsive: true
         }
       });
-    }
+    });
+  }
+
+  private initDespesaChart(): void {
+    this.apiService.getDespesas().subscribe(data => {
+      this.despesaChart = new Chart('graficoDespesasCanvas', {
+        type: 'line',
+        data: {
+          labels: data.map((item: any) => item.nome),
+          datasets: [
+            {
+              label: 'Despesas',
+              data: data.map((item: any) => item.valor),
+              backgroundColor: 'rgba(255, 99, 132, 0.5)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    });
+  }
 }
