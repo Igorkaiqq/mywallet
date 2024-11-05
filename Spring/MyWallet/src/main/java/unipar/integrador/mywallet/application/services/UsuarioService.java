@@ -3,30 +3,31 @@ package unipar.integrador.mywallet.application.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 import unipar.integrador.mywallet.application.converters.usuario.UsuarioConverterDTO;
-import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
-import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
+import unipar.integrador.mywallet.application.dto.login.LoginResponseDTO;
 import unipar.integrador.mywallet.application.dto.usuario.AtualizarUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.*;
-import unipar.integrador.mywallet.application.enums.GeneroEnum;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.exception.CamposDuplicadosUsuarioException;
 import unipar.integrador.mywallet.application.exception.ExceptionUtils;
-import unipar.integrador.mywallet.application.exception.GlobalExceptionHandler;
 import unipar.integrador.mywallet.application.exception.UsuarioNaoEncontradoException;
 import unipar.integrador.mywallet.application.interfaces.IUsuario;
 import unipar.integrador.mywallet.application.services.subservice.CategoriaSubcategoriaService;
 import unipar.integrador.mywallet.infrastructure.repository.UsuarioRepository;
-import unipar.integrador.mywallet.application.dto.usuario.LoginDTO;
+import unipar.integrador.mywallet.application.dto.login.LoginDTO;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService implements IUsuario {
@@ -40,6 +41,10 @@ public class UsuarioService implements IUsuario {
     @Autowired
     private CategoriaSubcategoriaService categoriaSubcategoriaService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private JwtEncoder jwtEncoder;
 
     @Override
     public UsuarioEntity save(CadastroUsuarioDTO dto) {
@@ -91,16 +96,33 @@ public class UsuarioService implements IUsuario {
     }
 
     @Override
-    public UsuarioEntity realizarLogin(LoginDTO loginDto) {
+    public LoginResponseDTO realizarLogin(LoginDTO loginDto) {
+        UsuarioEntity usuario = usuarioRepository.findByEmailOrUsername(
+                loginDto.emailOuUsername(), loginDto.emailOuUsername()
+        ).orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado"));
 
-        UsuarioEntity usuario = usuarioRepository.findByEmailOrUsername(loginDto.emailOuUsername(), loginDto.emailOuUsername())
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado"));
-
-        if (!usuario.getSenha().equals(loginDto.senha())) {
+        if (!bCryptPasswordEncoder.matches(loginDto.senha(), usuario.getSenha())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Senha inválida");
         }
 
-        return usuario;
+        var now = Instant.now();
+        var expiresAt = 300L;
+
+        var scopes = usuario.getRoles().stream()
+                .map(Role::getNome)
+                .collect(Collectors.joining(""));
+
+        var claims = JwtClaimsSet.builder()
+                .issuer("https://mywallet.com")
+                .subject(usuario.getId().toString())
+                .issuedAt(now)
+                .expiresAt(now.plusSeconds(expiresAt))
+                .claim("scope", scopes)
+                .build();
+
+        var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+
+        return new LoginResponseDTO(jwtValue, expiresAt);
     }
 
 }

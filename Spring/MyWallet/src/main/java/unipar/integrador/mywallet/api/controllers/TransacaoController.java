@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.TransacaoEntity;
+import unipar.integrador.mywallet.application.interfaces.ITransacao;
 import unipar.integrador.mywallet.application.services.TransacaoService;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.UUID;
 public class TransacaoController {
 
     @Autowired
-    private TransacaoService transacaoService;
+    private ITransacao transacaoService;
 
     @PostMapping
     public ResponseEntity<TransacaoEntity> create(@Valid @RequestBody TransacaoDTO dto) {
