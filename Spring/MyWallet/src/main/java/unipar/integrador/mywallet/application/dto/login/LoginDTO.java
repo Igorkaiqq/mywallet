@@ -1,8 +1,6 @@
-package unipar.integrador.mywallet.application.dto.usuario;
+package unipar.integrador.mywallet.application.dto.login;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
 
 public record LoginDTO (
 

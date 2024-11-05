@@ -2,6 +2,7 @@ package unipar.integrador.mywallet.application.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
 import java.time.LocalDate;
@@ -46,6 +47,7 @@ public class TransacaoEntity {
     private Double valor;
 
     @Column(name = "Data", nullable = false)
+    @CreationTimestamp
     private LocalDate data;
 
     @Column(name = "Descricao", length = 200)

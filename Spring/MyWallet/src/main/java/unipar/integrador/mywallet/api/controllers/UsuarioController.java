@@ -2,18 +2,18 @@ package unipar.integrador.mywallet.api.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import unipar.integrador.mywallet.application.dto.usuario.AtualizarUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDTO;
-import unipar.integrador.mywallet.application.dto.usuario.LoginDTO;
+import unipar.integrador.mywallet.application.dto.login.LoginDTO;
 import unipar.integrador.mywallet.application.entities.UsuarioEntity;
 import unipar.integrador.mywallet.application.exception.UsuarioNaoEncontradoException;
 import unipar.integrador.mywallet.application.services.UsuarioService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -23,6 +23,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+
 
     @PostMapping
     public ResponseEntity<UsuarioEntity> criarUsuario (@Valid @RequestBody CadastroUsuarioDTO dto){
@@ -38,6 +40,7 @@ public class UsuarioController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<List<UsuarioEntity>> buscarTodosUsuarios(){
         List<UsuarioEntity> usuarios = usuarioService.findAll();
         return ResponseEntity.ok(usuarios);
@@ -50,16 +53,11 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ESCOPE_ADMIN')")
     public ResponseEntity<Void> inativarUsuario(@PathVariable UUID id){
         usuarioService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
-    @PostMapping("/login")
-    public ResponseEntity<UsuarioEntity> validarLogin(@Valid @RequestBody LoginDTO loginDto) {
-        return ResponseEntity.ok(usuarioService.realizarLogin(loginDto));
-    }
-
 
 
 }

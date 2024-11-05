@@ -3,10 +3,13 @@ package unipar.integrador.mywallet.application.entities;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import unipar.integrador.mywallet.application.dto.login.LoginDTO;
 import unipar.integrador.mywallet.application.enums.GeneroEnum;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "Usuario")
@@ -15,6 +18,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Transactional
+@Getter
+@Setter
 public class UsuarioEntity extends Base {
 
     @Column(name = "Nome", length = 70, nullable = false)
@@ -28,6 +33,14 @@ public class UsuarioEntity extends Base {
 
     @Column(name = "Senha", length = 255, nullable = false)
     private String senha;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "UsuarioRole",
+            joinColumns = @JoinColumn(name = "UsuarioId"),
+            inverseJoinColumns = @JoinColumn(name = "RoleId")
+    )
+    private Set<Role> roles;
 
     @Column(name = "Telefone", length = 15, nullable = false, unique = true)
     private String telefone;
