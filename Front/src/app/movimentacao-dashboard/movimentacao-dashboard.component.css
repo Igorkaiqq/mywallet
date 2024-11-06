@@ -10,8 +10,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background-color: #d0d0d0;
+    padding: 20px;
+    background-color: #bdbdbd;
+    font-size: 20px;
   }
   
   .logo {
@@ -24,11 +25,7 @@
   }
   
   .back-button {
-    background-color: #fdd835;
-    border: none;
-    padding: 10px;
-    font-size: 0.9em;
-    cursor: pointer;
+
   }
   
   table {
@@ -61,32 +58,25 @@
     background-color: #d6d4d46d;
   }
   
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
   
-  .goal-button, .edit-button, .delete-button {
-    padding: 10px;
-    font-size: 1em;
+  button.back-button {
+    border: none;
+    padding: 15px;
+    background-color: #335AA6;
+    color: white;
+    border-radius: 10px;
+    font-size: 0.9em;
     cursor: pointer;
-    border: 2px solid;
-    background-color: transparent;
+    transition: background-color 0.3s ease;
   }
   
-  .goal-button {
-    border-color: #8e24aa;
-    color: #8e24aa;
+  button.back-button:hover {
+    background-color: #4EBFD9;
+    color: black;
   }
+
   
-  .edit-button {
-    border-color: #1e88e5;
-    color: #1e88e5;
-  }
   
-  .delete-button {
-    border-color: #d32f2f;
-    color: #d32f2f;
-  }
+  
+  
   

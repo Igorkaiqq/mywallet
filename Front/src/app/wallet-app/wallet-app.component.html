@@ -12,11 +12,11 @@
         <h1 (click)="goLogin()">Expert Wallet</h1>
         <div class="buttons">
             <button class="button-criar" (click)="goToCadTransacao()">Criar Movimentação</button>
-            <button class="button-visualizar" (click)="goToMovimentacao()">Visualizar Movimentações</button>
+            <button class="button-visualizar">Visualizar Movimentações</button>
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="main">
             <div class="card-row">
                 <div class="card saldo">
@@ -34,14 +34,29 @@
             </div>
         </div>
 
-        <div class="grafico-section">
-            <h3>Gráfico de Receitas</h3>
-            <canvas id="graficoReceitasCanvas"></canvas>
-        </div>
-
-        <div class="grafico-section">
-            <h3>Gráfico de Despesas</h3>
-            <canvas id="graficoDespesasCanvas"></canvas>
+        <div class="table-section">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Categoria</th>
+                        <th>Sub-Categoria</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                    </tr>
+                    <tr *ngFor="let transacao of transacoes">
+                        <td>{{ transacao.data | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ transacao.nomeTransacao }}</td>
+                        <td>{{ transacao.nomeCategoria }}</td>
+                        <td>{{ transacao.nomeSubcategoria }}</td>
+                        <td>{{ transacao.descricao }}</td>
+                        <td>{{ transacao.valor | currency:'BRL' }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
 
