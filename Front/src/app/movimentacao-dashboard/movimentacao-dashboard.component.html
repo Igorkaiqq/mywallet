@@ -1,40 +1,43 @@
-<div class="wallet-container">
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="wallet-container">
     <header class="header">
       <div class="logo">
-        Expert Wallet
+        Histórico de Movimentações
       </div>
-      <button class="back-button">Retornar</button>
+      <button class="back-button" (click)="goToDashboard()">Retornar</button>
     </header>
-  
+
     <div class="table-section">
       <table border="1">
-          <thead>
-              <tr>
-                  <th>Data</th>
-                  <th>Tipo</th>
-                  <th>Categoria</th>
-                  <th>Sub-Categoria</th>
-                  <th>Descrição</th>
-                  <th>Valor</th>
-              </tr>
-              <tr *ngFor="let transacao of transacoes">
-                  <td>{{ transacao.data | date:'dd/MM/yyyy' }}</td>
-                  <td>{{ transacao.nomeTransacao }}</td>
-                  <td>{{ transacao.nomeCategoria }}</td>
-                  <td>{{ transacao.nomeSubcategoria }}</td>
-                  <td>{{ transacao.descricao }}</td>
-                  <td>{{ transacao.valor | currency:'BRL' }}</td>
-              </tr>
-          </thead>
-          <tbody>
-          </tbody>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Tipo</th>
+            <th>Categoria</th>
+            <th>Sub-Categoria</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+          </tr>
+          <tr *ngFor="let transacao of transacoes">
+            <td>{{ transacao.data | date:'dd/MM/yyyy' }}</td>
+            <td>{{ transacao.nomeTransacao }}</td>
+            <td>{{ transacao.nomeCategoria }}</td>
+            <td>{{ transacao.nomeSubcategoria }}</td>
+            <td>{{ transacao.descricao }}</td>
+            <td>{{ transacao.valor | currency:'BRL' }}</td>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
       </table>
+    </div>
   </div>
-  
-    <footer class="footer">
-      <button class="goal-button">METAS</button>
-      <button class="edit-button">EDITAR</button>
-      <button class="delete-button">EXCLUIR</button>
-    </footer>
-  </div>
-  
+</body>

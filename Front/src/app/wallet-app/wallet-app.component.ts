@@ -19,7 +19,6 @@ export class WalletAppComponent implements OnInit {
     this.initDespesaChart();
   }
 
-  // Método para navegação para a página de realizar transação
   goToCadTransacao() {
     this.router.navigate(['/realizar-transacao']);
   }
@@ -28,7 +27,6 @@ export class WalletAppComponent implements OnInit {
     this.router.navigate(['/movimentacoes']);
   }
 
-  // Método para navegação para a página de login
   goLogin() {
     this.router.navigate(['']);
   }

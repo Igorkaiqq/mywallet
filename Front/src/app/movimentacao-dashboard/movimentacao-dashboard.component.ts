@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {TransacaoService} from "../service/transacao/transacao.service";
 import {CommonModule, CurrencyPipe, DatePipe} from "@angular/common";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -35,9 +36,7 @@ export class MovimentacaoDashboardComponent implements OnInit {
     this.walletAppForm.reset();
   }
 
-  constructor(
-    private transacaoService: TransacaoService
-  ) {}
+  constructor( private transacaoService: TransacaoService, private router: Router) {}
 
   buscarTransacoes() {
 
@@ -49,5 +48,9 @@ export class MovimentacaoDashboardComponent implements OnInit {
           console.error('Erro ao buscar transações: ', error);
         }
       });
+    }
+
+    goToDashboard(){
+      this.router.navigate(['/wallet']);
     }
 }
