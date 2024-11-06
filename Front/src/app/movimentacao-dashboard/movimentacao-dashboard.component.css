@@ -1,82 +1,81 @@
 .wallet-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #e0e0e0;
-    color: #333;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #bdbdbd;
-    font-size: 20px;
-  }
-  
-  .logo {
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-  
-  .user-info {
-    font-size: 1em;
-  }
-  
-  .back-button {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #e0e0e0;
+  color: #333;
+}
 
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #bdbdbd;
-    margin-top: 10px;
-    flex: 1;
-  }
-  
-  table th {
-    padding: 10px;
-    border: 1px solid #9e9e9e;
-    text-align: left;
-  }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #bdbdbd;
+  font-size: 20px;
+}
 
-  .table-section {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-  
-  
-  table td {
-    padding: 15px;
-    text-align: left;
-    border: 1px solid #ccc;
-    background-color: #d6d4d46d;
-  }
-  
-  
-  button.back-button {
-    border: none;
-    padding: 15px;
-    background-color: #335AA6;
-    color: white;
-    border-radius: 10px;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button.back-button:hover {
-    background-color: #4EBFD9;
-    color: black;
-  }
+.logo {
+  font-size: 1.2em;
+  font-weight: bold;
+}
 
-  
-  
-  
-  
-  
+.user-info {
+  font-size: 1em;
+}
+
+.back-button {
+
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #bdbdbd;
+  margin-top: 10px;
+  flex: 1;
+}
+
+table th {
+  padding: 10px;
+  border: 1px solid #9e9e9e;
+  text-align: left;
+}
+
+.table-section {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
+table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ccc;
+  background-color: #d6d4d46d;
+}
+
+
+button.back-button {
+  border: none;
+  padding: 15px;
+  background-color: #335AA6;
+  color: white;
+  border-radius: 10px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.back-button:hover {
+  background-color: #4EBFD9;
+  color: black;
+}
+
+
+
+
+

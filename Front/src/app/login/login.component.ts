@@ -28,7 +28,7 @@ export class LoginComponent {
 
         sessionStorage.setItem('usuarioLogado', JSON.stringify(response));
 
-        this.router.navigate(['/wallet']);
+        this.router.navigate(['/api/v1/token']);
       },
       error => {
         alert('Usuário ou senha inválidos');
