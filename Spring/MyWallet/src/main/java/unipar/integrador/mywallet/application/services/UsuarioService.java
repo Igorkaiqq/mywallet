@@ -33,24 +33,18 @@ import java.util.stream.Collectors;
 public class UsuarioService implements IUsuario {
 
     @Autowired
-    private  UsuarioRepository usuarioRepository;
-
+    UsuarioConverterDTO usuarioConverterDTO;
     @Autowired
-    private CategoriaPadraoService categoriaPadraoService;
-
+    UsuarioRepository usuarioRepository;
     @Autowired
-    private CategoriaSubcategoriaService categoriaSubcategoriaService;
-
+    CategoriaPadraoService categoriaPadraoService;
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    private JwtEncoder jwtEncoder;
+    CategoriaSubcategoriaService categoriaSubcategoriaService;
 
     @Override
     public UsuarioEntity save(CadastroUsuarioDTO dto) {
-
         try {
-            UsuarioEntity usuarioEntity = UsuarioConverterDTO.toEntity(dto);
+            UsuarioEntity usuarioEntity = usuarioConverterDTO.toEntity(dto);
             UsuarioEntity usuarioSalvo = usuarioRepository.save(usuarioEntity);
 
             List<CategoriaPadraoEntity> categoriasPadrao = categoriaPadraoService.findAllCategoriasAtivasEntities();
@@ -64,18 +58,17 @@ public class UsuarioService implements IUsuario {
     }
 
     @Override
-    public Optional<UsuarioEntity> findById (UUID id){
+    public Optional<UsuarioEntity> findById(UUID id) {
         return usuarioRepository.findById(id);
     }
 
     @Override
-    public List<UsuarioEntity> findAll () {
+    public List<UsuarioEntity> findAll() {
         return usuarioRepository.findAll();
     }
 
     @Override
-    public UsuarioEntity update (UUID id, AtualizarUsuarioDTO atualizarUsuarioDTO){
-
+    public UsuarioEntity update(UUID id, AtualizarUsuarioDTO atualizarUsuarioDTO) {
         UsuarioEntity usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado"));
 
@@ -88,41 +81,11 @@ public class UsuarioService implements IUsuario {
     }
 
     @Override
-    public void deleteById (UUID id){
+    public void deleteById(UUID id) {
         UsuarioEntity usuarioEntity = usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário com ID " + id + " não encontrado"));
         usuarioEntity.setStatusRegistro(StatusRegistroEnum.DELETADO);
         usuarioRepository.save(usuarioEntity);
-    }
-
-    @Override
-    public LoginResponseDTO realizarLogin(LoginDTO loginDto) {
-        UsuarioEntity usuario = usuarioRepository.findByEmailOrUsername(
-                loginDto.emailOuUsername(), loginDto.emailOuUsername()
-        ).orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado"));
-
-        if (!bCryptPasswordEncoder.matches(loginDto.senha(), usuario.getSenha())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Senha inválida");
-        }
-
-        var now = Instant.now();
-        var expiresAt = 300L;
-
-        var scopes = usuario.getRoles().stream()
-                .map(Role::getNome)
-                .collect(Collectors.joining(""));
-
-        var claims = JwtClaimsSet.builder()
-                .issuer("https://mywallet.com")
-                .subject(usuario.getId().toString())
-                .issuedAt(now)
-                .expiresAt(now.plusSeconds(expiresAt))
-                .claim("scope", scopes)
-                .build();
-
-        var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-
-        return new LoginResponseDTO(jwtValue, expiresAt);
     }
 
 }

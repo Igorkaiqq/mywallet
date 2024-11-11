@@ -13,10 +13,6 @@ public class TransacaoConveterDTO {
         TransacaoEntity transacao = new TransacaoEntity();
         transacao.setId(UUID.randomUUID());
 
-        UsuarioEntity usuario = new UsuarioEntity();
-        usuario.setId(dto.usuarioId());
-        transacao.setUsuario(usuario);
-
         TipoTransacaoEntity tipoTransacao = new TipoTransacaoEntity();
         tipoTransacao.setId(dto.tipoTransacaoId());
         transacao.setTipoTransacao(tipoTransacao);

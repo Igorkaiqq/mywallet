@@ -12,15 +12,6 @@ export class CategoriaService {
 
   getCategoriasPorUsuarioId(tipoTransacaoId: string): Observable<any> {
 
-    const usuarioLogado = sessionStorage.getItem('usuarioLogado');
-
-    if (usuarioLogado) {
-      const usuario = JSON.parse(usuarioLogado);
-      const usuarioId = usuario.id;
-
-      return this.http.get(`${this.apiUrl}/categoria-usuario/${usuarioId}/tipoTransacao/${tipoTransacaoId}`);
-    } else {
-      throw new Error('Usuário não logado');
-    }
+    return this.http.get(`${this.apiUrl}/categoria-usuario/tipoTransacao/${tipoTransacaoId}`);
   }
 }

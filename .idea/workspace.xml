@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3f63d2a-c774-4876-b6db-7b73bcc2e43c" name="Changes" comment="" />
+    <list default="true" id="c3f63d2a-c774-4876-b6db-7b73bcc2e43c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/api/controllers/TokenController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/dto/login/LoginResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/entities/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/core/security/AdminUserConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/core/security/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/infrastructure/repository/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/resources/db/migration/V12__Create_Table_Roles.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/resources/db/migration/V13__Create_Roles_Iniciais.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/api/controllers/TransacaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/api/controllers/TransacaoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/api/controllers/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/api/controllers/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/converters/usuario/UsuarioConverterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/converters/usuario/UsuarioConverterDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/dto/usuario/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/dto/login/LoginDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/entities/TransacaoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/entities/TransacaoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/entities/UsuarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/entities/UsuarioEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/interfaces/IUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/interfaces/IUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/services/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/application/services/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/infrastructure/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/java/unipar/integrador/mywallet/infrastructure/repository/UsuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/MyWallet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/MyWallet/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,21 +39,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "gabriel/main/2",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Dzkyy/Documents/mywallet/Spring/MyWallet",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dzkyy/Documents/mywallet/Spring/MyWallet&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
       </set>
     </attachedChunks>
   </component>
@@ -46,6 +67,8 @@
       <updated>1727217842040</updated>
       <workItem from="1727217843071" duration="221000" />
       <workItem from="1727218097427" duration="25000" />
+      <workItem from="1730155012548" duration="66000" />
+      <workItem from="1730832484846" duration="16000" />
     </task>
     <servers />
   </component>

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { UsuarioService } from '../service/usuario/usuario.service';
+import { UsuarioService } from '../../service/usuario/usuario.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -49,7 +49,7 @@ export class CadastroUsuarioComponent implements OnInit {
           this.successMessage = 'Conta criada com sucesso!';
           this.errorMessages = [];
           setTimeout(() => {
-            this.router.navigate(['/usuarios']);
+            this.router.navigate(['/login']);
           }, 2000)
         },
         error: (error) => {

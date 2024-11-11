@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
-import { ApiService } from '../../app/service/graficos/api.service';
+import { ApiService } from '../../service/graficos/api.service';
 
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet-app.component.html',
+  standalone: true,
   styleUrls: ['./wallet-app.component.css']
 })
 export class WalletAppComponent implements OnInit {
@@ -24,7 +25,7 @@ export class WalletAppComponent implements OnInit {
   }
 
   goToMovimentacao(){
-    this.router.navigate(['/movimentacoes']);
+    this.router.navigate(['/tela-inicial']);
   }
 
   goLogin() {
@@ -75,5 +76,11 @@ export class WalletAppComponent implements OnInit {
         }
       });
     });
+  }
+
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['login']);
   }
 }

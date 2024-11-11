@@ -16,6 +16,6 @@ public interface ITransacao {
     TransacaoEntity update(UUID id, TransacaoDTO dto);
     void deleteById(UUID id);
     List<TransacaoEntity> findByusuarioIdAndCategoriaId(UUID usuarioId, UUID categoriaId);
-    List<TransacaoUsuarioDTO> findByUsuarioId(UUID id);
+    List<TransacaoUsuarioDTO> findByUsuarioId();
 
 }

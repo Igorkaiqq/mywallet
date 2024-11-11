@@ -1,8 +1,13 @@
 import { RouterModule, Routes } from "@angular/router";
-import { CadastroUsuarioComponent } from "./cadastro-usuario/cadastro-usuario.component";
-import { LoginComponent } from "./login/login.component";
-import { WalletAppComponent } from "./wallet-app/wallet-app.component";
-import {RealizarTransacaoComponent} from "./realizar-transacao/realizar-transacao.component";
+import { CadastroUsuarioComponent } from "./pages/cadastro-usuario/cadastro-usuario.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { WalletAppComponent } from "./pages/wallet-app/wallet-app.component";
+import {RealizarTransacaoComponent} from "./pages/realizar-transacao/realizar-transacao.component";
+import {MovimentacaoDashboardComponent} from "./pages/movimentacao-dashboard/movimentacao-dashboard.component";
+import {AuthGuard} from "./service/authGuard/auth-guard.service";
+import {
+  CadastroContaBancariaComponent
+} from "./pages/conta-bancaria/cadastro-conta-bancaria/cadastro-conta-bancaria.component";
 
 
 export const routes: Routes = [
@@ -11,17 +16,29 @@ export const routes: Routes = [
         component: CadastroUsuarioComponent
     },
     {
+        path: 'tela-inicial',
+        component: MovimentacaoDashboardComponent,
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'wallet',
-        component: WalletAppComponent
+        component: WalletAppComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'realizar-transacao',
-        component: RealizarTransacaoComponent
+        component: RealizarTransacaoComponent,
+        canActivate: [AuthGuard]
     },
     {
-        path: '**',
+    path: 'cadastrar-conta-bancaria',
+    component: CadastroContaBancariaComponent,
+    canActivate: [AuthGuard]
+    },
+    {
+        path: 'login',
         component: LoginComponent
-    }
+    },
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

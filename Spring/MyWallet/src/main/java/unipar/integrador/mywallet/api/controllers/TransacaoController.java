@@ -5,6 +5,7 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoUsuarioDTO;
@@ -54,9 +55,9 @@ public class TransacaoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/usuario/{id}")
-    public ResponseEntity<List<TransacaoUsuarioDTO>> buscarTransacoesUsuario(@PathVariable UUID id) {
-        return ResponseEntity.ok(transacaoService.findByUsuarioId(id));
+    @GetMapping("/usuario")
+    public ResponseEntity<List<TransacaoUsuarioDTO>> buscarTransacoesUsuario() {
+        return ResponseEntity.ok(transacaoService.findByUsuarioId());
     }
 
 }

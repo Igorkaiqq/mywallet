@@ -16,7 +16,7 @@
     <div class="form-group">
       <label>Tipo de Transação:</label>
       <select [(ngModel)]="transacao.tipoTransacaoId" name="tipoTransacao" (change)="onTipoTransacaoChange($event)"
-        required>
+              required>
         <option for="tipoTransacao" *ngFor="let tipo of tiposTransacao" [value]="tipo.id">{{ tipo.tipoTransacaoEnum }}
         </option>
       </select>
@@ -25,7 +25,7 @@
     <div class="form-group">
       <label for="valor">Valor:</label>
       <input type="text" currencyMask [(ngModel)]="transacao.valor"
-        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" name="valor" id="valor" required>
+             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" name="valor" id="valor" required>
     </div>
 
     <div class="form-group">
@@ -40,7 +40,7 @@
       <label>Subcategoria:</label>
       <select [(ngModel)]="transacao.subcategoriaId" name="subcategoria" required>
         <option for="subcategoria" *ngFor="let subcategoria of subcategorias" [value]="subcategoria.id">{{
-          subcategoria.nome }}</option>
+            subcategoria.nome }}</option>
       </select>
     </div>
 
@@ -48,8 +48,16 @@
       <label>Método de Pagamento:</label>
       <select [(ngModel)]="transacao.metodoPagamentoId" name="metodoPagamento" required>
         <option for="metodoPagamento" *ngFor="let metodo of metodosPagamento" [value]="metodo.id">{{
-          metodo.metodoPagamento }}</option>
+            metodo.metodoPagamento }}</option>
       </select>
+    </div>
+
+    <div class="form-group">
+      <label>Conta Bancária:</label>
+      <select [(ngModel)]="transacao.contaBancariaId" name="contaBancaria" required>
+        <option for="contaBancaria" *ngFor="let conta of contasBancarias" [value]="conta.id">{{ conta.nome }}</option>
+      </select>
+      <button type="button" (click)="cadastrarNovaContaBancaria()">Cadastrar Nova Conta Bancária</button>
     </div>
 
     <div class="form-group">

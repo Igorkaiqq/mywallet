@@ -25,13 +25,11 @@ public class SubcategoriaUsuarioController {
         return ResponseEntity.ok(subcategoriaUsuarioService.findAll());
     }
 
-    @GetMapping("/{usuarioId}/categoria-usuario/{categoriaUsuarioId}")
+    @GetMapping("/categoria-usuario/{categoriaUsuarioId}")
     public ResponseEntity<Optional<List<SubcategoriaUsuarioEntity>>> buscarSubcategoriasPorUsuarioIdECategoriaUsuarioId(
-            @PathVariable UUID usuarioId,
             @PathVariable UUID categoriaUsuarioId) {
-        System.out.println("usuarioId: " + usuarioId);
         System.out.println("categoriaUsuarioId: " + categoriaUsuarioId);
-        return ResponseEntity.ok(subcategoriaUsuarioService.findByUsuarioIdAndCategoriaUsuarioId(usuarioId, categoriaUsuarioId));
+        return ResponseEntity.ok(subcategoriaUsuarioService.findByCategoriaUsuarioId(categoriaUsuarioId));
     }
 
 }

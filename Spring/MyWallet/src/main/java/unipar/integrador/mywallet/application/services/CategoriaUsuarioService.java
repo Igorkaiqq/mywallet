@@ -1,6 +1,8 @@
 package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.CategoriaPadraoEntity;
@@ -22,6 +24,10 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
     @Autowired
     private CategoriaUsuarioRepository categoriaUsuarioRepository;
 
+    public UUID getUsuarioAutenticadoId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return UUID.fromString(authentication.getName());
+    }
 
     @Override
     public CategoriaUsuarioEntity save(CategoriaUsuarioDTO dto) {
@@ -99,7 +105,8 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
         return categoriaUsuarioRepository.findByUsuarioEntityIdAndCategoriaPadraoEntityId(usuarioId, categoriaPadraoId);
     }
 
-    public List<CategoriaUsuarioDTO> findByUsuarioIdAndTipoTransacaoId(UUID usuarioId, UUID tipoTransacaoId) {
+    public List<CategoriaUsuarioDTO> findByUsuarioIdAndTipoTransacaoId(UUID tipoTransacaoId) {
+        UUID usuarioId = getUsuarioAutenticadoId();
         return categoriaUsuarioRepository.findByUsuarioEntityIdAndTipoTransacaoEntityId(usuarioId, tipoTransacaoId).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());

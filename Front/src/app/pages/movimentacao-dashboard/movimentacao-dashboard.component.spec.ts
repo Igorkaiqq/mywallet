@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MovimentacaoDashboardComponent } from '../movimentacao-dashboard/movimentacao-dashboard.component';
+import { MovimentacaoDashboardComponent } from './movimentacao-dashboard.component';
 
 
 describe('MovimentacaoDashboardComponent', () => {
