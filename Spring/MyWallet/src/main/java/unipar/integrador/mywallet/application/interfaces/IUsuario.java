@@ -18,6 +18,4 @@ public interface IUsuario {
     List<UsuarioEntity> findAll();
     UsuarioEntity update(UUID id, AtualizarUsuarioDTO dto);
     void deleteById(UUID id);
-    LoginResponseDTO realizarLogin(LoginDTO loginDto);
-
 }

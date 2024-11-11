@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../service/login/login.service';
+import { LoginService } from '../../service/login/login.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink} from "@angular/router";
 
@@ -26,13 +26,13 @@ export class LoginComponent {
     this.loginService.login(credentials).subscribe(
       response => {
 
-        sessionStorage.setItem('usuarioLogado', JSON.stringify(response));
-
-        this.router.navigate(['/api/v1/token']);
+        this.router.navigate(['/tela-inicial']);
       },
       error => {
         alert('Usuário ou senha inválidos');
       }
     );
+
   }
+
 }

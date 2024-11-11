@@ -14,6 +14,6 @@ public interface SubcategoriaUsuarioRepository extends JpaRepository<Subcategori
     Optional<SubcategoriaUsuarioEntity> findByUsuarioEntityIdAndCategoriaUsuarioIdAndSubcategoriaPadraoId(
             UUID usuarioId, UUID categoriaUsuarioId, UUID subcategoriaPadraoId);
 
-    Optional<List<SubcategoriaUsuarioEntity>> findByUsuarioEntity_IdAndCategoriaUsuarioId(UUID usuarioId, UUID categoriaUsuarioId);
+    Optional<List<SubcategoriaUsuarioEntity>> findByCategoriaUsuarioId(UUID categoriaUsuarioId);
 
 }

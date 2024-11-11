@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from '../service/categoria/categoria.service';
-import { SubcategoriaService } from '../service/subcategoria/subcategoria.service';
-import { MetodoPagamentoService } from '../service/metodoPagamento/metodo-pagamento.service';
-import { TransacaoService } from '../service/transacao/transacao.service';
-import {TipoTransacaoService} from "../service/tipoTransacao/tipo-transacao.service";
+import { CategoriaService } from '../../service/categoria/categoria.service';
+import { SubcategoriaService } from '../../service/subcategoria/subcategoria.service';
+import { MetodoPagamentoService } from '../../service/metodoPagamento/metodo-pagamento.service';
+import { TransacaoService } from '../../service/transacao/transacao.service';
+import {TipoTransacaoService} from "../../service/tipoTransacao/tipo-transacao.service";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule} from "ng2-currency-mask";
 import {Router} from "@angular/router";
+import {ContaBancariaService} from "../../service/contaBancaria/conta-bancaria.service";
 
 interface TipoTransacao {
   tipoTransacaoEnum: string;
@@ -27,6 +28,11 @@ interface Subcategoria {
 interface MetodoPagamento {
   metodoPagamento: string;
   id: string;
+}
+
+interface ContaBancaria {
+  id: string;
+  nome: string;
 }
 
 const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -51,20 +57,20 @@ const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 })
 export class RealizarTransacaoComponent implements OnInit {
   transacao: {
-    usuarioId: string,
     tipoTransacaoId: string | null,
     valor: string,
     categoriaId: string | null,
     subcategoriaId: string | null,
     metodoPagamentoId: string | null,
+    contaBancariaId: string | null,
     descricao: string
   } = {
-    usuarioId: '',
     tipoTransacaoId: null,
     valor: '0',
     categoriaId: null,
     subcategoriaId: null,
     metodoPagamentoId: null,
+    contaBancariaId: null,
     descricao: ''
   };
 
@@ -72,6 +78,7 @@ export class RealizarTransacaoComponent implements OnInit {
   categorias: Categoria[] = [];
   subcategorias: Subcategoria[] = [];
   metodosPagamento: MetodoPagamento[] = [];
+  contasBancarias: ContaBancaria[] = [];
 
   successMessage: string = '';
   errorMessages: string[] = [];
@@ -82,18 +89,11 @@ export class RealizarTransacaoComponent implements OnInit {
     private metodoPagamentoService: MetodoPagamentoService,
     private transacaoService: TransacaoService,
     private tipotransacaoService: TipoTransacaoService,
+    private contaBancariaService: ContaBancariaService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-
-    const usuarioLogado = sessionStorage.getItem('usuarioLogado');
-    if (usuarioLogado) {
-      const usuario = JSON.parse(usuarioLogado);
-      this.transacao.usuarioId = usuario.id;
-    } else {
-      console.error('Usuário não logado');
-    }
 
     this.tipotransacaoService.getTiposTransacao().subscribe(tipos => {
       this.tiposTransacao = tipos;
@@ -104,6 +104,12 @@ export class RealizarTransacaoComponent implements OnInit {
       this.metodosPagamento = metodos;
       sessionStorage.setItem('metodosPagamento', JSON.stringify(metodos));
     });
+
+    this.contaBancariaService.getContasBancarias().subscribe(contas => {
+      this.contasBancarias = contas;
+      sessionStorage.setItem('contasBancarias', JSON.stringify(contas));
+    });
+
   }
 
 
@@ -136,7 +142,6 @@ export class RealizarTransacaoComponent implements OnInit {
   }
 
   salvarTransacao(): void {
-
     const valorNumerico = String(this.transacao.valor).replace('R$', '').replace('.', '').replace(',', '.').trim();
     this.transacao.valor = valorNumerico;
 
@@ -158,7 +163,10 @@ export class RealizarTransacaoComponent implements OnInit {
         this.successMessage = '';
       }
     });
+  }
 
+  cadastrarNovaContaBancaria(): void {
+    this.router.navigate(['/cadastrar-conta-bancaria']);
   }
 
 }

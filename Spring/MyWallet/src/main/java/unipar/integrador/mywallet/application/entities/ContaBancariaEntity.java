@@ -11,9 +11,12 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class ContaBancariaEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false, updatable = false)
     private UUID id;
 
@@ -21,8 +24,8 @@ public class ContaBancariaEntity {
     @JoinColumn(name = "UsuarioId", nullable = false)
     private UsuarioEntity usuario;
 
-    @Column(name = "NomeBanco", nullable = false, length = 100)
-    private String nomeBanco;
+    @Column(name = "Nome", nullable = false, length = 100)
+    private String nome;
 
     @Column(name = "Saldo", nullable = false)
     private Double saldo;

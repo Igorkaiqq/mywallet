@@ -24,7 +24,7 @@ public class TipoTransacaoService implements ITipoTransacao {
 
     @Override
     public Optional<TipoTransacaoEntity> findById(UUID id) {
-        return Optional.empty();
+        return tipoTransacaoRepository.findById(id);
     }
 
     @Override

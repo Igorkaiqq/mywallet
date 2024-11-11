@@ -4,8 +4,6 @@ import jakarta.validation.constraints.*;
 import java.util.UUID;
 
 public record TransacaoDTO(
-        @NotNull(message = "Usuário é obrigatório.")
-        UUID usuarioId,
 
         @NotNull(message = "Tipo de Transação é obrigatório.")
         UUID tipoTransacaoId,

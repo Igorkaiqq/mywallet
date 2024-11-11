@@ -1,6 +1,8 @@
 package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.converters.transacao.TransacaoConveterDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
@@ -28,32 +30,43 @@ public class TransacaoService implements ITransacao {
 
     @Autowired
     TipoTransacaoService tipoTransacaoService;
+    @Autowired
+    private UsuarioService usuarioService;
+
+    public UUID getUsuarioAutenticadoId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return UUID.fromString(authentication.getName());
+    }
 
     @Override
     public TransacaoEntity save(TransacaoDTO dto) {
 
+        UUID usuarioId = getUsuarioAutenticadoId();
+
         TransacaoEntity transacao = TransacaoConveterDTO.toEntity(dto);
+
+        UsuarioEntity usuario = usuarioService.findById(usuarioId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+
+        transacao.setUsuario(usuario);
 
         ContaBancariaEntity contaBancaria = contaBancariaService.findById(dto.contaBancariaId())
                 .orElseThrow(() -> new EntityNotFoundException("Conta Bancária não encontrada."));
 
-        CaixaEntity caixa = caixaService.findById(dto.usuarioId())
-                .orElseThrow(() -> new EntityNotFoundException("Caixa não encontrado para o usuário."));
+        transacao.setContaBancaria(contaBancaria);
 
         double valorTransacao = dto.valor();
+
         TipoTransacaoEntity tipoTransacao = tipoTransacaoService.findById(dto.tipoTransacaoId())
                 .orElseThrow(() -> new EntityNotFoundException("Tipo de Transação não encontrado."));
 
         if (tipoTransacao.getTipoTransacaoEnum() == TipoTransacaoEnum.RECEITA) {
             contaBancaria.setSaldo(contaBancaria.getSaldo() + valorTransacao);
-            caixa.setSaldoTotal(caixa.getSaldoTotal() + valorTransacao);
         } else if (tipoTransacao.getTipoTransacaoEnum() == TipoTransacaoEnum.DESPESA) {
             contaBancaria.setSaldo(contaBancaria.getSaldo() - valorTransacao);
-            caixa.setSaldoTotal(caixa.getSaldoTotal() - valorTransacao);
         }
 
         contaBancariaService.update(contaBancaria);
-        caixaService.update(caixa);
         return transacaoRepository.save(transacao);
     }
 
@@ -88,9 +101,11 @@ public class TransacaoService implements ITransacao {
     }
 
     @Override
-    public List<TransacaoUsuarioDTO> findByUsuarioId(UUID id) {
+    public List<TransacaoUsuarioDTO> findByUsuarioId() {
 
-        return transacaoRepository.findByUsuario_Id(id).stream()
+        UUID usuarioId = getUsuarioAutenticadoId();
+
+        return transacaoRepository.findByUsuario_Id(usuarioId).stream()
                 .map(this::convertToDto)
                 .toList();
     }

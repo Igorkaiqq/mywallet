@@ -32,12 +32,11 @@ public class CategoriaUsuarioController {
         return ResponseEntity.ok(categorias);
     }
 
-    @GetMapping("/{usuarioId}/tipoTransacao/{tipoTransacaoId}")
+    @GetMapping("/tipoTransacao/{tipoTransacaoId}")
     public ResponseEntity<List<CategoriaUsuarioDTO>> findCategoriasByUsuarioIdAndTipoTransacaoId(
-            @PathVariable UUID usuarioId,
             @PathVariable UUID tipoTransacaoId) {
 
-        List<CategoriaUsuarioDTO> categorias = categoriaUsuarioService.findByUsuarioIdAndTipoTransacaoId(usuarioId, tipoTransacaoId);
+        List<CategoriaUsuarioDTO> categorias = categoriaUsuarioService.findByUsuarioIdAndTipoTransacaoId(tipoTransacaoId);
         return ResponseEntity.ok(categorias);
     }
 

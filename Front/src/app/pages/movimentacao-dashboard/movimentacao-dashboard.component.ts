@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import {TransacaoService} from "../service/transacao/transacao.service";
+import {TransacaoService} from "../../service/transacao/transacao.service";
 import {CommonModule, CurrencyPipe, DatePipe} from "@angular/common";
 import { Router } from '@angular/router';
 

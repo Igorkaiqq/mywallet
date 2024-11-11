@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import {RealizarTransacaoComponent} from "./realizar-transacao/realizar-transacao.component";
+import { HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -11,9 +11,11 @@ import {RealizarTransacaoComponent} from "./realizar-transacao/realizar-transaca
   imports: [
     BrowserModule,
     FormsModule,
-    AppComponent
+    AppComponent,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: []
 })
 export class AppModule { }

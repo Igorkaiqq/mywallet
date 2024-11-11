@@ -2,6 +2,7 @@ package unipar.integrador.mywallet.application.converters.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.Role;
 import unipar.integrador.mywallet.application.entities.UsuarioEntity;
@@ -13,55 +14,53 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
+@Component
 public class UsuarioConverterDTO {
 
-        private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        private static RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-        private static PasswordEncoder passwordEncoder;
-
+    @Autowired
     public UsuarioConverterDTO(RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public static UsuarioEntity toEntity(CadastroUsuarioDTO dto) {
-            var roleBasic = roleRepository.findByNome(Role.Values.ADMIN.name());
-            UsuarioEntity usuarioEntity = new UsuarioEntity();
-            usuarioEntity.setNome(dto.nome());
-            usuarioEntity.setUsername(dto.username());
-            usuarioEntity.setEmail(dto.email());
-            usuarioEntity.setSenha(passwordEncoder.encode(dto.senha()));
-            usuarioEntity.setTelefone(dto.telefone());
-            usuarioEntity.setCpf(dto.cpf());
-            usuarioEntity.setGenero(GeneroEnum.fromString(dto.genero()));
-            usuarioEntity.setDataNascimento(LocalDate.parse(dto.dataNascimento(), formatter));
-            usuarioEntity.setDataCadastro(LocalDate.now());
-            usuarioEntity.setPerguntaSecreta(dto.perguntaSecreta());
-            usuarioEntity.setRespostaSecreta(dto.respostaSecreta());
-            usuarioEntity.setStatusRegistro(StatusRegistroEnum.ATIVO);
-            usuarioEntity.setRoles(Set.of(roleBasic));
+    public UsuarioEntity toEntity(CadastroUsuarioDTO dto) {
+        var roleBasic = roleRepository.findByNome(Role.Values.ADMIN.name());
 
-            return usuarioEntity;
-        }
+        UsuarioEntity usuarioEntity = new UsuarioEntity();
+        usuarioEntity.setNome(dto.nome());
+        usuarioEntity.setUsername(dto.username());
+        usuarioEntity.setEmail(dto.email());
+        usuarioEntity.setSenha(passwordEncoder.encode(dto.senha()));
+        usuarioEntity.setTelefone(dto.telefone());
+        usuarioEntity.setCpf(dto.cpf());
+        usuarioEntity.setGenero(GeneroEnum.fromString(dto.genero()));
+        usuarioEntity.setDataNascimento(LocalDate.parse(dto.dataNascimento(), formatter));
+        usuarioEntity.setDataCadastro(LocalDate.now());
+        usuarioEntity.setPerguntaSecreta(dto.perguntaSecreta());
+        usuarioEntity.setRespostaSecreta(dto.respostaSecreta());
+        usuarioEntity.setStatusRegistro(StatusRegistroEnum.ATIVO);
+        usuarioEntity.setRoles(Set.of(roleBasic));
 
-        public static CadastroUsuarioDTO toDTO(UsuarioEntity entity) {
+        return usuarioEntity;
+    }
 
-            CadastroUsuarioDTO usuarioDTO = new CadastroUsuarioDTO(
-                    entity.getNome(),
-                    entity.getUsername(),
-                    entity.getEmail(),
-                    entity.getSenha(),
-                    entity.getTelefone(),
-                    entity.getCpf(),
-                    entity.getGenero().toString(),
-                    entity.getDataNascimento().toString(),
-                    entity.getPerguntaSecreta(),
-                    entity.getRespostaSecreta()
-            );
-
-            return usuarioDTO;
-        }
-
+    public CadastroUsuarioDTO toDTO(UsuarioEntity entity) {
+        return new CadastroUsuarioDTO(
+                entity.getNome(),
+                entity.getUsername(),
+                entity.getEmail(),
+                entity.getSenha(),
+                entity.getTelefone(),
+                entity.getCpf(),
+                entity.getGenero().toString(),
+                entity.getDataNascimento().toString(),
+                entity.getPerguntaSecreta(),
+                entity.getRespostaSecreta()
+        );
+    }
 }

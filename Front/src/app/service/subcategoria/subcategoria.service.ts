@@ -29,17 +29,8 @@ export class SubcategoriaService {
 
   getSubcategoriasPorCategoriaId(categoriaUsuarioId: string): Observable<any> {
 
-    const usuarioLogado = sessionStorage.getItem('usuarioLogado');
+   return this.http.get(`${this.apiUrl}/subcategoria-usuario/categoria-usuario/${categoriaUsuarioId}`);
 
-    if (usuarioLogado) {
-
-      const usuario = JSON.parse(usuarioLogado);
-      const usuarioId = usuario.id;
-
-      return this.http.get(`${this.apiUrl}/subcategoria-usuario/${usuarioId}/categoria-usuario/${categoriaUsuarioId}`);
-    } else {
-      throw new Error('Usuário não logado');
-    }
   }
 
 }
