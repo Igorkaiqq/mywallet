@@ -1,4 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #6a11cb;
+  --secondary-color: #2575fc;
+  --button-bg-color: #28a745;
+  --button-hover-color: #218838;
+  --text-light: #ffffff;
+  --text-highlight: #ffeb3b;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  font-family: 'Roboto', sans-serif;
+  overflow-y: auto;
+}
+
+body {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-form-field {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.mat-datepicker-toggle {
+  position: initial;
+  right: 10px;
+  cursor: pointer;
+  color: #333;
+  opacity: 1;
+}
+
+.mat-datepicker-toggle button {
+  color: #333;
+}
+
+.mat-datepicker-toggle:hover {
+  color: #000;
+  opacity: 1;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -9,41 +9,13 @@ import {FormsModule} from "@angular/forms";
 import {CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule} from "ng2-currency-mask";
 import {Router} from "@angular/router";
 import {ContaBancariaService} from "../../service/contaBancaria/conta-bancaria.service";
-
-interface TipoTransacao {
-  tipoTransacaoEnum: string;
-  id: string;
-}
-
-interface Categoria {
-  id: string;
-  nome: string;
-}
-
-interface Subcategoria {
-  id: string;
-  nome: string;
-}
-
-interface MetodoPagamento {
-  metodoPagamento: string;
-  id: string;
-}
-
-interface ContaBancaria {
-  id: string;
-  nome: string;
-}
-
-const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
-  align: "left",
-  allowNegative: true,
-  decimal: ",",
-  precision: 2,
-  prefix: "R$ ",
-  suffix: "",
-  thousands: "."
-};
+import {Transacao} from "../../models/transacao/transacao";
+import {TipoTransacao} from "../../models/tipoTransacao/tipo-transacao";
+import {Categoria} from "../../models/categoria/categoria";
+import {Subcategoria} from "../../models/subcategoria/subcategoria";
+import {MetodoPagamento} from "../../models/metodoPagamento/metodo-pagamento";
+import {ContaBancaria} from "../../models/contaBancaria/conta-bancaria";
+import {CustomCurrencyMaskConfig} from "../../config/currency-mask";
 
 @Component({
   selector: 'app-realizar-transacao',
@@ -56,23 +28,16 @@ const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   ],
 })
 export class RealizarTransacaoComponent implements OnInit {
-  transacao: {
-    tipoTransacaoId: string | null,
-    valor: string,
-    categoriaId: string | null,
-    subcategoriaId: string | null,
-    metodoPagamentoId: string | null,
-    contaBancariaId: string | null,
-    descricao: string
-  } = {
-    tipoTransacaoId: null,
+
+  transacao: Transacao = {
+    tipoTransacaoId: '',
+    categoriaId: '',
+    subcategoriaId: '',
+    metodoPagamentoId: '',
+    contaBancariaId: '',
     valor: '0',
-    categoriaId: null,
-    subcategoriaId: null,
-    metodoPagamentoId: null,
-    contaBancariaId: null,
     descricao: ''
-  };
+  }
 
   tiposTransacao: TipoTransacao[] = [];
   categorias: Categoria[] = [];
@@ -95,23 +60,29 @@ export class RealizarTransacaoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.tipotransacaoService.getTiposTransacao().subscribe(tipos => {
-      this.tiposTransacao = tipos;
-      sessionStorage.setItem('tiposTransacao', JSON.stringify(tipos));
-    });
-
-    this.metodoPagamentoService.getMetodosPagamento().subscribe(metodos => {
-      this.metodosPagamento = metodos;
-      sessionStorage.setItem('metodosPagamento', JSON.stringify(metodos));
-    });
-
-    this.contaBancariaService.getContasBancarias().subscribe(contas => {
-      this.contasBancarias = contas;
-      sessionStorage.setItem('contasBancarias', JSON.stringify(contas));
-    });
+    this.buscarTiposTransacao();
+    this.buscarMetodosPagamento();
+    this.buscarContasBancarias();
 
   }
 
+  private buscarTiposTransacao(): void {
+    this.tipotransacaoService.getTiposTransacao().subscribe(tipos => {
+      this.tiposTransacao = tipos;
+    });
+  }
+
+  private buscarMetodosPagamento(): void {
+    this.metodoPagamentoService.getMetodosPagamento().subscribe(metodos => {
+      this.metodosPagamento = metodos;
+    });
+  }
+
+  private buscarContasBancarias(): void {
+    this.contaBancariaService.getContasBancarias().subscribe(contas => {
+      this.contasBancarias = contas
+    });
+  }
 
   onTipoTransacaoChange(event: any): void {
 
@@ -142,7 +113,13 @@ export class RealizarTransacaoComponent implements OnInit {
   }
 
   salvarTransacao(): void {
-    const valorNumerico = String(this.transacao.valor).replace('R$', '').replace('.', '').replace(',', '.').trim();
+
+    const valorNumerico = String(this.transacao.valor)
+      .replace('R$', '')
+      .replace('.', '')
+      .replace(',', '.')
+      .trim();
+
     this.transacao.valor = valorNumerico;
 
     this.transacaoService.salvarTransacao(this.transacao).subscribe({

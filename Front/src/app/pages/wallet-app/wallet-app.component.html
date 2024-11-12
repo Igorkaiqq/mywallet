@@ -1,53 +1,71 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
 <body>
+<div class="container-fluid">
 
-    <div class="header">
-        <h1 class="name">Expert Wallet</h1>
-        <div class="buttons">
-            <button class="button-criar" (click)="goToCadTransacao()">Criar Movimentação</button>
-            <button class="button-visualizar" (click)="goToMovimentacao()">Visualizar Movimentações</button>
-             <button class="button-logout" (click)="logout()">Logout</button>
-        </div>
+  <div class="dashboard">
+    <div class="top-row">
+      <div class="card saldo">
+        <h2>Saldo do Mês</h2>
+        <p>R$ 561,00</p>
+      </div>
+      <div class="card receitas">
+        <h2>Receita do Mês</h2>
+        <p>R$ 12.000,00</p>
+      </div>
+      <div class="card despesas">
+        <h2>Despesa do Mês</h2>
+        <p>R$ 11.439,00</p>
+      </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="main">
-            <div class="card-row">
-                <div class="card saldo">
-                    <h2>Saldo</h2>
-                    <p>R$</p>
-                </div>
-                <div class="card receitas">
-                    <h2>Receitas</h2>
-                    <p>R$</p>
-                </div>
-                <div class="card despesas">
-                    <h2>Despesas</h2>
-                    <p>R$</p>
-                </div>
-            </div>
+    <div class="middle-row">
+      <div class="desempenho-container">
+        <h3 class="grafico-title">Desempenho do Mês</h3>
+        <div class="desempenho-section">
+          <div class="desempenho-item">
+            <p>Moradia: 72%</p>
+          </div>
+          <div class="desempenho-item">
+            <p>Saúde: 111%</p>
+          </div>
         </div>
+      </div>
 
-        <div class="grafico-container">
-            <div class="grafico-section">
-                <h3 class="grafico-title">Gráfico de Receitas</h3>
-                <canvas id="graficoReceitasCanvas"></canvas>
-            </div>
-            <div class="grafico-section">
-                <h3 class="grafico-title">Gráfico de Despesas</h3>
-                <canvas id="graficoDespesasCanvas"></canvas>
-            </div>
+      <div class="contas-container">
+        <h3 class="grafico-title">Contas Bancárias</h3>
+        <div class="conta-item">
+          <p>Conta 1: R$ 3.000,00</p>
         </div>
-        
+        <div class="conta-item">
+          <p>Conta 2: R$ 5.000,00</p>
+        </div>
+      </div>
     </div>
 
+    <div class="bottom-row">
+      <div class="grafico-section">
+        <h3 class="grafico-title">Gráfico de Receitas</h3>
+        <canvas id="graficoReceitasCanvas"></canvas>
+      </div>
+      <div class="grafico-section">
+        <h3 class="grafico-title">Gráfico de Despesas</h3>
+        <canvas id="graficoDespesasCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-range-picker">
+    <label for="dateRange">Selecione o período:</label>
+    <input type="text" id="dateRange" name="dateRange">
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('#dateRange').daterangepicker({
+      locale: {
+        format: 'DD/MM/YYYY HH:mm'
+      }
+    });
+  });
+</script>
 </body>
-
-</html>

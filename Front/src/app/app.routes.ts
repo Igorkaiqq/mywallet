@@ -8,6 +8,7 @@ import {AuthGuard} from "./service/authGuard/auth-guard.service";
 import {
   CadastroContaBancariaComponent
 } from "./pages/conta-bancaria/cadastro-conta-bancaria/cadastro-conta-bancaria.component";
+import {CategoriasComponent} from "./pages/categorias/categorias.component";
 
 
 export const routes: Routes = [
@@ -31,9 +32,14 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-    path: 'cadastrar-conta-bancaria',
-    component: CadastroContaBancariaComponent,
-    canActivate: [AuthGuard]
+      path: 'cadastrar-conta-bancaria',
+      component: CadastroContaBancariaComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'categorias',
+      component: CategoriasComponent,
+      canActivate: [AuthGuard]
     },
     {
         path: 'login',

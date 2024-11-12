@@ -1,0 +1,32 @@
+<div class="container">
+
+  <div class="category-panel">
+    <h3>Receitas</h3>
+    <div class="category" *ngFor="let categoria of categoriasReceita" (click)="toggleCategory(categoria.id)">
+      <div class="category-header">
+        <span>{{ categoria.nome }}</span>
+        <span class="arrow" [ngClass]="{ 'expanded': isCategoryExpanded(categoria.id) }">&#9662;</span>
+      </div>
+      <div class="subcategories" *ngIf="isCategoryExpanded(categoria.id)">
+        <div class="subcategory" *ngFor="let subcategoria of subcategoriasMap[categoria.id]">
+          {{ subcategoria.nome }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-panel">
+    <h3>Despesas</h3>
+    <div class="category" *ngFor="let categoria of categoriasDespesa" (click)="toggleCategory(categoria.id)">
+      <div class="category-header">
+        <span>{{ categoria.nome }}</span>
+        <span class="arrow" [ngClass]="{ 'expanded': isCategoryExpanded(categoria.id) }">&#9662;</span>
+      </div>
+      <div class="subcategories" *ngIf="isCategoryExpanded(categoria.id)">
+        <div class="subcategory" *ngFor="let subcategoria of subcategoriasMap[categoria.id]">
+          {{ subcategoria.nome }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
