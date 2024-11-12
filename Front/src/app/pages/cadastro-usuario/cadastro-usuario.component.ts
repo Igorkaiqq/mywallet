@@ -71,9 +71,10 @@ export class CadastroUsuarioComponent implements OnInit {
 
   onCancel() {
     this.criarContaForm.reset();
+    this.router.navigate(['/login']);
   }
 
   goToLogin() {
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 }

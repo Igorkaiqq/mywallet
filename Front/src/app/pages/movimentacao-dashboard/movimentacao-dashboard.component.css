@@ -1,9 +1,9 @@
-.wallet-container {
-  display: flex;
+.container-fluid {
   flex-direction: column;
   height: 100vh;
   background-color: #e0e0e0;
-  color: #333;
+  color: #000000;
+  background: linear-gradient(#335AA6, #000000);
 }
 
 .header {
@@ -13,6 +13,7 @@
   padding: 20px;
   background-color: #bdbdbd;
   font-size: 20px;
+  border-radius: 20px;
 }
 
 .logo {
@@ -22,10 +23,6 @@
 
 .user-info {
   font-size: 1em;
-}
-
-.back-button {
-
 }
 
 table {
