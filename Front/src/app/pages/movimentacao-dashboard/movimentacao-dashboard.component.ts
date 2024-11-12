@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import {TransacaoService} from "../../service/transacao/transacao.service";
-import {CommonModule, CurrencyPipe, DatePipe} from "@angular/common";
+import { TransacaoService } from '../../service/transacao/transacao.service';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-movimentacao-dashboard',
@@ -13,11 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./movimentacao-dashboard.component.css']
 })
 export class MovimentacaoDashboardComponent implements OnInit {
-  walletAppForm = new FormGroup({
-  });
-
+  walletAppForm = new FormGroup({});
   transacoes: any[] = [];
-
+  filteredTransacoes: any[] = [];
 
   ngOnInit(): void {
     this.buscarTransacoes();
@@ -26,7 +23,6 @@ export class MovimentacaoDashboardComponent implements OnInit {
   onSubmit() {
     if (this.walletAppForm.valid) {
       console.log('Form Data: ', this.walletAppForm.value);
-
     } else {
       console.log('Form inválido');
     }
@@ -36,21 +32,26 @@ export class MovimentacaoDashboardComponent implements OnInit {
     this.walletAppForm.reset();
   }
 
-  constructor( private transacaoService: TransacaoService, private router: Router) {}
+  constructor(private transacaoService: TransacaoService, private router: Router) {}
 
   buscarTransacoes() {
+    this.transacaoService.buscarTransacoesPorUsuarioId().subscribe({
+      next: (transacoes) => {
+        this.transacoes = transacoes;
+        this.filteredTransacoes = transacoes;
+      },
+      error: (error) => {
+        console.error('Erro ao buscar transações: ', error);
+      }
+    });
+  }
 
-      this.transacaoService.buscarTransacoesPorUsuarioId().subscribe({
-        next: (transacoes) => {
-          this.transacoes = transacoes;
-        },
-        error: (error) => {
-          console.error('Erro ao buscar transações: ', error);
-        }
-      });
-    }
+  goToDashboard() {
+    this.router.navigate(['/wallet']);
+  }
 
-    goToDashboard(){
-      this.router.navigate(['/wallet']);
-    }
+  goToNovaMovimentacao() {
+    this.router.navigate(['realizar-transacao']);
+  }
 }
+

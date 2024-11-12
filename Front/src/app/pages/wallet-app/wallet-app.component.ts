@@ -28,6 +28,10 @@ export class WalletAppComponent implements OnInit {
     this.router.navigate(['/tela-inicial']);
   }
 
+  goToCategorias(){
+    this.router.navigate(['/categorias']);
+  }
+
   private initReceitaChart(): void {
     this.apiService.getReceitas().subscribe(data => {
       this.receitaChart = new Chart('graficoReceitasCanvas', {

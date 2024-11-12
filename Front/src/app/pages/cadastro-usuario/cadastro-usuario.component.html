@@ -1,10 +1,112 @@
-<div class="container-fluid">
-  <div class="cadastro-box">
-    <h1>CRIAR CONTA</h1>
+<div class="register-container">
+  <div class="glass-box">
 
-    <div *ngIf="successMessage" class="alert alert-success">
-      {{ successMessage }}
-    </div>
+    <form [formGroup]="criarContaForm" (ngSubmit)="onSubmit()" class="register-form">
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-user"></i>
+          <input id="nome" formControlName="nome" type="text" class="form-control" placeholder="Nome">
+        </div>
+        <div *ngIf="criarContaForm.get('nome')?.invalid && criarContaForm.get('nome')?.touched" class="error-message">
+          Campo obrigatório
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-user-circle"></i>
+          <input id="username" formControlName="username" type="text" class="form-control" placeholder="Username">
+        </div>
+        <div *ngIf="criarContaForm.get('username')?.invalid && criarContaForm.get('username')?.touched" class="error-message">
+          Campo obrigatório
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-envelope"></i>
+          <input id="email" formControlName="email" type="text" class="form-control" placeholder="E-mail">
+        </div>
+        <div *ngIf="criarContaForm.get('email')?.invalid && criarContaForm.get('email')?.touched" class="error-message">
+          {{ criarContaForm.get('email')?.errors?.['required'] ? 'Campo obrigatório' : 'Formato de e-mail inválido' }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-lock"></i>
+          <input id="senha" formControlName="senha" type="password" class="form-control" placeholder="Senha">
+        </div>
+        <div *ngIf="criarContaForm.get('senha')?.invalid && criarContaForm.get('senha')?.touched" class="error-message">
+          {{ criarContaForm.get('senha')?.errors?.['required'] ? 'Campo obrigatório' : 'Senha deve ter no mínimo 6 caracteres' }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-phone"></i>
+          <input id="telefone" formControlName="telefone" type="text" class="form-control" mask="(00) 00000-0000" placeholder="Telefone">
+        </div>
+        <div *ngIf="criarContaForm.get('telefone')?.invalid && criarContaForm.get('telefone')?.touched" class="error-message">
+          Campo obrigatório
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-id-card"></i>
+          <input id="cpf" formControlName="cpf" type="text" class="form-control" mask="000.000.000-00" placeholder="CPF">
+        </div>
+        <div *ngIf="criarContaForm.get('cpf')?.invalid && criarContaForm.get('cpf')?.touched" class="error-message">
+          {{ criarContaForm.get('cpf')?.errors?.['required'] ? 'Campo obrigatório' : 'CPF inválido' }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-venus-mars"></i>
+          <input id="genero" formControlName="genero" type="text" class="form-control" placeholder="Gênero">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-calendar-alt"></i>
+          <input id="dataNascimento" matInput [matDatepicker]="picker" formControlName="dataNascimento" type="text" class="form-control" placeholder="dd/mm/aaaa">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <div *ngIf="criarContaForm.get('dataNascimento')?.invalid && criarContaForm.get('dataNascimento')?.touched" class="error-message">
+          Campo obrigatório
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-question-circle"></i>
+          <input id="pergunta" formControlName="perguntaSecreta" type="text" class="form-control" placeholder="Pergunta de segurança">
+        </div>
+        <div *ngIf="criarContaForm.get('perguntaSecreta')?.invalid && criarContaForm.get('perguntaSecreta')?.touched" class="error-message">
+          Campo obrigatório
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-icon">
+          <i class="fas fa-key"></i>
+          <input id="resposta" formControlName="respostaSecreta" type="text" class="form-control" placeholder="Resposta de segurança">
+        </div>
+        <div *ngIf="criarContaForm.get('respostaSecreta')?.invalid && criarContaForm.get('respostaSecreta')?.touched" class="error-message">
+          Campo obrigatório
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button type="submit" class="submit-btn">Cadastrar</button>
+        <button type="button" class="cancel-btn" (click)="onCancel()">Cancelar</button>
+      </div>
+    </form>
 
     <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
       <ul>
@@ -12,80 +114,8 @@
       </ul>
     </div>
 
-    <form [formGroup]="criarContaForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-
-        <label for="nome">Nome:</label>
-        <input id="nome" class="form-control" formControlName="nome" type="text" />
-        <div *ngIf="criarContaForm.get('nome')?.invalid && criarContaForm.get('nome')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="username">Username:</label>
-        <input id="username" class="form-control" formControlName="username" type="text" />
-        <div *ngIf="criarContaForm.get('username')?.invalid && criarContaForm.get('username')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="email">E-mail:</label>
-        <input id="email" class="form-control" formControlName="email" type="text" />
-        <div *ngIf="criarContaForm.get('email')?.invalid && criarContaForm.get('email')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="senha">Senha:</label>
-        <input id="senha" class="form-control" formControlName="senha" type="password" />
-        <div *ngIf="criarContaForm.get('senha')?.invalid && criarContaForm.get('senha')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="telefone">Telefone:</label>
-        <input id="telefone" class="form-control" formControlName="telefone" mask="(00) 00000-0000" type="text" />
-        <div *ngIf="criarContaForm.get('telefone')?.invalid && criarContaForm.get('telefone')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="cpf">CPF:</label>
-        <input id="cpf" class="form-control" formControlName="cpf" mask="000.000.000-00" type="text" />
-        <div *ngIf="criarContaForm.get('cpf')?.invalid && criarContaForm.get('cpf')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="genero">Gênero:</label>
-        <input id="genero" class="form-control" formControlName="genero" type="text" />
-        <div *ngIf="criarContaForm.get('genero')?.invalid && criarContaForm.get('genero')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="dataNascimento">Data de Nascimento:</label>
-        <input id="dataNascimento" class="form-control" formControlName="dataNascimento" type="date" />
-        <div *ngIf="criarContaForm.get('dataNascimento')?.invalid && criarContaForm.get('dataNascimento')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="pergunta">Pergunta de segurança:</label>
-        <input id="pergunta" class="form-control" formControlName="perguntaSecreta" type="text"/>
-        <div *ngIf="criarContaForm.get('perguntaSecreta')?.invalid && criarContaForm.get('perguntaSecreta')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <label for="resposta">Resposta de segurança:</label>
-        <input id="resposta" class="form-control" formControlName="respostaSecreta" type="text"/>
-        <div *ngIf="criarContaForm.get('respostaSecreta')?.invalid && criarContaForm.get('respostaSecreta')?.touched">
-          <small class="text-danger">Campo obrigatório</small>
-        </div>
-
-        <div *ngIf="backendErrors.length > 0" class="alert alert-danger">
-          <ul>
-            <li *ngFor="let error of backendErrors">{{ error }}</li>
-          </ul>
-        </div>
-
-      <div class="buttons">
-        <button type="submit" class="btn btn-success" [disabled]="criarContaForm.invalid">Salvar</button>
-        <button type="button" class="btn btn-danger" (click)="goToLogin()">Cancelar</button>
-      </div>
-      </div>
-    </form>
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
   </div>
 </div>

@@ -1,10 +1,8 @@
-html,
-body {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: linear-gradient(#335AA6, #000000);
 }
 
 .header {
@@ -44,8 +42,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-
-
 .container-fluid {
   min-height: calc(100vh - 85px);
   display: flex;
@@ -57,32 +53,44 @@ body {
   padding-top: 100px;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+  gap: 30px;
+  width: 90%;
   max-width: 1200px;
-  gap: 20px;
   padding: 20px;
 }
 
-.card-row {
+.top-row {
+  grid-column: span 2;
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
+}
+
+.middle-row {
+  display: flex;
+  gap: 20px;
+}
+
+.bottom-row {
+  grid-column: span 2;
+  display: flex;
   gap: 20px;
 }
 
 .card {
   flex: 1;
-  min-width: 200px; /* Aumentando a largura mínima */
-  padding: 20px; /* Aumentando o padding interno */
+  min-width: 200px;
+  padding: 20px;
   border-radius: 8px;
   text-align: center;
   margin-top: 20px;
 }
 
 .card.saldo {
-  background-color: #6a6a6a;
+  background-color: #0abd5b;
   color: #fff;
 }
 
@@ -96,115 +104,29 @@ body {
   color: #fff;
 }
 
-.card h2 {
-  font-size: 2em; /* Aumentando o tamanho da fonte do título */
-}
-
-.card p {
-  font-size: 1.5em; /* Aumentando o tamanho da fonte do texto */
-}
-
-.card.despesas:hover{
-  background-color: #ff2222;
-  color: #fff;
-}
-
-.card.receitas:hover{
-  background-color: #24ba74;
-  color: #fff;
-}
-
-.card.saldo:hover{
-  background-color: #414141;
-  color: #fff;
-}
-
 .grafico-container {
   display: flex;
   justify-content: space-around;
-  gap: 30px; /* Aumentando o espaço entre os gráficos */
+  gap: 30px;
   width: 90%;
   max-width: 1200px;
   padding: 20px;
 }
 
-.grafico-title{
+.grafico-title {
   background-color: #335AA6;
   border-radius: 10px;
   color: black;
 }
 
-.grafico-section {
-  flex: 1;
-  text-align: center;
-  min-width: 350px; /* Aumentando a largura mínima*/
-}
-
-canvas {
+.contas-container {
   width: 100%;
-  max-width: 500px; /* Aumentando o tamanho máximo*/
-  height: 400px; /* Aumentando a altura*/
-  background-color: #f0f0f000;
+  padding: 20px;
+}
+
+.conta-item {
+  background-color: #ffffff;
+  margin: 10px 0;
+  padding: 15px;
   border-radius: 8px;
-}
-
-/* botões */
-button.button-criar {
-  border: none;
-  padding: 15px;
-  background-color: #335AA6;
-  color: white;
-  border-radius: 10px;
-  font-size: 0.9em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button.button-criar:hover {
-  background-color: #4EBFD9;
-  color: black;
-}
-
-/* */
-
-button.button-visualizar {
-  border: none;
-  padding: 15px;
-  background-color: #335AA6;
-  color: white;
-  border-radius: 10px;
-  font-size: 0.9em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button.button-visualizar:hover {
-  background-color: #4EBFD9;
-  color: black;
-}
-
-/* */
-
-button.button-logout {
-  border: none;
-  padding: 15px;
-  background-color: #ff0044 ;
-  color: white;
-  border-radius: 10px;
-  font-size: 0.9em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button.button-logout:hover {
-  background-color:  #d7013a;
-  color: white;
-}
-
-h1.name{
-  font-size: 20px;
-}
-
-h1.name:hover{
-  font-size: 30px;
 }

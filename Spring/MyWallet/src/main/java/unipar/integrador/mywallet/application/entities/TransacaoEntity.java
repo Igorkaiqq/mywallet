@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -48,7 +49,7 @@ public class TransacaoEntity {
 
     @Column(name = "Data", nullable = false)
     @CreationTimestamp
-    private LocalDate data;
+    private LocalDateTime data;
 
     @Column(name = "Descricao", length = 200)
     private String descricao;

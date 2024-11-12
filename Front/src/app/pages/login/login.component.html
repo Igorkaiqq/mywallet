@@ -1,23 +1,36 @@
 <div class="login-container">
-  <div class="login-box">
-    <h1>Expert <span>Wallet</span></h1>
-    <i class="fa fa-wallet"></i>
-    <form (ngSubmit)="onSubmit()">
+  <div class="glass-box">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
       <div class="form-group">
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" class="form-control" placeholder="Digite seu usuário"
-          [(ngModel)]="emailOuUsername" name="emailOuUsername" required>
+        <div class="input-icon">
+          <i class="fas fa-user"></i>
+          <input id="emailOuUsername" formControlName="emailOuUsername" type="text" class="form-control" placeholder="Usuário">
+        </div>
+        <div *ngIf="loginForm.get('emailOuUsername')?.invalid && loginForm.get('emailOuUsername')?.touched " class="error-message">
+          Este campo é obrigatório.
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="password">Senha:</label>
-        <input type="password" id="password" class="form-control" placeholder="Digite sua senha" [(ngModel)]="senha"
-          name="senha" required>
+        <div class="input-icon">
+          <i class="fas fa-lock"></i>
+          <input id="senha" formControlName="senha" type="password" class="form-control" placeholder="Senha">
+          <i class="fas fa-eye toggle-password"></i>
+        </div>
+        <div *ngIf="loginForm.get('senha')?.invalid && loginForm.get('senha')?.touched" class="error-message">
+          A senha deve ter no mínimo 6 caracteres.
+        </div>
       </div>
 
-      <button type="submit" class="btn-login">ACESSAR</button>
+      <div class="forgot-password">
+        <a href="#">Esqueci minha senha</a>
+      </div>
+
+      <button type="submit" class="submit-btn">Login</button>
+
+      <div class="register">
+        Não possui uma conta? <a href="javascript:void(0)" (click)="goToRegister()">Crie aqui</a>
+      </div>
     </form>
-
-    <a class="create-account" routerLink="/cadastrar-usuario">Criar Conta</a>
   </div>
 </div>
