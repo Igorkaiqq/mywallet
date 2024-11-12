@@ -9,7 +9,7 @@
 <body>
 
     <div class="header">
-        <h1 (click)="goLogin()">Expert Wallet</h1>
+        <h1 class="name">Expert Wallet</h1>
         <div class="buttons">
             <button class="button-criar" (click)="goToCadTransacao()">Criar Movimentação</button>
             <button class="button-visualizar" (click)="goToMovimentacao()">Visualizar Movimentações</button>
@@ -35,15 +35,17 @@
             </div>
         </div>
 
-        <div class="grafico-section">
-            <h3>Gráfico de Receitas</h3>
-            <canvas id="graficoReceitasCanvas"></canvas>
+        <div class="grafico-container">
+            <div class="grafico-section">
+                <h3 class="grafico-title">Gráfico de Receitas</h3>
+                <canvas id="graficoReceitasCanvas"></canvas>
+            </div>
+            <div class="grafico-section">
+                <h3 class="grafico-title">Gráfico de Despesas</h3>
+                <canvas id="graficoDespesasCanvas"></canvas>
+            </div>
         </div>
-
-        <div class="grafico-section">
-            <h3>Gráfico de Despesas</h3>
-            <canvas id="graficoDespesasCanvas"></canvas>
-        </div>
+        
     </div>
 
 </body>

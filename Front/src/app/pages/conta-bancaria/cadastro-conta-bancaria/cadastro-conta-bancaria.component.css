@@ -1,3 +1,7 @@
+body{
+  background: linear-gradient(#335AA6, #000000);
+}
+
 .cadastro-conta-bancaria-form {
   width: 400px;
   margin: 0 auto;
