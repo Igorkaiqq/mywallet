@@ -85,3 +85,9 @@ button[type="button"]:hover {
 .alert ul {
   padding-left: 20px;
 }
+
+
+html{
+  background-color: transparent !important;
+  background: none !important;
+}

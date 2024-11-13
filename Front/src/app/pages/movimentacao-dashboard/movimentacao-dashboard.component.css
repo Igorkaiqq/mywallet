@@ -99,3 +99,9 @@ td {
   border: 1px solid #ccc;
   width: 200px;
 }
+
+
+body{
+  background-color: transparent !important;
+  background: none !important;
+}
