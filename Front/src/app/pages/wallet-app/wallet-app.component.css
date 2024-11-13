@@ -4,7 +4,13 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+<<<<<<< gabriel/main/11
   background: linear-gradient(#335AA6, #000000);
+=======
+
+  background-color: transparent !important;
+  background: none !important;
+>>>>>>> local
 }
 
 .header {
@@ -55,6 +61,8 @@ body {
   gap: 30px;
   width: 100%;
   padding-top: 100px;
+
+
 }
 
 .main {

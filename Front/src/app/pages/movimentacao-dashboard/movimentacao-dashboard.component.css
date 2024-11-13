@@ -11,8 +11,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+<<<<<<< gabriel/main/11
   background-color: #bdbdbd;
   font-size: 20px;
+=======
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  width: 90%;
+>>>>>>> local
   border-radius: 20px;
 }
 
@@ -74,5 +80,20 @@ button.back-button:hover {
 
 
 
+<<<<<<< gabriel/main/11
 
 
+=======
+.filter-section input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+
+body{
+  background-color: transparent !important;
+  background: none !important;
+}
+>>>>>>> local
