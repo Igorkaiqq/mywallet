@@ -10,9 +10,12 @@
 html, body {
   height: 100%;
   margin: 0;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background-image: url("app/assets/background2.png");
   font-family: 'Roboto', sans-serif;
   overflow-y: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
