@@ -12,8 +12,9 @@ public interface ICategoriaUsuario {
     CategoriaUsuarioEntity save(CategoriaUsuarioDTO dto);
     Optional<CategoriaUsuarioEntity> findById(UUID id);
     List<CategoriaUsuarioEntity> findAll();
-    CategoriaUsuarioEntity update(CategoriaUsuarioEntity categoriaUsuario);
+    CategoriaUsuarioDTO update(CategoriaUsuarioDTO dto);
     void deleteById(UUID id);
     List<CategoriaUsuarioDTO> findAllCategoriasUsuariosAtivas();
 
+    CategoriaUsuarioEntity savePersonalizada(CategoriaUsuarioDTO dto);
 }

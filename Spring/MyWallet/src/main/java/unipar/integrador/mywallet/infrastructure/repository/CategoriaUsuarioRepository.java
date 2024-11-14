@@ -14,12 +14,12 @@ public interface CategoriaUsuarioRepository extends JpaRepository<CategoriaUsuar
 
     List<CategoriaUsuarioEntity> findByStatusRegistro(StatusRegistroEnum statusRegistro);
 
-    List<CategoriaUsuarioEntity> findByUsuarioEntityId(UUID usuarioId);
+    List<CategoriaUsuarioEntity> findByUsuarioEntityIdAndStatusRegistro(UUID usuarioId, StatusRegistroEnum statusRegistroEnum);
 
     boolean existsByUsuarioEntityIdAndCategoriaPadraoEntityId(UUID usuarioId, UUID categoriaPadraoId);
 
     Optional<CategoriaUsuarioEntity> findByUsuarioEntityIdAndCategoriaPadraoEntityId(UUID usuarioId, UUID categoriaPadraoId);
 
-    List<CategoriaUsuarioEntity> findByUsuarioEntityIdAndTipoTransacaoEntityId(UUID usuarioId, UUID tipoTransacaoId);
+    List<CategoriaUsuarioEntity> findByUsuarioEntityIdAndTipoTransacaoEntityIdAndStatusRegistro(UUID usuarioId, UUID tipoTransacaoId, StatusRegistroEnum statusRegistroEnum);
 
 }

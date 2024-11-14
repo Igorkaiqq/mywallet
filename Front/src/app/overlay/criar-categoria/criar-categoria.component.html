@@ -1,0 +1,27 @@
+<div class="overlay-container">
+  <div class="header">
+    <h2>Criar Categoria</h2>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="categoriaForm" class="form-container">
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="tipoTransacao" placeholder="Tipo de Transação" required>
+        <mat-option *ngFor="let tipo of tiposTransacao" [value]="tipo.id">
+          {{ tipo.tipoTransacaoEnum }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="nome" placeholder="Nome da Categoria" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="categoriaForm.invalid">
+      Concluir
+    </button>
+
+  </form>
+</div>

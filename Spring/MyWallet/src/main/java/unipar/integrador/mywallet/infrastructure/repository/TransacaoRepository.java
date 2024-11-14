@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface TransacaoRepository extends JpaRepository<TransacaoEntity, UUID> {
 
-    List<TransacaoEntity> findByUsuario_Id(UUID usuarioId);
+    List<TransacaoEntity> findByUsuario_IdOrderByDataDesc(UUID usuarioId);
 
 }
