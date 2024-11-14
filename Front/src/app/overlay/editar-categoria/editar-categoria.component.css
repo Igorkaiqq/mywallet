@@ -1,0 +1,35 @@
+[mat-dialog-actions] {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+button[mat-button].cancel-button {
+  color: #FF4C4C;
+  border: 2px solid rgba(255, 76, 76, 0.5);
+  background: rgba(255, 76, 76, 0.1);
+  border-radius: 20px;
+  padding: 5px 20px;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+button[mat-button].cancel-button:hover {
+  background: rgba(255, 76, 76, 0.2);
+  color: #FF3333;
+}
+
+button[mat-button].save-button {
+  color: #4CAF50;
+  border: 2px solid rgba(76, 175, 80, 0.5);
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 20px;
+  padding: 5px 20px;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+button[mat-button].save-button:hover {
+  background: rgba(76, 175, 80, 0.2);
+  color: #388E3C;
+}

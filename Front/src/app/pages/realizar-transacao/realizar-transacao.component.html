@@ -15,8 +15,7 @@
   <form (ngSubmit)="salvarTransacao()">
     <div class="form-group">
       <label>Tipo de Transação:</label>
-      <select [(ngModel)]="transacao.tipoTransacaoId" name="tipoTransacao" (change)="onTipoTransacaoChange($event)"
-              required>
+      <select [(ngModel)]="transacao.tipoTransacaoId" name="tipoTransacao" (change)="onTipoTransacaoChange($event)" required>
         <option for="tipoTransacao" *ngFor="let tipo of tiposTransacao" [value]="tipo.id">{{ tipo.tipoTransacaoEnum }}
         </option>
       </select>

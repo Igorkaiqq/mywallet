@@ -1,0 +1,26 @@
+.buttons {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.icon-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.mat-icon {
+  font-size: 20px;
+  color: #333;
+}

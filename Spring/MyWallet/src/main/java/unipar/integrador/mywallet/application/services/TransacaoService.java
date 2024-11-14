@@ -105,7 +105,7 @@ public class TransacaoService implements ITransacao {
 
         UUID usuarioId = getUsuarioAutenticadoId();
 
-        return transacaoRepository.findByUsuario_Id(usuarioId).stream()
+        return transacaoRepository.findByUsuario_IdOrderByDataDesc(usuarioId).stream()
                 .map(this::convertToDto)
                 .toList();
     }

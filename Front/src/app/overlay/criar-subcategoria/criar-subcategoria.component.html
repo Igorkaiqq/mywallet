@@ -1,0 +1,18 @@
+<div class="overlay-container">
+  <div class="header">
+    <h2>Nova subcategoria para {{ categoriaNome }}</h2>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="subcategoriaForm" class="form-container">
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="nome" placeholder="Nome da Subcategoria" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="subcategoriaForm.invalid">
+      Salvar
+    </button>
+  </form>
+</div>

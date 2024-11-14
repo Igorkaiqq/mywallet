@@ -1,9 +1,12 @@
 package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.entities.*;
+import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.interfaces.ISubcategoriaUsuario;
 import unipar.integrador.mywallet.infrastructure.repository.SubcategoriaUsuarioRepository;
 import unipar.integrador.mywallet.infrastructure.repository.CategoriaUsuarioRepository;
@@ -21,6 +24,10 @@ public class SubcategoriaUsuarioService implements ISubcategoriaUsuario {
     @Autowired
     private CategoriaUsuarioRepository categoriaUsuarioRepository;
 
+    public UUID getUsuarioAutenticadoId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return UUID.fromString(authentication.getName());
+    }
 
     @Override
     public SubcategoriaUsuarioEntity save(SubcategoriaUsuarioDTO dto) {
@@ -61,17 +68,15 @@ public class SubcategoriaUsuarioService implements ISubcategoriaUsuario {
     }
 
     @Override
-    public SubcategoriaUsuarioEntity update(SubcategoriaUsuarioEntity subcategoriaUsuario) {
-        return subcategoriaUsuarioRepository.save(subcategoriaUsuario);
-    }
-
-    @Override
-    public void deleteById(UUID id) {
-        subcategoriaUsuarioRepository.deleteById(id);
+    public SubcategoriaUsuarioEntity update(SubcategoriaUsuarioDTO subcategoriaUsuario) {
+        SubcategoriaUsuarioEntity subcategoriaUsuarioEntity = subcategoriaUsuarioRepository.findById(subcategoriaUsuario.id()).orElseThrow();
+        subcategoriaUsuarioEntity.setNome(subcategoriaUsuario.nome());
+        return subcategoriaUsuarioRepository.save(subcategoriaUsuarioEntity);
     }
 
     public SubcategoriaUsuarioDTO convertToDto(SubcategoriaUsuarioEntity subcategoriaUsuarioEntity) {
         return new SubcategoriaUsuarioDTO(
+                subcategoriaUsuarioEntity.getId(),
                 subcategoriaUsuarioEntity.getUsuarioEntity().getId(),
                 subcategoriaUsuarioEntity.getCategoriaUsuario().getId(),
                 subcategoriaUsuarioEntity.getSubcategoriaPadrao() != null ? subcategoriaUsuarioEntity.getSubcategoriaPadrao().getId() : null,
@@ -87,7 +92,35 @@ public class SubcategoriaUsuarioService implements ISubcategoriaUsuario {
     }
 
     public Optional<List<SubcategoriaUsuarioEntity>> findByCategoriaUsuarioId(UUID categoriaUsuarioId) {
-        return subcategoriaUsuarioRepository.findByCategoriaUsuarioId(categoriaUsuarioId);
+        return subcategoriaUsuarioRepository.findByCategoriaUsuarioIdAndStatusRegistro(categoriaUsuarioId, StatusRegistroEnum.ATIVO);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        SubcategoriaUsuarioEntity subcategoriaUsuarioEntity = subcategoriaUsuarioRepository.findById(id).orElseThrow();
+        subcategoriaUsuarioEntity.setStatusRegistro(StatusRegistroEnum.INATIVO);
+        subcategoriaUsuarioRepository.save(subcategoriaUsuarioEntity);
+    }
+
+
+    public SubcategoriaUsuarioEntity savePersonalizada(SubcategoriaUsuarioDTO dto) {
+
+        SubcategoriaUsuarioEntity subcategoriaUsuario = new SubcategoriaUsuarioEntity();
+
+        subcategoriaUsuario.setId(UUID.randomUUID());
+
+        UsuarioEntity usuario = new UsuarioEntity();
+        usuario.setId(getUsuarioAutenticadoId());
+        subcategoriaUsuario.setUsuarioEntity(usuario);
+
+        CategoriaUsuarioEntity categoriaUsuario = new CategoriaUsuarioEntity();
+        categoriaUsuario.setId(dto.categoriaUsuarioId());
+        subcategoriaUsuario.setCategoriaUsuario(categoriaUsuario);
+
+        subcategoriaUsuario.setNome(dto.nome());
+        subcategoriaUsuario.setStatusRegistro(StatusRegistroEnum.ATIVO);
+
+        return subcategoriaUsuarioRepository.save(subcategoriaUsuario);
     }
 
 }

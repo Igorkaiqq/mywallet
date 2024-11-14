@@ -68,13 +68,18 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
     }
 
     @Override
-    public CategoriaUsuarioEntity update(CategoriaUsuarioEntity categoriaUsuario) {
-        return null;
+    public CategoriaUsuarioDTO update(CategoriaUsuarioDTO dto) {
+        CategoriaUsuarioEntity categoriaUsuarioEntity = categoriaUsuarioRepository.findById(dto.id()).get();
+        categoriaUsuarioEntity.setNome(dto.nome());
+        categoriaUsuarioRepository.save(categoriaUsuarioEntity);
+        return dto;
     }
 
     @Override
     public void deleteById(UUID id) {
-
+        CategoriaUsuarioEntity categoriaUsuarioEntity = categoriaUsuarioRepository.findById(id).orElseThrow();
+        categoriaUsuarioEntity.setStatusRegistro(StatusRegistroEnum.INATIVO);
+        categoriaUsuarioRepository.save(categoriaUsuarioEntity);
     }
 
     @Override
@@ -84,8 +89,31 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public CategoriaUsuarioEntity savePersonalizada(CategoriaUsuarioDTO dto) {
+
+        CategoriaUsuarioEntity categoriaUsuario = new CategoriaUsuarioEntity();
+
+
+
+        categoriaUsuario.setId(UUID.randomUUID());
+
+        TipoTransacaoEntity tipoTransacaoEntity = new TipoTransacaoEntity();
+        tipoTransacaoEntity.setId(dto.tipoTransacao());
+        categoriaUsuario.setTipoTransacaoEntity(tipoTransacaoEntity);
+
+        UsuarioEntity usuario = new UsuarioEntity();
+        usuario.setId(getUsuarioAutenticadoId());
+
+        categoriaUsuario.setUsuarioEntity(usuario);
+        categoriaUsuario.setNome(dto.nome());
+        categoriaUsuario.setStatusRegistro(StatusRegistroEnum.ATIVO);
+
+        return categoriaUsuarioRepository.save(categoriaUsuario);
+    }
+
     public List<CategoriaUsuarioDTO> findByUsuarioId(UUID usuarioId) {
-        return categoriaUsuarioRepository.findByUsuarioEntityId(usuarioId).stream()
+        return categoriaUsuarioRepository.findByUsuarioEntityIdAndStatusRegistro(usuarioId, StatusRegistroEnum.ATIVO).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
@@ -107,7 +135,7 @@ public class CategoriaUsuarioService implements ICategoriaUsuario {
 
     public List<CategoriaUsuarioDTO> findByUsuarioIdAndTipoTransacaoId(UUID tipoTransacaoId) {
         UUID usuarioId = getUsuarioAutenticadoId();
-        return categoriaUsuarioRepository.findByUsuarioEntityIdAndTipoTransacaoEntityId(usuarioId, tipoTransacaoId).stream()
+        return categoriaUsuarioRepository.findByUsuarioEntityIdAndTipoTransacaoEntityIdAndStatusRegistro(usuarioId, tipoTransacaoId, StatusRegistroEnum.ATIVO).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }

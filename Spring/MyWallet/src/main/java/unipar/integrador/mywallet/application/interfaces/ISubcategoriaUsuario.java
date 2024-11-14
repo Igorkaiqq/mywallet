@@ -12,6 +12,9 @@ public interface ISubcategoriaUsuario {
     SubcategoriaUsuarioEntity save(SubcategoriaUsuarioDTO dto);
     Optional<SubcategoriaUsuarioEntity> findById(UUID id);
     List<SubcategoriaUsuarioEntity> findAll();
-    SubcategoriaUsuarioEntity update(SubcategoriaUsuarioEntity subcategoriaUsuario);
+
+    SubcategoriaUsuarioEntity update(SubcategoriaUsuarioDTO subcategoriaUsuario);
+
     void deleteById(UUID id);
+
 }
