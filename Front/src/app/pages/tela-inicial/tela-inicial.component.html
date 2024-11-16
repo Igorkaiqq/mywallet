@@ -1,0 +1,67 @@
+<main id="main-dashboard-container">
+  <div class="containter-dashboard">
+    <section id="informations-container">
+      <div class="informations">
+        <div class="info-card receita">
+          <div class="icon">💰</div>
+          <div class="info-text">
+            <h3>R$ 9.500,00</h3>
+            <span>Receita do Mês</span>
+          </div>
+        </div>
+        <div class="info-card despesa">
+          <div class="icon">💰</div>
+          <div class="info-text">
+            <h3>R$ 9.884,00</h3>
+            <span>Despesas do Mês</span>
+          </div>
+        </div>
+        <div class="info-card saldo-mes">
+          <div class="icon">💰</div>
+          <div class="info-text">
+            <h3>-R$ 384,00</h3>
+            <span>Saldo do Mês</span>
+          </div>
+        </div>
+      </div>
+      <div class="graphics">
+        <span>Desempenho do mês</span>
+        <div class="category-charts">
+          <div *ngFor="let chartData of chartsData" class="category-chart">
+            <div class="chart-title">{{chartData.name}}</div>
+            <p-chart type="doughnut" [data]="chartData.data" [options]="chartData.options"></p-chart>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section id="bank-accounts-container">
+    <div class="bank-accounts">
+      <div class="account">Conta 1 - Bradesco R$500</div>
+      <div class="account">Conta 2 - Itaú R$200</div>
+      <div class="account">Conta 3 - Santander R$300</div>
+      <div class="account">Conta 4 - Nubank R$150</div>
+    </div>
+    <section id="last-transactions-receita-container">
+      <div class="last-transactions-receita">
+        <span>Maiores receitas</span>
+        <div class="receitas">Teste</div>
+        <div class="receitas">Teste</div>
+        <div class="receitas">Teste</div>
+        <div class="receitas">Teste</div>
+      </div>
+    </section>
+    <section id="last-transactions-despesa-container">
+      <div class="last-transactions-despesa">
+        <span>Maiores despesas</span>
+        <div class="despesas">Teste</div>
+        <div class="despesas">Teste</div>
+        <div class="despesas">Teste</div>
+        <div class="despesas">Teste</div>
+      </div>
+    </section>
+  </section>
+
+
+</main>
+

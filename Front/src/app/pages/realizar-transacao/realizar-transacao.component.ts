@@ -109,7 +109,7 @@ export class RealizarTransacaoComponent implements OnInit {
       }, error => {
         console.error('Erro ao buscar subcategorias', error);
       });
-      }
+    }
   }
 
   salvarTransacao(): void {

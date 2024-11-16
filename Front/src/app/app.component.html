@@ -1,6 +1,6 @@
 <div *ngIf="showSidebar" class="sidebar">
   <div class="sidebar-items">
-    <div class="sidebar-item" [ngClass]="{'active': currentPage === 'wallet'}" (click)="navigateTo('wallet')">
+    <div class="sidebar-item" [ngClass]="{'active': currentPage === 'tela-inicial'}" (click)="navigateTo('tela-inicial')">
       <span class="icon">🏠</span>
       <span class="tooltip">Tela Inicial</span>
     </div>
@@ -8,7 +8,7 @@
       <span class="icon">💸</span>
       <span class="tooltip">Realizar Transação</span>
     </div>
-    <div class="sidebar-item" [ngClass]="{'active': currentPage === 'tela-inicial'}" (click)="navigateTo('tela-inicial')">
+    <div class="sidebar-item" [ngClass]="{'active': currentPage === 'movimentacao'}" (click)="navigateTo('movimentacao')">
       <span class="icon">📊</span>
       <span class="tooltip">Movimentações</span>
     </div>

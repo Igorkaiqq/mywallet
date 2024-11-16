@@ -36,7 +36,7 @@ export class LoginComponent {
     this.loginService.login(credentials).subscribe(
       response => {
 
-        this.router.navigate(['/wallet']);
+        this.router.navigate(['/tela-inicial']);
       },
       error => {
         alert('Usuário ou senha inválidos');

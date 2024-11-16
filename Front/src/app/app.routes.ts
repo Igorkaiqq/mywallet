@@ -9,15 +9,22 @@ import {
   CadastroContaBancariaComponent
 } from "./pages/conta-bancaria/cadastro-conta-bancaria/cadastro-conta-bancaria.component";
 import {CategoriasComponent} from "./pages/categorias/categorias.component";
+import {TelaInicialComponent} from "./pages/tela-inicial/tela-inicial.component";
 
 
 export const routes: Routes = [
+
+    {
+      path: 'tela-inicial',
+      component: TelaInicialComponent,
+      canActivate: [AuthGuard]
+    },
     {
         path: 'cadastrar-usuario',
         component: CadastroUsuarioComponent
     },
     {
-        path: 'tela-inicial',
+        path: 'movimentacao',
         component: MovimentacaoDashboardComponent,
         canActivate: [AuthGuard]
     },

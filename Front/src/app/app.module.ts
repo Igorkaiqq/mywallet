@@ -7,6 +7,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {HighchartsChartModule} from "highcharts-angular";
+import {ChartModule} from "primeng/chart";
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { MatInputModule } from '@angular/material/input';
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
+    HighchartsChartModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: []

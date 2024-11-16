@@ -1,0 +1,208 @@
+#main-dashboard-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  padding: 2rem 0 2rem 5.5rem;
+  gap: 2rem;
+}
+
+.containter-dashboard {
+  display: flex;
+  gap: 2rem;
+}
+
+#informations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.informations {
+  display: flex;
+  width: 100%;
+  background-color: #6a11cb;
+  height: 20%;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+#bank-accounts-container {
+  min-width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 0 1rem 0 0;
+}
+
+.bank-accounts {
+  background-color: #67f6a5;
+  padding: 0.5rem;
+  border-radius: 15px;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bank-accounts-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.account {
+  background-color: #0abd5b;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 20%;
+}
+
+.graphics {
+  background-color: #d5a1ff;
+  border-radius: 15px;
+  display: block;
+  height: 80%;
+  padding: 1.2rem;
+}
+
+.category-charts {
+  display: flex;
+  flex-wrap: wrap;
+}
+.category-chart {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+.chart-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#last-transactions-receita-container {
+  min-width: 30%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 0 1rem 0 0;
+}
+
+.last-transactions-receita {
+  background-color: #67f6a5;
+  padding: 0.5rem;
+  border-radius: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.receitas {
+  background-color: #0abd5b;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  margin-top:0.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 20%;
+}
+
+#last-transactions-despesa-container {
+  min-width: 30%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 0 1rem 0 0;
+}
+
+.last-transactions-despesa {
+  background-color: #f85959;
+  padding: 0.5rem;
+  border-radius: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.despesas {
+  background-color: #bd0a0a;
+  color: white;
+  padding: 1rem;
+  margin-top:0.5rem;
+  border-radius: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 20%;
+}
+
+div {
+  border-radius: 20px;
+}
+
+.informations {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1 1 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  gap: 4rem;
+}
+
+.info-card .icon {
+  font-size: 2.5em;
+  margin-left: 0;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info-text h3 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.info-text span {
+  font-size: 0.9em;
+  color: #f1f1f1;
+}
+
+
+.receita {
+  background-color: #3498db;
+}
+
+.despesa {
+  background-color: #e74c3c;
+}
+
+.saldo-mes {
+  background-color: #27ae60;
+}

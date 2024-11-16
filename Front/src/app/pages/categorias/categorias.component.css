@@ -1,12 +1,7 @@
-.container {
+.container_categories {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 40px;
-  width: 100%;
-  max-width: 1800px;
-  box-sizing: border-box;
-  gap: 20px;
+  width: 100vw;
+  padding: 3.3rem 0 0 4.5rem;
 }
 
 .category-panel {
