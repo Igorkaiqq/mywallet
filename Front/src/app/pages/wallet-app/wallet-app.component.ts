@@ -25,7 +25,7 @@ export class WalletAppComponent implements OnInit {
   }
 
   goToMovimentacao(){
-    this.router.navigate(['/tela-inicial']);
+    this.router.navigate(['/movimentacao']);
   }
 
   goToCategorias(){

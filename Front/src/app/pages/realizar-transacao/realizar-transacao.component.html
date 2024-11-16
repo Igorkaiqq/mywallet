@@ -1,71 +1,70 @@
-<html>
-<div class="transaction-form">
-  <h2>Realizar Transação</h2>
+<main id="main-form-container">
+  <div class="transaction-form">
+    <h2>Realizar Transação</h2>
 
-  <div *ngIf="successMessage" class="alert alert-success">
-    {{ successMessage }}
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
+      <ul>
+        <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
+      </ul>
+    </div>
+
+    <form (ngSubmit)="salvarTransacao()">
+      <div class="form-group">
+        <label>Tipo de Transação:</label>
+        <select [(ngModel)]="transacao.tipoTransacaoId" name="tipoTransacao" (change)="onTipoTransacaoChange($event)" required>
+          <option for="tipoTransacao" *ngFor="let tipo of tiposTransacao" [value]="tipo.id">{{ tipo.tipoTransacaoEnum }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="valor">Valor:</label>
+        <input type="text" currencyMask [(ngModel)]="transacao.valor"
+               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" name="valor" id="valor" required>
+      </div>
+
+      <div class="form-group">
+        <label>Categoria:</label>
+        <select [(ngModel)]="transacao.categoriaId" name="categoria" (change)="onCategoriaChange($event)" required>
+          <option for="categoria" *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Subcategoria:</label>
+        <select [(ngModel)]="transacao.subcategoriaId" name="subcategoria" required>
+          <option for="subcategoria" *ngFor="let subcategoria of subcategorias" [value]="subcategoria.id">{{
+              subcategoria.nome }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Método de Pagamento:</label>
+        <select [(ngModel)]="transacao.metodoPagamentoId" name="metodoPagamento" required>
+          <option for="metodoPagamento" *ngFor="let metodo of metodosPagamento" [value]="metodo.id">{{
+              metodo.metodoPagamento }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Conta Bancária:</label>
+        <select [(ngModel)]="transacao.contaBancariaId" name="contaBancaria" required>
+          <option for="contaBancaria" *ngFor="let conta of contasBancarias" [value]="conta.id">{{ conta.nome }}</option>
+        </select>
+        <button type="button" (click)="cadastrarNovaContaBancaria()">Cadastrar Nova Conta Bancária</button>
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição:</label>
+        <input type="text" [(ngModel)]="transacao.descricao" name="descricao" id="descricao">
+      </div>
+
+      <button type="submit" class="submit-btn">Salvar Transação</button>
+    </form>
   </div>
-
-  <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
-    <ul>
-      <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
-    </ul>
-  </div>
-
-  <form (ngSubmit)="salvarTransacao()">
-    <div class="form-group">
-      <label>Tipo de Transação:</label>
-      <select [(ngModel)]="transacao.tipoTransacaoId" name="tipoTransacao" (change)="onTipoTransacaoChange($event)" required>
-        <option for="tipoTransacao" *ngFor="let tipo of tiposTransacao" [value]="tipo.id">{{ tipo.tipoTransacaoEnum }}
-        </option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="valor">Valor:</label>
-      <input type="text" currencyMask [(ngModel)]="transacao.valor"
-             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" name="valor" id="valor" required>
-    </div>
-
-    <div class="form-group">
-      <label>Categoria:</label>
-      <select [(ngModel)]="transacao.categoriaId" name="categoria" (change)="onCategoriaChange($event)" required>
-        <option for="categoria" *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}
-        </option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Subcategoria:</label>
-      <select [(ngModel)]="transacao.subcategoriaId" name="subcategoria" required>
-        <option for="subcategoria" *ngFor="let subcategoria of subcategorias" [value]="subcategoria.id">{{
-            subcategoria.nome }}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Método de Pagamento:</label>
-      <select [(ngModel)]="transacao.metodoPagamentoId" name="metodoPagamento" required>
-        <option for="metodoPagamento" *ngFor="let metodo of metodosPagamento" [value]="metodo.id">{{
-            metodo.metodoPagamento }}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Conta Bancária:</label>
-      <select [(ngModel)]="transacao.contaBancariaId" name="contaBancaria" required>
-        <option for="contaBancaria" *ngFor="let conta of contasBancarias" [value]="conta.id">{{ conta.nome }}</option>
-      </select>
-      <button type="button" (click)="cadastrarNovaContaBancaria()">Cadastrar Nova Conta Bancária</button>
-    </div>
-
-    <div class="form-group">
-      <label for="descricao">Descrição:</label>
-      <input type="text" [(ngModel)]="transacao.descricao" name="descricao" id="descricao">
-    </div>
-
-    <button type="submit" class="submit-btn">Salvar Transação</button>
-  </form>
-</div>
-
-</html>
+</main>

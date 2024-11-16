@@ -1,9 +1,13 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
-  margin: 0;
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  overflow-y: auto;
 }
 
 .app-wrapper {
@@ -88,9 +92,9 @@ html, body {
   margin-left: 70px;
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
 }
 
 .no-sidebar .main-content {
@@ -99,7 +103,12 @@ html, body {
 
 form {
   background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
+/* .container {
+  margin-left: 50px;
+  margin-right: 50px;
+} */
