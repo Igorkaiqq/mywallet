@@ -29,7 +29,7 @@ public class MetasUsuarioEntity {
     private CategoriaUsuarioEntity CategoriaId;
 
     @Column(name = "Valor", length = 70, nullable = false)
-    private String valor;
+    private double valor;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "StatusRegistro", nullable = false)
