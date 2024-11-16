@@ -21,11 +21,17 @@
 .informations {
   display: flex;
   width: 100%;
-  background-color: #6a11cb;
   height: 20%;
   align-items: center;
   justify-content: space-between;
-  display: flex;
+  background: rgba(106, 17, 203, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  gap: 10px;
+  padding: 20px;
+  border-radius: 20px;
 }
 
 #bank-accounts-container {
@@ -34,16 +40,21 @@
   flex-direction: column;
   gap: 1.2rem;
   padding: 0 1rem 0 0;
+  flex: 0 0 auto;
 }
 
 .bank-accounts {
-  background-color: #67f6a5;
   padding: 0.5rem;
-  border-radius: 15px;
   height: 20%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: rgba(103, 246, 165, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 .bank-accounts-title {
@@ -54,34 +65,44 @@
 }
 
 .account {
-  background-color: #0abd5b;
-  color: white;
-  padding: 1rem;
-  border-radius: 15px;
+  color: #ffffff;
+  padding: 0.5rem;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: start;
   height: 20%;
+  background: rgba(10, 189, 91, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
 
 .graphics {
-  background-color: #d5a1ff;
-  border-radius: 15px;
   display: block;
   height: 80%;
   padding: 1.2rem;
+  background: rgba(213, 161, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 .category-charts {
   display: flex;
   flex-wrap: wrap;
 }
+
 .category-chart {
   position: relative;
   width: 180px;
   height: 180px;
 }
+
 .chart-title {
   font-size: 1.2em;
   margin-bottom: 10px;
@@ -98,26 +119,35 @@
 }
 
 .last-transactions-receita {
-  background-color: #67f6a5;
   padding: 0.5rem;
-  border-radius: 15px;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: rgba(103, 246, 165, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 .receitas {
-  background-color: #0abd5b;
-  color: white;
+  color: #ffffff;
   padding: 1rem;
-  border-radius: 15px;
-  margin-top:0.5rem;
+  margin-top: 0.5rem;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: start;
   height: 20%;
+  font-size: 0.85rem;
+  background: rgba(10, 189, 91, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 #last-transactions-despesa-container {
@@ -130,36 +160,35 @@
 }
 
 .last-transactions-despesa {
-  background-color: #f85959;
   padding: 0.5rem;
-  border-radius: 15px;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: rgba(248, 89, 89, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 .despesas {
-  background-color: #bd0a0a;
-  color: white;
+  color: #ffffff;
   padding: 1rem;
-  margin-top:0.5rem;
-  border-radius: 15px;
+  margin-top: 0.5rem;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: start;
   height: 20%;
-}
-
-div {
-  border-radius: 20px;
-}
-
-.informations {
-  display: flex;
-  gap: 10px;
-  padding: 20px;
+  font-size: 0.85rem;
+  background: rgba(189, 10, 10, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 .info-card {
@@ -171,6 +200,12 @@ div {
   box-sizing: border-box;
   padding: 1.5rem;
   gap: 4rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 .info-card .icon {
@@ -191,18 +226,32 @@ div {
 
 .info-text span {
   font-size: 0.9em;
-  color: #f1f1f1;
+  color: #ffffff;
 }
 
-
 .receita {
-  background-color: #3498db;
+  background: rgba(52, 152, 219, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 .despesa {
-  background-color: #e74c3c;
+  background: rgba(231, 76, 60, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }
 
 .saldo-mes {
-  background-color: #27ae60;
+  background: rgba(39, 174, 96, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 }

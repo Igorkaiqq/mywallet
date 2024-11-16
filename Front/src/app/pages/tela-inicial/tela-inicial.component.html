@@ -5,21 +5,21 @@
         <div class="info-card receita">
           <div class="icon">💰</div>
           <div class="info-text">
-            <h3>R$ 9.500,00</h3>
+            <h3>R$ {{ receita.totalReceitas }}</h3>
             <span>Receita do Mês</span>
           </div>
         </div>
         <div class="info-card despesa">
           <div class="icon">💰</div>
           <div class="info-text">
-            <h3>R$ 9.884,00</h3>
+            <h3>R$ {{ receita.totalDespesas }}</h3>
             <span>Despesas do Mês</span>
           </div>
         </div>
         <div class="info-card saldo-mes">
           <div class="icon">💰</div>
           <div class="info-text">
-            <h3>-R$ 384,00</h3>
+            <h3>R$ {{ receita.saldo }}</h3>
             <span>Saldo do Mês</span>
           </div>
         </div>
@@ -37,31 +37,26 @@
   </div>
   <section id="bank-accounts-container">
     <div class="bank-accounts">
-      <div class="account">Conta 1 - Bradesco R$500</div>
-      <div class="account">Conta 2 - Itaú R$200</div>
-      <div class="account">Conta 3 - Santander R$300</div>
-      <div class="account">Conta 4 - Nubank R$150</div>
+      <div *ngFor="let banco of bancos" class="account">
+        <span>{{banco.nome}} - R$ {{banco.saldo}}</span>
+      </div>
     </div>
     <section id="last-transactions-receita-container">
       <div class="last-transactions-receita">
         <span>Maiores receitas</span>
-        <div class="receitas">Teste</div>
-        <div class="receitas">Teste</div>
-        <div class="receitas">Teste</div>
-        <div class="receitas">Teste</div>
+        <div *ngFor="let receita of maioresReceitas" class="receitas">
+          <span>{{ receita.data }} - {{ receita.nomeCategoria }} - {{ receita.nomeSubcategoria }} - R$ {{ receita.valor }}</span>
+        </div>
       </div>
     </section>
     <section id="last-transactions-despesa-container">
       <div class="last-transactions-despesa">
         <span>Maiores despesas</span>
-        <div class="despesas">Teste</div>
-        <div class="despesas">Teste</div>
-        <div class="despesas">Teste</div>
-        <div class="despesas">Teste</div>
+        <div *ngFor="let despesa of maioresDespesas" class="despesas">
+          <span>{{ despesa.data }} - {{ despesa.nomeCategoria }} - {{ despesa.nomeSubcategoria }} - R$ {{ despesa.valor }}</span>
+        </div>
       </div>
     </section>
   </section>
-
-
 </main>
 
