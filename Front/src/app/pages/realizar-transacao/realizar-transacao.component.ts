@@ -127,7 +127,7 @@ export class RealizarTransacaoComponent implements OnInit {
         this.successMessage = 'Transação realizada com sucesso!';
         this.errorMessages = [];
         setTimeout(() => {
-          this.router.navigate(['/wallet']);
+          this.router.navigate(['/tela-inicial']);
         }, 2000)
       },
       error: (error) => {
