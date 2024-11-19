@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from '../../service/categoria/categoria.service';
-import { SubcategoriaService } from '../../service/subcategoria/subcategoria.service';
-import { TipoTransacaoService } from '../../service/tipoTransacao/tipo-transacao.service';
-import { Categoria } from '../../models/categoria/categoria';
-import { Subcategoria } from '../../models/subcategoria/subcategoria';
-import { TipoTransacao } from '../../models/tipoTransacao/tipo-transacao';
-import { NgClass, NgForOf, NgIf } from "@angular/common";
-import { ActionButtonsComponent } from "../../components/actions/actions-buttons/actions-buttons.component";
-import { EditarCategoriaComponent } from "../../overlay/editar-categoria/editar-categoria.component";
-import { MatDialog } from "@angular/material/dialog";
-import { CriarCategoriaComponent } from "../../overlay/criar-categoria/criar-categoria.component";
-import { CriarSubcategoriaComponent } from "../../overlay/criar-subcategoria/criar-subcategoria.component";
+import {Component, OnInit} from '@angular/core';
+import {CategoriaService} from '../../service/categoria/categoria.service';
+import {SubcategoriaService} from '../../service/subcategoria/subcategoria.service';
+import {TipoTransacaoService} from '../../service/tipoTransacao/tipo-transacao.service';
+import {Categoria} from '../../models/categoria/categoria';
+import {Subcategoria} from '../../models/subcategoria/subcategoria';
+import {TipoTransacao} from '../../models/tipoTransacao/tipo-transacao';
+import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {ActionButtonsComponent} from "../../components/actions/actions-buttons/actions-buttons.component";
+import {EditarCategoriaComponent} from "../../overlay/editar-categoria/editar-categoria.component";
+import {MatDialog} from "@angular/material/dialog";
+import {CriarCategoriaComponent} from "../../overlay/criar-categoria/criar-categoria.component";
+import {CriarSubcategoriaComponent} from "../../overlay/criar-subcategoria/criar-subcategoria.component";
 
 @Component({
   selector: 'app-categorias',

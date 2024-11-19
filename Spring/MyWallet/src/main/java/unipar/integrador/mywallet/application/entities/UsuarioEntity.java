@@ -3,8 +3,6 @@ package unipar.integrador.mywallet.application.entities;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import unipar.integrador.mywallet.application.dto.login.LoginDTO;
 import unipar.integrador.mywallet.application.enums.GeneroEnum;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 

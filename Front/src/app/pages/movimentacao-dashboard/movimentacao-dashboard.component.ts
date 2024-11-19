@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TransacaoService } from '../../service/transacao/transacao.service';
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+import {TransacaoService} from '../../service/transacao/transacao.service';
+import {CommonModule, CurrencyPipe, DatePipe} from '@angular/common';
+import {Router} from '@angular/router';
+import {MatDialog} from "@angular/material/dialog";
+import {NovaTransacaoComponent} from "../../overlay/nova-transacao/nova-transacao.component";
 
 @Component({
   selector: 'app-movimentacao-dashboard',
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./movimentacao-dashboard.component.css']
 })
 export class MovimentacaoDashboardComponent implements OnInit {
-  walletAppForm = new FormGroup({});
+
   transacoes: any[] = [];
   filteredTransacoes: any[] = [];
 
@@ -20,19 +22,11 @@ export class MovimentacaoDashboardComponent implements OnInit {
     this.buscarTransacoes();
   }
 
-  onSubmit() {
-    if (this.walletAppForm.valid) {
-      console.log('Form Data: ', this.walletAppForm.value);
-    } else {
-      console.log('Form inválido');
-    }
-  }
-
-  onCancel() {
-    this.walletAppForm.reset();
-  }
-
-  constructor(private transacaoService: TransacaoService, private router: Router) {}
+  constructor(
+    private transacaoService: TransacaoService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   buscarTransacoes() {
     this.transacaoService.buscarTransacoesPorUsuarioId().subscribe({
@@ -50,8 +44,19 @@ export class MovimentacaoDashboardComponent implements OnInit {
     this.router.navigate(['/wallet']);
   }
 
-  goToNovaMovimentacao() {
-    this.router.navigate(['realizar-transacao']);
+  novaMovimentacao(): void {
+    const dialogRef = this.dialog.open(NovaTransacaoComponent, {
+      width: '500px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Nova movimentação criada:', result);
+      }
+    });
   }
+
+
 }
 

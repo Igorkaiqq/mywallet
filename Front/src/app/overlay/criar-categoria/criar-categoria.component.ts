@@ -6,9 +6,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
-import {Transacao} from "../../models/transacao/transacao";
 import {TipoTransacao} from "../../models/tipoTransacao/tipo-transacao";
-import {TransacaoService} from "../../service/transacao/transacao.service";
 import {TipoTransacaoService} from "../../service/tipoTransacao/tipo-transacao.service";
 import {NgForOf} from "@angular/common";
 
@@ -32,16 +30,6 @@ import {NgForOf} from "@angular/common";
 })
 export class CriarCategoriaComponent {
   categoriaForm: FormGroup;
-
-  transacao: Transacao = {
-    tipoTransacaoId: '',
-    categoriaId: '',
-    subcategoriaId: '',
-    metodoPagamentoId: '',
-    contaBancariaId: '',
-    valor: '0',
-    descricao: ''
-  }
 
   tiposTransacao: TipoTransacao[] = [];
 

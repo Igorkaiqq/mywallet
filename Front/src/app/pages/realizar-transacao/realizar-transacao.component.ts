@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from '../../service/categoria/categoria.service';
-import { SubcategoriaService } from '../../service/subcategoria/subcategoria.service';
-import { MetodoPagamentoService } from '../../service/metodoPagamento/metodo-pagamento.service';
-import { TransacaoService } from '../../service/transacao/transacao.service';
+import {Component, OnInit} from '@angular/core';
+import {CategoriaService} from '../../service/categoria/categoria.service';
+import {SubcategoriaService} from '../../service/subcategoria/subcategoria.service';
+import {MetodoPagamentoService} from '../../service/metodoPagamento/metodo-pagamento.service';
+import {TransacaoService} from '../../service/transacao/transacao.service';
 import {TipoTransacaoService} from "../../service/tipoTransacao/tipo-transacao.service";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {CURRENCY_MASK_CONFIG, CurrencyMaskConfig, CurrencyMaskModule} from "ng2-currency-mask";
+import {CURRENCY_MASK_CONFIG, CurrencyMaskModule} from "ng2-currency-mask";
 import {Router} from "@angular/router";
 import {ContaBancariaService} from "../../service/contaBancaria/conta-bancaria.service";
 import {Transacao} from "../../models/transacao/transacao";
@@ -36,7 +36,8 @@ export class RealizarTransacaoComponent implements OnInit {
     metodoPagamentoId: '',
     contaBancariaId: '',
     valor: '0',
-    descricao: ''
+    descricao: '',
+    data: ''
   }
 
   tiposTransacao: TipoTransacao[] = [];

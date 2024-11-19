@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ActionsButtonsComponent } from './actions-buttons.component';
+import {ActionsButtonsComponent} from './actions-buttons.component';
 
 describe('ActionsButtonsComponent', () => {
   let component: ActionsButtonsComponent;

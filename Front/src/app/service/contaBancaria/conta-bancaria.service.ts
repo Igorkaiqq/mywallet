@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {API_BASE_URL} from "../../app.config";
 
 interface ContaBancaria {

@@ -1,23 +1,8 @@
 package unipar.integrador.mywallet.api.controllers;
 
 
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
-import unipar.integrador.mywallet.application.dto.metas.MetasUsuarioDTO;
-import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
-import unipar.integrador.mywallet.application.entities.MetasUsuarioEntity;
-import unipar.integrador.mywallet.application.entities.TransacaoEntity;
-import unipar.integrador.mywallet.application.interfaces.IMetasUsuario;
-import unipar.integrador.mywallet.application.interfaces.ITransacao;
-import unipar.integrador.mywallet.application.services.MetasUsuarioService;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/metas-usuario")

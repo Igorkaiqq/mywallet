@@ -7,14 +7,19 @@ import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.converters.transacao.TransacaoConveterDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoUsuarioDTO;
-import unipar.integrador.mywallet.application.entities.*;
+import unipar.integrador.mywallet.application.entities.ContaBancariaEntity;
+import unipar.integrador.mywallet.application.entities.TipoTransacaoEntity;
+import unipar.integrador.mywallet.application.entities.TransacaoEntity;
+import unipar.integrador.mywallet.application.entities.UsuarioEntity;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.enums.TipoTransacaoEnum;
 import unipar.integrador.mywallet.application.exception.EntityNotFoundException;
 import unipar.integrador.mywallet.application.interfaces.ITransacao;
 import unipar.integrador.mywallet.infrastructure.repository.TransacaoRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class TransacaoService implements ITransacao {

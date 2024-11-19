@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Chart } from 'chart.js';
-import { ApiService } from '../../service/graficos/api.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Chart} from 'chart.js';
+import {ApiService} from '../../service/graficos/api.service';
 
 @Component({
   selector: 'app-wallet',

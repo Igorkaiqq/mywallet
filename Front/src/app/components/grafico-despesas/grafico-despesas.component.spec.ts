@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GraficoDespesasComponent } from './grafico-despesas.component';
+import {GraficoDespesasComponent} from './grafico-despesas.component';
 
 describe('GraficoDespesasComponent', () => {
   let component: GraficoDespesasComponent;

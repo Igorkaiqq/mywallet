@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {Observable, pipe, tap} from "rxjs";
-import { API_BASE_URL} from "../../app.config";
+import {HttpClient} from '@angular/common/http';
+import {Observable, tap} from "rxjs";
+import {API_BASE_URL} from "../../app.config";
 import {LoginResponseType} from "../../types/login-response.type";
 
 interface LoginDTO {
