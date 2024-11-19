@@ -1,7 +1,7 @@
-import { RouterModule, Routes } from "@angular/router";
-import { CadastroUsuarioComponent } from "./pages/cadastro-usuario/cadastro-usuario.component";
-import { LoginComponent } from "./pages/login/login.component";
-import { WalletAppComponent } from "./pages/wallet-app/wallet-app.component";
+import {RouterModule, Routes} from "@angular/router";
+import {CadastroUsuarioComponent} from "./pages/cadastro-usuario/cadastro-usuario.component";
+import {LoginComponent} from "./pages/login/login.component";
+import {WalletAppComponent} from "./pages/wallet-app/wallet-app.component";
 import {RealizarTransacaoComponent} from "./pages/realizar-transacao/realizar-transacao.component";
 import {MovimentacaoDashboardComponent} from "./pages/movimentacao-dashboard/movimentacao-dashboard.component";
 import {AuthGuard} from "./service/authGuard/auth-guard.service";

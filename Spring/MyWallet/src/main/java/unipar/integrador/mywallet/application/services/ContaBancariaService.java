@@ -5,7 +5,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.dto.contaBancaria.CadastroContaBancariaDTO;
-import unipar.integrador.mywallet.application.entities.CaixaEntity;
 import unipar.integrador.mywallet.application.entities.ContaBancariaEntity;
 import unipar.integrador.mywallet.application.entities.UsuarioEntity;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;

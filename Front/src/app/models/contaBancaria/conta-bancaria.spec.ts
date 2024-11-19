@@ -1,4 +1,4 @@
-import { ContaBancaria } from './conta-bancaria';
+import {ContaBancaria} from './conta-bancaria';
 
 describe('ContaBancaria', () => {
   it('should create an instance', () => {

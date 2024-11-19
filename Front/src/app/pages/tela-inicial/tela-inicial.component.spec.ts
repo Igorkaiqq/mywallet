@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TelaInicialComponent } from './tela-inicial.component';
+import {TelaInicialComponent} from './tela-inicial.component';
 
 describe('TelaInicialComponent', () => {
   let component: TelaInicialComponent;

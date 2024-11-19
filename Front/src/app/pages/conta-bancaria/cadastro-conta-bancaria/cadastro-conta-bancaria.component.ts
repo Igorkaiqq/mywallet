@@ -1,11 +1,10 @@
-import { CurrencyMaskConfig } from 'ng2-currency-mask';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ContaBancariaService } from '../../../service/contaBancaria/conta-bancaria.service';
-import { FormsModule } from '@angular/forms';
-import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
-import { CustomCurrencyMaskConfig } from '../../../config/currency-mask';
+import {CURRENCY_MASK_CONFIG, CurrencyMaskModule} from 'ng2-currency-mask';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {ContaBancariaService} from '../../../service/contaBancaria/conta-bancaria.service';
+import {FormsModule} from '@angular/forms';
+import {CustomCurrencyMaskConfig} from '../../../config/currency-mask';
 
 interface ContaBancaria {
   id: string;

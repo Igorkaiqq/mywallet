@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GraficoReceitasComponent } from './grafico-receitas.component';
+import {GraficoReceitasComponent} from './grafico-receitas.component';
 
 describe('GraficoReceitasComponent', () => {
   let component: GraficoReceitasComponent;

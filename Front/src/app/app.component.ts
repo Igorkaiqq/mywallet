@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {Router, NavigationEnd, RouterOutlet} from '@angular/router';
+import {Component} from '@angular/core';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {NgClass, NgIf} from "@angular/common";
 
 @Component({

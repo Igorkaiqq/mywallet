@@ -1,4 +1,4 @@
-import { TipoTransacao } from './tipo-transacao';
+import {TipoTransacao} from './tipo-transacao';
 
 describe('TipoTransacao', () => {
   it('should create an instance', () => {

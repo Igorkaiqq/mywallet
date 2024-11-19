@@ -5,11 +5,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
-import unipar.integrador.mywallet.application.entities.*;
+import unipar.integrador.mywallet.application.entities.CategoriaUsuarioEntity;
+import unipar.integrador.mywallet.application.entities.SubcategoriaPadraoEntity;
+import unipar.integrador.mywallet.application.entities.SubcategoriaUsuarioEntity;
+import unipar.integrador.mywallet.application.entities.UsuarioEntity;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.interfaces.ISubcategoriaUsuario;
-import unipar.integrador.mywallet.infrastructure.repository.SubcategoriaUsuarioRepository;
 import unipar.integrador.mywallet.infrastructure.repository.CategoriaUsuarioRepository;
+import unipar.integrador.mywallet.infrastructure.repository.SubcategoriaUsuarioRepository;
 
 import java.util.List;
 import java.util.Optional;

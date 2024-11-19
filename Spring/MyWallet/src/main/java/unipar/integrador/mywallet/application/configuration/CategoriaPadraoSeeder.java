@@ -10,10 +10,8 @@ import unipar.integrador.mywallet.application.entities.CategoriaPadraoEntity;
 import unipar.integrador.mywallet.infrastructure.repository.CategoriaPadraoRepository;
 import unipar.integrador.mywallet.infrastructure.repository.TipoTransacaoRepository;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Order(3)
 @Component

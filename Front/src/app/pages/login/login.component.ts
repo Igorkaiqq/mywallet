@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginService } from '../../service/login/login.service';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink} from "@angular/router";
+import {Component} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
+import {LoginService} from '../../service/login/login.service';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {LoginCredentials} from "../../models/usuario/login";
 import {NgIf} from "@angular/common";
 

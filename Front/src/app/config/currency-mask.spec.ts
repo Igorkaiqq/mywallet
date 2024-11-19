@@ -1,4 +1,4 @@
-import { CurrencyMask } from './currency-mask';
+import {CurrencyMask} from './currency-mask';
 
 describe('CurrencyMask', () => {
   it('should create an instance', () => {

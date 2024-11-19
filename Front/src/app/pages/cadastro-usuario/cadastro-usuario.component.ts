@@ -1,13 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { UsuarioService } from '../../service/usuario/usuario.service';
-import { CommonModule } from '@angular/common';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
+import {Component, inject, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {NgxMaskDirective, NgxMaskPipe} from 'ngx-mask';
+import {UsuarioService} from '../../service/usuario/usuario.service';
+import {CommonModule} from '@angular/common';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @Component({
   selector: 'app-criar-conta',
