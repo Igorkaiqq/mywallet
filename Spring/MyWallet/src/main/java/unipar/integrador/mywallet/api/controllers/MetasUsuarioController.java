@@ -18,6 +18,7 @@ import java.util.UUID;
 @RequestMapping("/api/metas-usuario")
 public class MetasUsuarioController {
 
+
     @Autowired
     private IMetasUsuario metasService;
 
@@ -45,4 +46,5 @@ public class MetasUsuarioController {
         MetasUsuarioEntity metasUpdt = metasService.update(id, dto);
         return new ResponseEntity<>(metasUpdt, HttpStatus.OK);
     }
+
 }
