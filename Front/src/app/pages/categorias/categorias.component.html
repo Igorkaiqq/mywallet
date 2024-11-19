@@ -19,7 +19,10 @@
       <div class="subcategories" *ngIf="isCategoryExpanded(categoria.id)">
         <div class="subcategory-header">
           <span>Subcategorias</span>
+          <div>
           <button (click)="registrarSubcategoria(categoria)" (click)="$event.stopPropagation()" class="new-category-button">+ Nova Subcategoria</button>
+          <button class="new-category-button">Meta</button>
+        </div>
         </div>
         <div class="subcategory" *ngFor="let subcategoria of subcategoriasMap[categoria.id]">
           <span>{{ subcategoria.nome }}</span>
@@ -54,7 +57,10 @@
       <div class="subcategories" *ngIf="isCategoryExpanded(categoria.id)">
         <div class="subcategory-header">
           <span>Subcategorias</span>
+          <div>
           <button (click)="registrarSubcategoria(categoria)" (click)="$event.stopPropagation()" class="new-category-button">+ Nova Subcategoria</button>
+          <button class="new-category-button">Meta</button>
+          </div>
         </div>
         <div class="subcategory" *ngFor="let subcategoria of subcategoriasMap[categoria.id]">
           <span>{{ subcategoria.nome }}</span>

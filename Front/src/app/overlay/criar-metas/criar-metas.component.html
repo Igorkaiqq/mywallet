@@ -1,0 +1,16 @@
+<div class="overlay-container">
+    <div class="header">
+        <h2>Criar Meta</h2>
+        <button mat-icon-button>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+
+
+<form [formGroup]="metasForm" class="form-container">
+    <mat-form-field apparence = "fill">
+        <mat-option *ngFor="let tipo of tiposMeta" [value]="tipo.id">
+            {{ tipo.tipoMetaEnum}}
+        </mat-option>
+    </mat-form-field>

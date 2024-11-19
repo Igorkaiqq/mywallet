@@ -17,6 +17,7 @@ import java.util.UUID;
 public class MetasUsuarioEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false, updatable = false)
     private UUID id;
 

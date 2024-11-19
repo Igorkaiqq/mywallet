@@ -1,11 +1,16 @@
 package unipar.integrador.mywallet.application.services;
 
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.dto.metas.MetasUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
+import unipar.integrador.mywallet.application.entities.CategoriaUsuarioEntity;
 import unipar.integrador.mywallet.application.entities.MetasUsuarioEntity;
 import unipar.integrador.mywallet.application.entities.TransacaoEntity;
+import unipar.integrador.mywallet.application.entities.UsuarioEntity;
+import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.exception.EntityNotFoundException;
 import unipar.integrador.mywallet.application.interfaces.IMetasUsuario;
 import unipar.integrador.mywallet.infrastructure.repository.MetasUsuarioRepository;
@@ -20,13 +25,30 @@ public class MetasUsuarioService implements IMetasUsuario {
 
     private final MetasUsuarioRepository metasUsuarioRepository;
 
+    public UUID getUsuarioAutenticadoId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return UUID.fromString(authentication.getName());
+    }
+
     public MetasUsuarioService(MetasUsuarioRepository metasUsuarioRepository) {
         this.metasUsuarioRepository = metasUsuarioRepository;
     }
 
     @Override
     public MetasUsuarioEntity save(MetasUsuarioDTO dto) {
-        return null;
+
+        MetasUsuarioEntity metasUsuario = new MetasUsuarioEntity();
+
+        metasUsuario.setId(UUID.randomUUID());
+
+        UsuarioEntity usuario = new UsuarioEntity();
+        usuario.setId(getUsuarioAutenticadoId());
+
+        metasUsuario.setUsuarioEntity(usuario);
+        metasUsuario.setValor(dto.valor());
+        metasUsuario.setStatusRegistro(StatusRegistroEnum.ATIVO);
+
+        return metasUsuarioRepository.save(metasUsuario);
     }
 
     @Override

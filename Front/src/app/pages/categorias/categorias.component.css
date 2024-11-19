@@ -37,6 +37,7 @@ h3 {
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-left: 5px;
 }
 
 .new-category-button:hover {
