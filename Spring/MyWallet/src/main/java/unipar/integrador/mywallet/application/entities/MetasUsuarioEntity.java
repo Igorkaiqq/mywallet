@@ -10,7 +10,7 @@ import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Metas")
+@Table(name = "MetasUsuario")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,4 +34,5 @@ public class MetasUsuarioEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "StatusRegistro", nullable = false)
     private StatusRegistroEnum statusRegistro;
+
 }
