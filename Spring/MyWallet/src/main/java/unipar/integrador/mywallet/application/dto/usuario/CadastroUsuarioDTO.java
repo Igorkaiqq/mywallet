@@ -1,7 +1,9 @@
 package unipar.integrador.mywallet.application.dto.usuario;
 
-import jakarta.validation.constraints.*;
-import lombok.Getter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import unipar.integrador.mywallet.application.validators.annotation.ValidCPF;
 import unipar.integrador.mywallet.application.validators.annotation.ValidDataNascimento;
 import unipar.integrador.mywallet.application.validators.annotation.ValidTelefone;

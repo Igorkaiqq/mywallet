@@ -1,7 +1,9 @@
 package unipar.integrador.mywallet.application.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.enums.TipoTransacaoEnum;
 

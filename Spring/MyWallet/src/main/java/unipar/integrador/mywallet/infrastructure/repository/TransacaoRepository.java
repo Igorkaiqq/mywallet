@@ -3,7 +3,6 @@ package unipar.integrador.mywallet.infrastructure.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import unipar.integrador.mywallet.application.entities.TransacaoEntity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;

@@ -3,7 +3,6 @@ package unipar.integrador.mywallet.application.dto.metas;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-import unipar.integrador.mywallet.application.entities.MetasUsuarioEntity;
 
 import java.util.UUID;
 

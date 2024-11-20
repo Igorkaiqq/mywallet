@@ -1,4 +1,4 @@
-import { MetodoPagamento } from './metodo-pagamento';
+import {MetodoPagamento} from './metodo-pagamento';
 
 describe('MetodoPagamento', () => {
   it('should create an instance', () => {

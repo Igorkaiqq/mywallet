@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import unipar.integrador.mywallet.application.dto.dashboard.BancosDTO;
-import unipar.integrador.mywallet.application.dto.dashboard.MaioresTransacoesDTO;
 import unipar.integrador.mywallet.application.dto.dashboard.ReceitasDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoUsuarioDTO;
 import unipar.integrador.mywallet.application.interfaces.IDashboard;

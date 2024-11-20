@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
-import { ApiService } from '../../service/graficos/api.service';
+import {Component, OnInit} from '@angular/core';
+import {Chart} from 'chart.js';
+import {ApiService} from '../../service/graficos/api.service';
 
 @Component({
   selector: 'app-grafico-despesas',

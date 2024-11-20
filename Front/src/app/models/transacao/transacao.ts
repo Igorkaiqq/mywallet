@@ -6,4 +6,5 @@ export interface Transacao {
   metodoPagamentoId: string | null;
   contaBancariaId: string | null;
   descricao: string;
+  data: string;
 }

@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.subcategoriaUsuario.SubcategoriaUsuarioDTO;
-import unipar.integrador.mywallet.application.entities.CategoriaUsuarioEntity;
 import unipar.integrador.mywallet.application.entities.SubcategoriaUsuarioEntity;
 import unipar.integrador.mywallet.application.services.SubcategoriaUsuarioService;
 

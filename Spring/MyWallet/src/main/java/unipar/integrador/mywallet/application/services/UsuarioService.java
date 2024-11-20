@@ -2,18 +2,12 @@ package unipar.integrador.mywallet.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import unipar.integrador.mywallet.application.converters.usuario.UsuarioConverterDTO;
-import unipar.integrador.mywallet.application.dto.login.LoginResponseDTO;
 import unipar.integrador.mywallet.application.dto.usuario.AtualizarUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.usuario.CadastroUsuarioDTO;
-import unipar.integrador.mywallet.application.entities.*;
+import unipar.integrador.mywallet.application.entities.CategoriaPadraoEntity;
+import unipar.integrador.mywallet.application.entities.UsuarioEntity;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 import unipar.integrador.mywallet.application.exception.CamposDuplicadosUsuarioException;
 import unipar.integrador.mywallet.application.exception.ExceptionUtils;
@@ -21,13 +15,10 @@ import unipar.integrador.mywallet.application.exception.UsuarioNaoEncontradoExce
 import unipar.integrador.mywallet.application.interfaces.IUsuario;
 import unipar.integrador.mywallet.application.services.subservice.CategoriaSubcategoriaService;
 import unipar.integrador.mywallet.infrastructure.repository.UsuarioRepository;
-import unipar.integrador.mywallet.application.dto.login.LoginDTO;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService implements IUsuario {

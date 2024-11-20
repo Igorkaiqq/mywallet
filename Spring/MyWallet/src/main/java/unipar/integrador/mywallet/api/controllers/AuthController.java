@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import unipar.integrador.mywallet.application.dto.login.LoginDTO;
 import unipar.integrador.mywallet.application.dto.login.LoginResponseDTO;
 import unipar.integrador.mywallet.application.services.AuthService;
-import unipar.integrador.mywallet.application.services.UsuarioService;
 
 @RestController
 @RequestMapping("/api/v1/auth")

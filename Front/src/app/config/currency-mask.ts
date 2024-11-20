@@ -1,4 +1,4 @@
-import { CurrencyMaskConfig } from 'ng2-currency-mask';
+import {CurrencyMaskConfig} from 'ng2-currency-mask';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'left',
