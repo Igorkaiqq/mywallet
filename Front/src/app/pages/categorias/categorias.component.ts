@@ -12,6 +12,9 @@ import { MatDialog } from "@angular/material/dialog";
 import { CriarCategoriaComponent } from "../../overlay/criar-categoria/criar-categoria.component";
 import { CriarSubcategoriaComponent } from "../../overlay/criar-subcategoria/criar-subcategoria.component";
 import { Meta } from '@angular/platform-browser';
+import {MetasFinanceiras} from "../../models/metas/metas";
+import {CriarMetasComponent} from "../../overlay/criar-metas/criar-metas.component";
+import {MetasService} from "../../service/metas/metasService";
 
 @Component({
   selector: 'app-categorias',
@@ -35,6 +38,7 @@ export class CategoriasComponent implements OnInit {
     private categoriaService: CategoriaService,
     private subcategoriaService: SubcategoriaService,
     private tipoTransacaoService: TipoTransacaoService,
+    private metasService: MetasService,
     private dialog: MatDialog
   ) {}
 
@@ -134,18 +138,18 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-  registrarMeta(meta : Meta): void{
-    const dialogRef = this.dialog.open(CriarMetaComponent, {
-      data: { categoriaNome: categoria.nome }
+  registrarMeta(meta : MetasFinanceiras): void{
+    const dialogRef = this.dialog.open(CriarMetasComponent, {
+      data: { valorMeta: meta.valor }
     });
 
-    dialogRef.afterClosed().subscribe((novaSubcategoria: Subcategoria | undefined) => {
-      if (novaSubcategoria) {
-        novaSubcategoria.categoriaUsuarioId = categoria.id;
-        this.subcategoriaService.registrarSubcategoria(novaSubcategoria).subscribe(() => {
+    dialogRef.afterClosed().subscribe((novaMeta: MetasFinanceiras | undefined) => {
+      if (novaMeta) {
+        novaMeta.valor = meta.valor;
+        this.metasService.registrarMeta(novaMeta).subscribe(() => {
           this.buscarTiposTransacao();
         }, error => {
-          console.error('Erro ao registrar subcategoria:', error);
+          console.error('Erro ao registrar Meta:', error);
         });
       }
     });
