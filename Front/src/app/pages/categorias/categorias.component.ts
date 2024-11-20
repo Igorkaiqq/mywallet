@@ -11,6 +11,7 @@ import { EditarCategoriaComponent } from "../../overlay/editar-categoria/editar-
 import { MatDialog } from "@angular/material/dialog";
 import { CriarCategoriaComponent } from "../../overlay/criar-categoria/criar-categoria.component";
 import { CriarSubcategoriaComponent } from "../../overlay/criar-subcategoria/criar-subcategoria.component";
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-categorias',
@@ -118,6 +119,23 @@ export class CategoriasComponent implements OnInit {
 
   registrarSubcategoria(categoria: Categoria): void {
     const dialogRef = this.dialog.open(CriarSubcategoriaComponent, {
+      data: { categoriaNome: categoria.nome }
+    });
+
+    dialogRef.afterClosed().subscribe((novaSubcategoria: Subcategoria | undefined) => {
+      if (novaSubcategoria) {
+        novaSubcategoria.categoriaUsuarioId = categoria.id;
+        this.subcategoriaService.registrarSubcategoria(novaSubcategoria).subscribe(() => {
+          this.buscarTiposTransacao();
+        }, error => {
+          console.error('Erro ao registrar subcategoria:', error);
+        });
+      }
+    });
+  }
+
+  registrarMeta(meta : Meta): void{
+    const dialogRef = this.dialog.open(CriarMetaComponent, {
       data: { categoriaNome: categoria.nome }
     });
 

@@ -44,6 +44,10 @@ public class MetasUsuarioService implements IMetasUsuario {
         UsuarioEntity usuario = new UsuarioEntity();
         usuario.setId(getUsuarioAutenticadoId());
 
+        CategoriaUsuarioEntity categoria = new CategoriaUsuarioEntity();
+        categoria.setId(dto.categoriaId());
+
+        metasUsuario.setCategoriaId(categoria);
         metasUsuario.setUsuarioEntity(usuario);
         metasUsuario.setValor(dto.valor());
         metasUsuario.setStatusRegistro(StatusRegistroEnum.ATIVO);
