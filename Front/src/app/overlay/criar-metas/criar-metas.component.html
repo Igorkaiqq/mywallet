@@ -1,16 +1,18 @@
 <div class="overlay-container">
     <div class="header">
-        <h2>Criar Meta</h2>
-        <button mat-icon-button>
+        <h2>Nova Meta</h2>
+        <button mat-icon-button (click)="onClose()">
             <mat-icon>close</mat-icon>
         </button>
     </div>
+
+    <form [formGroup]="metasForm" class="form-container">
+        <mat-form-field appearance="fill">
+            <input matInput formControlName="valor" placeholder="Informe o Valor da Meta" type="number" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="metaForm.invalid">
+            Salvar
+        </button>
+    </form>
 </div>
-
-
-<form [formGroup]="metasForm" class="form-container">
-    <mat-form-field apparence = "fill">
-        <mat-option *ngFor="let tipo of tiposMeta" [value]="tipo.id">
-            {{ tipo.tipoMetaEnum}}
-        </mat-option>
-    </mat-form-field>

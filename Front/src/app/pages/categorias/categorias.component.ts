@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {CategoriaService} from '../../service/categoria/categoria.service';
-import {SubcategoriaService} from '../../service/subcategoria/subcategoria.service';
-import {TipoTransacaoService} from '../../service/tipoTransacao/tipo-transacao.service';
-import {Categoria} from '../../models/categoria/categoria';
-import {Subcategoria} from '../../models/subcategoria/subcategoria';
-import {TipoTransacao} from '../../models/tipoTransacao/tipo-transacao';
-import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {ActionButtonsComponent} from "../../components/actions/actions-buttons/actions-buttons.component";
-import {EditarCategoriaComponent} from "../../overlay/editar-categoria/editar-categoria.component";
-import {MatDialog} from "@angular/material/dialog";
-import {CriarCategoriaComponent} from "../../overlay/criar-categoria/criar-categoria.component";
-import {CriarSubcategoriaComponent} from "../../overlay/criar-subcategoria/criar-subcategoria.component";
+import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from '../../service/categoria/categoria.service';
+import { SubcategoriaService } from '../../service/subcategoria/subcategoria.service';
+import { TipoTransacaoService } from '../../service/tipoTransacao/tipo-transacao.service';
+import { Categoria } from '../../models/categoria/categoria';
+import { Subcategoria } from '../../models/subcategoria/subcategoria';
+import { TipoTransacao } from '../../models/tipoTransacao/tipo-transacao';
+import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { ActionButtonsComponent } from "../../components/actions/actions-buttons/actions-buttons.component";
+import { EditarCategoriaComponent } from "../../overlay/editar-categoria/editar-categoria.component";
+import { MatDialog } from "@angular/material/dialog";
+import { CriarCategoriaComponent } from "../../overlay/criar-categoria/criar-categoria.component";
+import { CriarSubcategoriaComponent } from "../../overlay/criar-subcategoria/criar-subcategoria.component";
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-categorias',
@@ -118,6 +119,23 @@ export class CategoriasComponent implements OnInit {
 
   registrarSubcategoria(categoria: Categoria): void {
     const dialogRef = this.dialog.open(CriarSubcategoriaComponent, {
+      data: { categoriaNome: categoria.nome }
+    });
+
+    dialogRef.afterClosed().subscribe((novaSubcategoria: Subcategoria | undefined) => {
+      if (novaSubcategoria) {
+        novaSubcategoria.categoriaUsuarioId = categoria.id;
+        this.subcategoriaService.registrarSubcategoria(novaSubcategoria).subscribe(() => {
+          this.buscarTiposTransacao();
+        }, error => {
+          console.error('Erro ao registrar subcategoria:', error);
+        });
+      }
+    });
+  }
+
+  registrarMeta(meta : Meta): void{
+    const dialogRef = this.dialog.open(CriarMetaComponent, {
       data: { categoriaNome: categoria.nome }
     });
 
