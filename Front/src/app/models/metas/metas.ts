@@ -1,4 +1,4 @@
-export interface Metas{
+export interface MetasFinanceiras{
     valor: number;
     tipoMetaEnum: string;
 }

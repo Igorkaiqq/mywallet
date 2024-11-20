@@ -35,6 +35,8 @@ public class MetasUsuarioController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+
     @GetMapping
     public ResponseEntity<List<MetasUsuarioEntity>> findAll() {
         List<MetasUsuarioEntity> metas = metasService.findAll();
