@@ -200,7 +200,7 @@
   box-sizing: border-box;
   padding: 1.5rem;
   gap: 4rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -222,11 +222,12 @@
 .info-text h3 {
   font-size: 1.5em;
   margin: 0;
+  color: #ffffff;
 }
 
 .info-text span {
   font-size: 0.9em;
-  color: #ffffff;
+  color: #f0f0f0;
 }
 
 .receita {
@@ -254,4 +255,11 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
+}
+
+#informations-container span,
+.graphics span,
+#last-transactions-receita-container span,
+#last-transactions-despesa-container span {
+  color: #ffffff;
 }

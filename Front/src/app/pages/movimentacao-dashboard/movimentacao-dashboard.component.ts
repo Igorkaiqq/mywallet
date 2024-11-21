@@ -4,7 +4,6 @@ import {TransacaoService} from '../../service/transacao/transacao.service';
 import {CommonModule, CurrencyPipe, DatePipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {MatDialog} from "@angular/material/dialog";
-import {NovaTransacaoComponent} from "../../overlay/nova-transacao/nova-transacao.component";
 
 @Component({
   selector: 'app-movimentacao-dashboard',
@@ -45,16 +44,7 @@ export class MovimentacaoDashboardComponent implements OnInit {
   }
 
   novaMovimentacao(): void {
-    const dialogRef = this.dialog.open(NovaTransacaoComponent, {
-      width: '500px',
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Nova movimentação criada:', result);
-      }
-    });
+    this.router.navigate(['/realizar-transacao']);
   }
 
 

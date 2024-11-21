@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record TransacaoDTO(
@@ -27,5 +29,8 @@ public record TransacaoDTO(
         double valor,
 
         @Size(max = 200, message = "Descrição deve ter no máximo 200 caracteres.")
-        String descricao
+        String descricao,
+
+        @NotNull(message = "Data é obrigatória.")
+        LocalDate data
 ) {}
