@@ -46,6 +46,10 @@ export class RealizarTransacaoComponent implements OnInit {
   metodosPagamento: MetodoPagamento[] = [];
   contasBancarias: ContaBancaria[] = [];
 
+
+  dataEscolhida: string = 'hoje';
+  mostrarCalendario: boolean = false;
+
   successMessage: string = '';
   errorMessages: string[] = [];
 
@@ -61,10 +65,31 @@ export class RealizarTransacaoComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.definirDataPadrao();
     this.buscarTiposTransacao();
     this.buscarMetodosPagamento();
     this.buscarContasBancarias();
 
+  }
+
+  definirDataPadrao(): void {
+    const hoje = new Date();
+    this.transacao.data = hoje.toISOString().split('T')[0];
+  }
+
+  onDataChange(event: any): void {
+    if (this.dataEscolhida === 'hoje') {
+      const hoje = new Date();
+      this.transacao.data = hoje.toISOString().split('T')[0];
+      this.mostrarCalendario = false;
+    } else if (this.dataEscolhida === 'ontem') {
+      const ontem = new Date();
+      ontem.setDate(ontem.getDate() - 1);
+      this.transacao.data = ontem.toISOString().split('T')[0];
+      this.mostrarCalendario = false;
+    } else {
+      this.mostrarCalendario = true;
+    }
   }
 
   private buscarTiposTransacao(): void {

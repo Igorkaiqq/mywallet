@@ -30,7 +30,9 @@ public class TransacaoConveterDTO {
         transacao.setMetodoPagamento(metodoPagamento);
 
         transacao.setValor(dto.valor());
-        transacao.setData(LocalDateTime.now());
+        System.out.println("Data do DTO: " + dto.data());
+        transacao.setData(dto.data().atStartOfDay());
+        System.out.println("Data depois: " + transacao.getData());
         transacao.setDescricao(dto.descricao());
         transacao.setStatusRegistro(StatusRegistroEnum.ATIVO);
 

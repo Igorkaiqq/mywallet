@@ -71,6 +71,8 @@ public class TransacaoService implements ITransacao {
             contaBancaria.setSaldo(contaBancaria.getSaldo() - valorTransacao);
         }
 
+
+
         contaBancariaService.update(contaBancaria);
         return transacaoRepository.save(transacao);
     }

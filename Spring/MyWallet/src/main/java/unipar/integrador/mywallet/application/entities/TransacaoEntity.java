@@ -49,7 +49,6 @@ public class TransacaoEntity {
     private Double valor;
 
     @Column(name = "Data", nullable = false)
-    @CreationTimestamp
     private LocalDateTime data;
 
     @Column(name = "Descricao", length = 200)
