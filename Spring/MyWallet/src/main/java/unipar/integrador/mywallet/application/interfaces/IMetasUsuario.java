@@ -13,4 +13,5 @@ public interface IMetasUsuario {
     Optional<MetasUsuarioEntity> findById(UUID id);
     List<MetasUsuarioEntity> findAll();
     MetasUsuarioEntity update(UUID id, MetasUsuarioDTO dto);
+    MetasUsuarioEntity findByCategoriaId (UUID categoriaId);
 }

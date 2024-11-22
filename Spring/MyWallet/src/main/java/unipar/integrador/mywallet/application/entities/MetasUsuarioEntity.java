@@ -27,7 +27,7 @@ public class MetasUsuarioEntity {
 
     @ManyToOne
     @JoinColumn(name = "CategoriaId", nullable = false)
-    private CategoriaUsuarioEntity CategoriaId;
+    private CategoriaUsuarioEntity categoriaId;
 
     @Column(name = "Valor", length = 70, nullable = false)
     private double valor;

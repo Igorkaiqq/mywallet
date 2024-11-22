@@ -45,7 +45,11 @@
 
     <div class="category" *ngFor="let categoria of categoriasDespesa" (click)="toggleCategory(categoria.id)">
       <div class="category-header">
+
         <span>{{ categoria.nome }}</span>
+        <span class="metasTitle">Meta: {{ metasMap[categoria.id] || 'não definido' }}</span>
+
+
         <div class="controls" (click)="$event.stopPropagation()">
           <app-actions-buttons
             (edit)="editarCategoria(categoria)"
@@ -58,9 +62,15 @@
         <div class="subcategory-header">
           <span>Subcategorias</span>
           <div>
-          <button (click)="registrarSubcategoria(categoria)" (click)="$event.stopPropagation()" class="new-category-button">+ Nova Subcategoria</button>
-          <button class="new-category-button">Meta</button>
+            <button (click)="registrarSubcategoria(categoria)" (click)="$event.stopPropagation()"
+                    class="new-category-button">+ Nova Subcategoria
+            </button>
+
+            <button (click)="registrarMeta(categoria)" (click)="$event.stopPropagation()" class="new-category-button">
+              Meta
+            </button>
           </div>
+
         </div>
         <div class="subcategory" *ngFor="let subcategoria of subcategoriasMap[categoria.id]">
           <span>{{ subcategoria.nome }}</span>
@@ -70,6 +80,7 @@
               (delete)="excluirSubcategoria(subcategoria)">
             </app-actions-buttons>
           </div>
+
         </div>
       </div>
     </div>
