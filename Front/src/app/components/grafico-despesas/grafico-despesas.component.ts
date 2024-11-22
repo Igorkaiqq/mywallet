@@ -14,7 +14,7 @@ export class GraficoDespesasComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getDespesas().subscribe(data => {
       this.chart = new Chart('graficoDespesasCanvas', {
-        type: 'bar', // Tipo do gráfico
+        type: 'bar',
         data: {
           labels: data.map((item: any) => item.nome),
           datasets: [

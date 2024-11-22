@@ -16,13 +16,32 @@ import {Subcategoria} from "../../models/subcategoria/subcategoria";
 import {MetodoPagamento} from "../../models/metodoPagamento/metodo-pagamento";
 import {ContaBancaria} from "../../models/contaBancaria/conta-bancaria";
 import {CustomCurrencyMaskConfig} from "../../config/currency-mask";
+import {MatFormField} from "@angular/material/form-field";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-realizar-transacao',
   templateUrl: './realizar-transacao.component.html',
   styleUrls: ['./realizar-transacao.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, CurrencyMaskModule],
+  imports: [CommonModule,
+    FormsModule,
+    CurrencyMaskModule,
+    MatFormField,
+    MatSelect,
+    MatOption,
+    MatRadioButton,
+    MatRadioGroup,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatSnackBarModule,
+    MatDialogModule
+  ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
@@ -35,10 +54,10 @@ export class RealizarTransacaoComponent implements OnInit {
     subcategoriaId: '',
     metodoPagamentoId: '',
     contaBancariaId: '',
-    valor: '0',
+    valor: 0,
     descricao: '',
     data: ''
-  }
+  };
 
   tiposTransacao: TipoTransacao[] = [];
   categorias: Categoria[] = [];
@@ -46,12 +65,12 @@ export class RealizarTransacaoComponent implements OnInit {
   metodosPagamento: MetodoPagamento[] = [];
   contasBancarias: ContaBancaria[] = [];
 
-
   dataEscolhida: string = 'hoje';
   mostrarCalendario: boolean = false;
 
-  successMessage: string = '';
   errorMessages: string[] = [];
+
+  dataMaxima: string = '';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -60,30 +79,36 @@ export class RealizarTransacaoComponent implements OnInit {
     private transacaoService: TransacaoService,
     private tipotransacaoService: TipoTransacaoService,
     private contaBancariaService: ContaBancariaService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-
     this.definirDataPadrao();
     this.buscarTiposTransacao();
     this.buscarMetodosPagamento();
     this.buscarContasBancarias();
-
+    this.definirDataMaxima();
   }
 
-  definirDataPadrao(): void {
+  definirDataMaxima(): void {
+    const hoje = new Date();
+    this.dataMaxima = hoje.toISOString().split('T')[0];
+  }
+
+    definirDataPadrao(): void {
     const hoje = new Date();
     this.transacao.data = hoje.toISOString().split('T')[0];
   }
 
   onDataChange(event: any): void {
+
     if (this.dataEscolhida === 'hoje') {
-      const hoje = new Date();
+      const hoje = new Date(new Date().getTime());
       this.transacao.data = hoje.toISOString().split('T')[0];
       this.mostrarCalendario = false;
     } else if (this.dataEscolhida === 'ontem') {
-      const ontem = new Date();
+      const ontem = new Date(new Date().getTime());
       ontem.setDate(ontem.getDate() - 1);
       this.transacao.data = ontem.toISOString().split('T')[0];
       this.mostrarCalendario = false;
@@ -91,6 +116,7 @@ export class RealizarTransacaoComponent implements OnInit {
       this.mostrarCalendario = true;
     }
   }
+
 
   private buscarTiposTransacao(): void {
     this.tipotransacaoService.getTiposTransacao().subscribe(tipos => {
@@ -106,55 +132,58 @@ export class RealizarTransacaoComponent implements OnInit {
 
   private buscarContasBancarias(): void {
     this.contaBancariaService.getContasBancarias().subscribe(contas => {
-      this.contasBancarias = contas
+      this.contasBancarias = contas;
     });
   }
 
   onTipoTransacaoChange(event: any): void {
-
     const tipoTransacaoId = this.transacao.tipoTransacaoId;
 
-    if (tipoTransacaoId){
+    if (tipoTransacaoId) {
       this.categoriaService.getCategoriasPorUsuarioId(tipoTransacaoId).subscribe(categorias => {
         this.categorias = categorias;
         sessionStorage.setItem('categorias', JSON.stringify(categorias));
       }, error => {
         console.error('Erro ao buscar categorias', error);
       });
+    } else {
+      this.categorias = [];
+      this.subcategorias = [];
+      this.transacao.categoriaId = '';
+      this.transacao.subcategoriaId = '';
     }
   }
 
   onCategoriaChange(event: any): void {
-
     const categoriaId = this.transacao.categoriaId;
 
-    if (categoriaId){
+    if (categoriaId) {
       this.subcategoriaService.getSubcategoriasPorCategoriaId(categoriaId).subscribe(subcategorias => {
         this.subcategorias = subcategorias;
         sessionStorage.setItem('subcategorias', JSON.stringify(subcategorias));
       }, error => {
         console.error('Erro ao buscar subcategorias', error);
       });
+    } else {
+      this.subcategorias = [];
+      this.transacao.subcategoriaId = '';
     }
   }
 
+
   salvarTransacao(): void {
-
-    const valorNumerico = String(this.transacao.valor)
-      .replace('R$', '')
-      .replace('.', '')
-      .replace(',', '.')
-      .trim();
-
-    this.transacao.valor = valorNumerico;
-
     this.transacaoService.salvarTransacao(this.transacao).subscribe({
       next: (response) => {
-        this.successMessage = 'Transação realizada com sucesso!';
+        this.snackBar.open('Transação realizada com sucesso!', 'Fechar', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: ['success-snackbar']
+        });
         this.errorMessages = [];
         setTimeout(() => {
           this.router.navigate(['/tela-inicial']);
-        }, 2000)
+        }, 2000);
       },
       error: (error) => {
         if (error.error) {
@@ -163,13 +192,22 @@ export class RealizarTransacaoComponent implements OnInit {
         } else {
           this.errorMessages = ['Erro ao realizar a transação. Tente novamente.'];
         }
-        this.successMessage = '';
+
+        this.snackBar.open(this.formatErrorMessages(this.errorMessages), 'Fechar', {
+          duration: 5000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
       }
     });
+  }
+
+  private formatErrorMessages(errorMessages: string[]): string {
+    return errorMessages.join('\n');
   }
 
   cadastrarNovaContaBancaria(): void {
     this.router.navigate(['/cadastrar-conta-bancaria']);
   }
-
 }

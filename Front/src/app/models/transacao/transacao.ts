@@ -1,6 +1,6 @@
 export interface Transacao {
   tipoTransacaoId: string | null;
-  valor: string;
+  valor: number;
   categoriaId: string | null;
   subcategoriaId: string | null;
   metodoPagamentoId: string | null;

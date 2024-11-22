@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CriarMetasComponent } from './criar-metas.component';
+import {CriarMetasComponent} from './criar-metas.component';
 
 describe('CriarMetasComponent', () => {
   let component: CriarMetasComponent;

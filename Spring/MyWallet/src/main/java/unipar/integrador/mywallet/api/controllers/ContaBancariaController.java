@@ -1,5 +1,6 @@
 package unipar.integrador.mywallet.api.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class ContaBancariaController {
     private ContaBancariaService contaBancariaService;
 
     @PostMapping
-    public ResponseEntity<ContaBancariaEntity> createContaBancaria(@RequestBody CadastroContaBancariaDTO contaBancaria) {
+    public ResponseEntity<ContaBancariaEntity> createContaBancaria(@RequestBody @Valid CadastroContaBancariaDTO contaBancaria) {
         ContaBancariaEntity novaConta = contaBancariaService.save(contaBancaria);
         return ResponseEntity.ok(novaConta);
     }

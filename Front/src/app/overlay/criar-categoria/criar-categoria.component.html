@@ -16,7 +16,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <input matInput formControlName="nome" placeholder="Nome da Categoria" />
+      <input matInput formControlName="nome" (keypress)="apenasLetras($event)" placeholder="Nome da Categoria"  />
     </mat-form-field>
 
     <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="categoriaForm.invalid">

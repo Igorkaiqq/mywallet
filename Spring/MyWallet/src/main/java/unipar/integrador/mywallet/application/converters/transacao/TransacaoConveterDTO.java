@@ -4,7 +4,6 @@ import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
 import unipar.integrador.mywallet.application.entities.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class TransacaoConveterDTO {

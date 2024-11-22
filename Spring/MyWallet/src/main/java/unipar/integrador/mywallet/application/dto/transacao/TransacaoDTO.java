@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record TransacaoDTO(
@@ -25,7 +24,7 @@ public record TransacaoDTO(
         @NotNull(message = "Conta Bancária é obrigatória.")
         UUID contaBancariaId,
 
-        @Positive(message = "Valor deve ser positivo.")
+        @Positive(message = "Valor deve ser positivo e maior que zero.")
         double valor,
 
         @Size(max = 200, message = "Descrição deve ter no máximo 200 caracteres.")
