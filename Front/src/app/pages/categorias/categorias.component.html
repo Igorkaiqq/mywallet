@@ -21,7 +21,6 @@
           <span>Subcategorias</span>
           <div>
           <button (click)="registrarSubcategoria(categoria)" (click)="$event.stopPropagation()" class="new-category-button">+ Nova Subcategoria</button>
-          <button (click)="registrarSubcategoria(categoria)" class="new-category-button">Meta</button>
         </div>
         </div>
         <div class="subcategory" *ngFor="let subcategoria of subcategoriasMap[categoria.id]">

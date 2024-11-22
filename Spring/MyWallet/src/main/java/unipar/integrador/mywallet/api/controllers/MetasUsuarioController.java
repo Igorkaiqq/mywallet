@@ -35,12 +35,6 @@ public class MetasUsuarioController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-//    @GetMapping("/categoria/{id}")
-//    public ResponseEntity<MetasUsuarioEntity> findByIdCategoria(@PathVariable UUID id) {
-//        Optional<MetasUsuarioEntity> metas = Optional.ofNullable(metasService.findByCategoriaId(id));
-//        return metas.map(ResponseEntity::ok)
-//                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
 
     @GetMapping("/categoria/{id}")
     public ResponseEntity<Object> findByIdCategoria(@PathVariable UUID id) {
