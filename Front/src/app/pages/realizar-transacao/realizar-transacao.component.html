@@ -47,7 +47,6 @@
         <select [(ngModel)]="transacao.subcategoriaId" name="subcategoria" [disabled]="!transacao.categoriaId || subcategorias.length === 0" required>
           <option for="subcategoria" *ngFor="let subcategoria of subcategorias" [value]="subcategoria.id">{{ subcategoria.nome }}</option>
         </select>
-        <!-- Mensagem para o usuário quando não houver subcategorias -->
         <div *ngIf="subcategorias.length === 0 && transacao.categoriaId" class="no-subcategories-message">
           Não há subcategorias disponíveis para esta categoria. Por favor, cadastre uma nova subcategoria.
         </div>

@@ -56,7 +56,6 @@ export class MovimentacaoDashboardComponent implements OnInit {
     this.transacaoService.buscarTransacoesPorUsuarioId().subscribe({
       next: (transacoes) => {
         this.transacoes = transacoes;
-        console.log('Transações: ', this.transacoes);
         this.loading = false;
       },
       error: (error) => {
