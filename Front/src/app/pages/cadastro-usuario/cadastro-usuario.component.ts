@@ -8,6 +8,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
+import {NotificationService} from "../../service/notification/notification.service";
 
 @Component({
   selector: 'app-criar-conta',
@@ -27,15 +28,15 @@ import {MatNativeDateModule} from '@angular/material/core';
 })
 export class CadastroUsuarioComponent implements OnInit {
   criarContaForm: FormGroup;
-  backendErrors: string[] = [];
 
   private usuarioService = inject(UsuarioService);
   private router = inject(Router);
 
-  successMessage: string = '';
   errorMessages: string[] = [];
 
-  constructor() {
+  constructor(
+    private notificationService: NotificationService
+  ) {
     this.criarContaForm = new FormBuilder().group({
       nome: ['', Validators.required],
       username: ['', Validators.required],
@@ -60,8 +61,7 @@ export class CadastroUsuarioComponent implements OnInit {
       this.usuarioService.cadastrarUsuario(this.criarContaForm.value).subscribe({
         next: (response) => {
           console.log('Cadastro realizado com sucesso', response);
-          this.successMessage = 'Conta criada com sucesso!';
-          this.errorMessages = [];
+          this.notificationService.showSuccess('Conta criada com sucesso!');
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 2000);
@@ -73,12 +73,16 @@ export class CadastroUsuarioComponent implements OnInit {
           } else {
             this.errorMessages = ['Erro ao realizar o cadastro de conta. Tente novamente.'];
           }
-          this.successMessage = '';
+          this.notificationService.showError(this.formatErrorMessages(this.errorMessages));
         }
       });
     } else {
       console.log("Formulário de cadastro de usuário inválido");
     }
+  }
+
+  private formatErrorMessages(errorMessages: string[]): string {
+    return errorMessages.join('\n');
   }
 
   onCancel(): void {

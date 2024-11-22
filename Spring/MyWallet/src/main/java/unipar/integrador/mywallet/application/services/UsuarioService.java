@@ -16,6 +16,7 @@ import unipar.integrador.mywallet.application.interfaces.IUsuario;
 import unipar.integrador.mywallet.application.services.subservice.CategoriaSubcategoriaService;
 import unipar.integrador.mywallet.infrastructure.repository.UsuarioRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,6 +36,26 @@ public class UsuarioService implements IUsuario {
     @Override
     public UsuarioEntity save(CadastroUsuarioDTO dto) {
         try {
+
+            List<String> camposDuplicados = new ArrayList<>();
+
+            if (usuarioRepository.existsByUsername(dto.username())) {
+                camposDuplicados.add("Username");
+            }
+            if (usuarioRepository.existsByEmail(dto.email())) {
+                camposDuplicados.add("Email");
+            }
+            if (usuarioRepository.existsByCpf(dto.cpf())) {
+                camposDuplicados.add("Cpf");
+            }
+            if (usuarioRepository.existsByTelefone(dto.telefone())) {
+                camposDuplicados.add("Telefone");
+            }
+
+            if (!camposDuplicados.isEmpty()) {
+                throw new CamposDuplicadosUsuarioException(String.join(", ", camposDuplicados));
+            }
+
             UsuarioEntity usuarioEntity = usuarioConverterDTO.toEntity(dto);
             UsuarioEntity usuarioSalvo = usuarioRepository.save(usuarioEntity);
 

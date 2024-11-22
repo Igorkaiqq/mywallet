@@ -38,7 +38,7 @@ public class UsuarioConverterDTO {
         usuarioEntity.setSenha(passwordEncoder.encode(dto.senha()));
         usuarioEntity.setTelefone(dto.telefone());
         usuarioEntity.setCpf(dto.cpf());
-        usuarioEntity.setGenero(GeneroEnum.fromString(dto.genero()));
+        usuarioEntity.setGenero(GeneroEnum.fromString(dto.genero().toString()));
         usuarioEntity.setDataNascimento(LocalDate.parse(dto.dataNascimento(), formatter));
         usuarioEntity.setDataCadastro(LocalDate.now());
         usuarioEntity.setPerguntaSecreta(dto.perguntaSecreta());
@@ -57,7 +57,7 @@ public class UsuarioConverterDTO {
                 entity.getSenha(),
                 entity.getTelefone(),
                 entity.getCpf(),
-                entity.getGenero().toString(),
+                entity.getGenero(),
                 entity.getDataNascimento().toString(),
                 entity.getPerguntaSecreta(),
                 entity.getRespostaSecreta()

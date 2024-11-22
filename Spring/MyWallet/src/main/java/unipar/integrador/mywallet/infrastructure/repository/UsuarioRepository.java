@@ -13,4 +13,12 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, UUID>{
 
     Object findByUsername(String admin);
 
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByCpf(String cpf);
+
+    boolean existsByTelefone(String telefone);
+
 }

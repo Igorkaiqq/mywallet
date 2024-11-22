@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import unipar.integrador.mywallet.application.enums.GeneroEnum;
 import unipar.integrador.mywallet.application.validators.annotation.ValidCPF;
 import unipar.integrador.mywallet.application.validators.annotation.ValidDataNascimento;
 import unipar.integrador.mywallet.application.validators.annotation.ValidTelefone;
@@ -34,7 +35,7 @@ public record CadastroUsuarioDTO(
         String cpf,
 
         @NotNull(message = "O gênero não pode ser nulo")
-        String genero,
+        GeneroEnum genero,
 
         @NotBlank(message = "A data de nascimento não pode estar em branco")
         @ValidDataNascimento

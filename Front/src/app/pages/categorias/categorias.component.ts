@@ -14,6 +14,7 @@ import {CriarSubcategoriaComponent} from "../../overlay/criar-subcategoria/criar
 import {MetasFinanceiras} from "../../models/metas/metas";
 import {CriarMetasComponent} from "../../overlay/criar-metas/criar-metas.component";
 import {MetasService} from "../../service/metas/metasService";
+import {NotificationService} from "../../service/notification/notification.service";
 
 @Component({
   selector: 'app-categorias',
@@ -41,7 +42,8 @@ export class CategoriasComponent implements OnInit {
     private subcategoriaService: SubcategoriaService,
     private tipoTransacaoService: TipoTransacaoService,
     private metasService: MetasService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private notificationService: NotificationService
   ) {
   }
 
@@ -67,6 +69,8 @@ export class CategoriasComponent implements OnInit {
           }
         }, error => {
           console.error('Erro ao buscar categorias', error);
+          const errorMessages = this.formatErrorMessages(error);
+          this.notificationService.showError(errorMessages);
         });
       });
     });
@@ -77,7 +81,6 @@ export class CategoriasComponent implements OnInit {
       this.expandedCategories.delete(categoriaId);
     } else {
       this.expandedCategories.add(categoriaId);
-
     }
   }
 
@@ -94,8 +97,11 @@ export class CategoriasComponent implements OnInit {
       if (novaCategoria) {
         this.categoriaService.registrarCategoria(novaCategoria).subscribe(() => {
           this.buscarTiposTransacao();
+          this.notificationService.showSuccess('Categoria criada com sucesso!');
         }, error => {
           console.error('Erro ao registrar categoria:', error);
+          const errorMessages = this.formatErrorMessages(error);
+          this.notificationService.showError(errorMessages);
         });
       }
     });
@@ -111,8 +117,11 @@ export class CategoriasComponent implements OnInit {
         const categoriaAtualizada = {...categoria, nome: novoNome};
         this.categoriaService.atualizarCategoria(categoriaAtualizada).subscribe(() => {
           this.buscarTiposTransacao();
+          this.notificationService.showSuccess('Categoria atualizada com sucesso!');
         }, error => {
           console.error('Erro ao atualizar categoria:', error);
+          const errorMessages = this.formatErrorMessages(error);
+          this.notificationService.showError(errorMessages);
         });
       }
     });
@@ -121,8 +130,11 @@ export class CategoriasComponent implements OnInit {
   excluirCategoria(categoria: Categoria): void {
     this.categoriaService.excluirCategoria(categoria.id).subscribe(() => {
       this.buscarTiposTransacao();
+      this.notificationService.showSuccess('Categoria excluída com sucesso!');
     }, error => {
       console.error('Erro ao excluir categoria:', error);
+      const errorMessages = this.formatErrorMessages(error);
+      this.notificationService.showError(errorMessages);
     });
   }
 
@@ -136,8 +148,11 @@ export class CategoriasComponent implements OnInit {
         novaSubcategoria.categoriaUsuarioId = categoria.id;
         this.subcategoriaService.registrarSubcategoria(novaSubcategoria).subscribe(() => {
           this.buscarTiposTransacao();
+          this.notificationService.showSuccess('Subcategoria criada com sucesso!');
         }, error => {
           console.error('Erro ao registrar subcategoria:', error);
+          const errorMessages = this.formatErrorMessages(error);
+          this.notificationService.showError(errorMessages);
         });
       }
     });
@@ -153,8 +168,11 @@ export class CategoriasComponent implements OnInit {
         novaMeta.categoriaId = categoria.id;
         this.metasService.registrarMeta(novaMeta).subscribe(() => {
           this.buscarTiposTransacao();
+          this.notificationService.showSuccess('Meta criada com sucesso!');
         }, error => {
           console.error('Erro ao registrar Meta:', error);
+          const errorMessages = this.formatErrorMessages(error);
+          this.notificationService.showError(errorMessages);
         });
       }
     });
@@ -170,8 +188,11 @@ export class CategoriasComponent implements OnInit {
         const subCategoriaAtualizada = {...subcategoria, nome: novoNome};
         this.subcategoriaService.atualizarsubCategoria(subCategoriaAtualizada).subscribe(() => {
           this.buscarTiposTransacao();
+          this.notificationService.showSuccess('Subcategoria atualizada com sucesso!');
         }, error => {
           console.error('Erro ao atualizar subcategoria:', error);
+          const errorMessages = this.formatErrorMessages(error);
+          this.notificationService.showError(errorMessages);
         });
       }
     });
@@ -180,8 +201,11 @@ export class CategoriasComponent implements OnInit {
   excluirSubcategoria(subcategoria: Subcategoria): void {
     this.subcategoriaService.excluirsubCategoria(subcategoria.id).subscribe(() => {
       this.buscarTiposTransacao();
+      this.notificationService.showSuccess('Subcategoria excluída com sucesso!');
     }, error => {
       console.error('Erro ao excluir subcategoria:', error);
+      const errorMessages = this.formatErrorMessages(error);
+      this.notificationService.showError(errorMessages);
     });
   }
 
@@ -193,5 +217,8 @@ export class CategoriasComponent implements OnInit {
     }
   }
 
+  private formatErrorMessages(errorMessages: string[]): string {
+    return errorMessages.join('\n');
+  }
 
 }
