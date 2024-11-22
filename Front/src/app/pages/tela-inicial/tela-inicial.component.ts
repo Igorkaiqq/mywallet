@@ -1,25 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
-import { MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import moment from 'moment'; // Para fácil manipulação de datas
-import { ChartModule } from 'primeng/chart';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import moment from 'moment';
+import {ChartModule} from 'primeng/chart';
 import {NgForOf, NgIf} from '@angular/common';
 
-import { DashboardService } from '../../service/dashboard/dashboard.service';
-import { CategoriaService } from '../../service/categoria/categoria.service';
-import { TipoTransacaoService } from '../../service/tipoTransacao/tipo-transacao.service';
-import { Receita } from '../../models/receita/receita';
-import { Categoria } from '../../models/categoria/categoria';
-import { TipoTransacao } from '../../models/tipoTransacao/tipo-transacao';
-import { forkJoin } from 'rxjs';
-import { TooltipItem } from "chart.js";
+import {DashboardService} from '../../service/dashboard/dashboard.service';
+import {CategoriaService} from '../../service/categoria/categoria.service';
+import {TipoTransacaoService} from '../../service/tipoTransacao/tipo-transacao.service';
+import {Receita} from '../../models/receita/receita';
+import {Categoria} from '../../models/categoria/categoria';
+import {TipoTransacao} from '../../models/tipoTransacao/tipo-transacao';
+import {forkJoin} from 'rxjs';
+import {TooltipItem} from "chart.js";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -41,7 +40,7 @@ export const MY_DATE_FORMATS = {
     NgForOf,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatMomentDateModule,  // Use o Moment Date Module em vez do MatNativeDateModule
+    MatMomentDateModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -53,7 +52,7 @@ export const MY_DATE_FORMATS = {
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' } // Configura o locale para português do Brasil
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ]
 })
 export class TelaInicialComponent implements OnInit {
@@ -239,12 +238,12 @@ export class TelaInicialComponent implements OnInit {
   }
 
   onDateRangePickerOpened(): void {
-    this.showPresetOptions = true; // Mostrar as opções quando o calendário for aberto
+    this.showPresetOptions = true;
   }
 
   setPresetPeriod(period: string): void {
     let start: moment.Moment;
-    let end: moment.Moment = moment(); // Default é a data atual
+    let end: moment.Moment = moment();
 
     switch (period) {
       case 'hoje':
@@ -305,11 +304,10 @@ export class TelaInicialComponent implements OnInit {
 
     this.onDateRangeChange(start.toDate(), end.toDate());
 
-    // Fechar as opções após escolher um período
     this.showPresetOptions = false;
   }
 
   onDateRangePickerClosed(): void {
-    this.showPresetOptions = false; // Esconder as opções quando o calendário for fechado
+    this.showPresetOptions = false;
   }
 }

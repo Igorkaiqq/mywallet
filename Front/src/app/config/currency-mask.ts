@@ -9,3 +9,4 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   suffix: '',
   thousands: '.'
 };
+

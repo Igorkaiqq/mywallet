@@ -2,18 +2,8 @@
   <div class="transaction-form">
     <h2>Realizar Transação</h2>
 
-    <div *ngIf="successMessage" class="alert alert-success">
-      {{ successMessage }}
-    </div>
-
-    <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
-      <ul>
-        <li *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</li>
-      </ul>
-    </div>
-
     <form (ngSubmit)="salvarTransacao()">
-      <div class="form-group">
+      <div class="form-group compact">
         <label>Tipo de Transação:</label>
         <select [(ngModel)]="transacao.tipoTransacaoId" name="tipoTransacao" (change)="onTipoTransacaoChange($event)" required>
           <option for="tipoTransacao" *ngFor="let tipo of tiposTransacao" [value]="tipo.id">{{ tipo.tipoTransacaoEnum }}
@@ -21,67 +11,70 @@
         </select>
       </div>
 
-      <div class="form-group">
-        <label for="valor">Valor:</label>
-        <input type="text" currencyMask [(ngModel)]="transacao.valor"
-               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" name="valor" id="valor" required>
-      </div>
-
-      <div class="form-group">
-        <label>Data:</label>
-        <div class="radio-group">
-          <label>
-            <input type="radio" [(ngModel)]="dataEscolhida" name="data" value="hoje" (change)="onDataChange($event)" checked> Hoje
-          </label>
-          <label>
-            <input type="radio" [(ngModel)]="dataEscolhida" name="data" value="ontem" (change)="onDataChange($event)"> Ontem
-          </label>
-          <label>
-            <input type="radio" [(ngModel)]="dataEscolhida" name="data" value="outra" (change)="onDataChange($event)"> Outra data
-          </label>
+      <div class="form-group compact inline-fields">
+        <div class="field">
+          <label for="valor">Valor:</label>
+          <input type="text" currencyMask [(ngModel)]="transacao.valor"
+                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" name="valor" id="valor" required>
         </div>
-        <input *ngIf="mostrarCalendario" type="date" [(ngModel)]="transacao.data" name="dataSelecionada">
+
+        <div class="field">
+          <div class="radio-group">
+            <label>
+              <input type="radio" [(ngModel)]="dataEscolhida" name="data" value="hoje" (change)="onDataChange($event)" checked> Hoje
+            </label>
+            <label>
+              <input type="radio" [(ngModel)]="dataEscolhida" name="data" value="ontem" (change)="onDataChange($event)"> Ontem
+            </label>
+            <label>
+              <input type="radio" [(ngModel)]="dataEscolhida" name="data" value="outra" (change)="onDataChange($event)"> Outra data
+            </label>
+          </div>
+          <input *ngIf="mostrarCalendario" type="date" [(ngModel)]="transacao.data" name="dataSelecionada" [max]="dataMaxima">
+
+        </div>
       </div>
 
-
-      <div class="form-group">
+      <div class="form-group compact">
         <label>Categoria:</label>
-        <select [(ngModel)]="transacao.categoriaId" name="categoria" (change)="onCategoriaChange($event)" required>
-          <option for="categoria" *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}
-          </option>
+        <select [(ngModel)]="transacao.categoriaId" name="categoria" (change)="onCategoriaChange($event)" [disabled]="!transacao.tipoTransacaoId" required>
+          <option for="categoria" *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}</option>
         </select>
       </div>
 
-      <div class="form-group">
+      <div class="form-group compact">
         <label>Subcategoria:</label>
-        <select [(ngModel)]="transacao.subcategoriaId" name="subcategoria" required>
-          <option for="subcategoria" *ngFor="let subcategoria of subcategorias" [value]="subcategoria.id">{{
-              subcategoria.nome }}</option>
+        <select [(ngModel)]="transacao.subcategoriaId" name="subcategoria" [disabled]="!transacao.categoriaId || subcategorias.length === 0" required>
+          <option for="subcategoria" *ngFor="let subcategoria of subcategorias" [value]="subcategoria.id">{{ subcategoria.nome }}</option>
         </select>
+        <!-- Mensagem para o usuário quando não houver subcategorias -->
+        <div *ngIf="subcategorias.length === 0 && transacao.categoriaId" class="no-subcategories-message">
+          Não há subcategorias disponíveis para esta categoria. Por favor, cadastre uma nova subcategoria.
+        </div>
       </div>
 
-      <div class="form-group">
+
+      <div class="form-group compact">
         <label>Método de Pagamento:</label>
         <select [(ngModel)]="transacao.metodoPagamentoId" name="metodoPagamento" required>
-          <option for="metodoPagamento" *ngFor="let metodo of metodosPagamento" [value]="metodo.id">{{
-              metodo.metodoPagamento }}</option>
+          <option for="metodoPagamento" *ngFor="let metodo of metodosPagamento" [value]="metodo.id">{{ metodo.metodoPagamento }}</option>
         </select>
       </div>
 
-      <div class="form-group">
-        <label>Conta Bancária:</label>
+      <div class="form-group compact form-group-inline">
+        <label>Conta:</label>
         <select [(ngModel)]="transacao.contaBancariaId" name="contaBancaria" required>
           <option for="contaBancaria" *ngFor="let conta of contasBancarias" [value]="conta.id">{{ conta.nome }}</option>
         </select>
-        <button type="button" (click)="cadastrarNovaContaBancaria()">Cadastrar Nova Conta Bancária</button>
+        <button type="button" class="small-button" (click)="cadastrarNovaContaBancaria()">Cadastrar Conta</button>
       </div>
 
-      <div class="form-group">
+      <div class="form-group compact banks">
         <label for="descricao">Descrição:</label>
         <input type="text" [(ngModel)]="transacao.descricao" name="descricao" id="descricao">
       </div>
 
-      <button type="submit" class="submit-btn">Salvar Transação</button>
+      <button type="submit" class="submit-btn">Salvar</button>
     </form>
   </div>
 </main>

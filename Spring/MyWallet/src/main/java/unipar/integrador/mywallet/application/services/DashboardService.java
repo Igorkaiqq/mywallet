@@ -15,7 +15,6 @@ import unipar.integrador.mywallet.infrastructure.repository.ContaBancariaReposit
 import unipar.integrador.mywallet.infrastructure.repository.TipoTransacaoRepository;
 import unipar.integrador.mywallet.infrastructure.repository.TransacaoRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -73,19 +72,7 @@ public class DashboardService implements IDashboard {
 
         UUID usuarioId = getUsuarioAutenticadoId();
         TipoTransacaoEntity receita = tipoTransacaoRepository.findByTipoTransacaoEnum(TipoTransacaoEnum.RECEITA);
-        List<TransacaoEntity> transacoes = transacaoRepository.
-                findTop5ByUsuarioIdAndTipoTransacao_IdAndDataBetweenOrderByValorDesc(usuarioId, receita.getId(), dataInicio, dataFim);
-        
-        return transacoes.stream()
-                .map(transacao -> new TransacaoUsuarioDTO(
-                        transacao.getId(),
-                        transacao.getData(),
-                        transacao.getTipoTransacao().getTipoTransacaoEnum().name(),
-                        transacao.getCategoriaUsuario().getNome(),
-                        transacao.getSubcategoriaUsuario().getNome(),
-                        transacao.getDescricao(),
-                        transacao.getValor()))
-                .collect(Collectors.toList());
+        return getTransacaoUsuarioDTOS(dataInicio, dataFim, receita, usuarioId);
     }
 
     @Override
@@ -94,6 +81,10 @@ public class DashboardService implements IDashboard {
         TipoTransacaoEntity despesa = tipoTransacaoRepository.findByTipoTransacaoEnum(TipoTransacaoEnum.DESPESA);
 
         UUID usuarioId = getUsuarioAutenticadoId();
+        return getTransacaoUsuarioDTOS(dataInicio, dataFim, despesa, usuarioId);
+    }
+
+    private List<TransacaoUsuarioDTO> getTransacaoUsuarioDTOS(LocalDateTime dataInicio, LocalDateTime dataFim, TipoTransacaoEntity despesa, UUID usuarioId) {
         List<TransacaoEntity> transacoes = transacaoRepository.
                 findTop5ByUsuarioIdAndTipoTransacao_IdAndDataBetweenOrderByValorDesc(usuarioId, despesa.getId(), dataInicio, dataFim);
 

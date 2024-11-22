@@ -3,7 +3,7 @@
   <form [formGroup]="editForm">
     <mat-form-field appearance="fill">
       <mat-label>Novo Nome</mat-label>
-      <input matInput formControlName="name" />
+      <input matInput formControlName="name" (keypress)="apenasLetras($event)" />
     </mat-form-field>
   </form>
 </div>

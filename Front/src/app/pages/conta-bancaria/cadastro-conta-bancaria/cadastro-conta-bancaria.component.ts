@@ -58,4 +58,12 @@ export class CadastroContaBancariaComponent {
       }
     });
   }
+
+  apenasLetras(event: KeyboardEvent): void {
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/;
+    if (!regex.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
 }

@@ -65,4 +65,12 @@ export class CriarCategoriaComponent {
   onClose(): void {
     this.dialogRef.close();
   }
+
+  apenasLetras(event: KeyboardEvent): void {
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ ]+$/;
+    if (!regex.test(event.key)) {
+      event.preventDefault();
+    }
+  }
+
 }

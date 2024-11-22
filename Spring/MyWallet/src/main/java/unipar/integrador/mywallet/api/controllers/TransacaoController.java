@@ -23,7 +23,6 @@ public class TransacaoController {
 
     @PostMapping
     public ResponseEntity<TransacaoEntity> create(@Valid @RequestBody TransacaoDTO dto) {
-        System.out.println(dto);
         TransacaoEntity transacao = transacaoService.save(dto);
         return new ResponseEntity<>(transacao, HttpStatus.CREATED);
     }

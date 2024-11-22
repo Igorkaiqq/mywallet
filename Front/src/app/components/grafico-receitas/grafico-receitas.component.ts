@@ -14,7 +14,7 @@ export class GraficoReceitasComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getReceitas().subscribe(data => {
       this.chart = new Chart('graficoReceitasCanvas', {
-        type: 'line', // Tipo do gráfico
+        type: 'line',
         data: {
           labels: data.map((item: any) => item.nome),
           datasets: [

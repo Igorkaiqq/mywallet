@@ -1,13 +1,14 @@
 package unipar.integrador.mywallet.application.dto.contaBancaria;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 
 public record CadastroContaBancariaDTO(
 
-        @NotNull(message = "Nome é obrigatório.")
+        @NotBlank(message = "Nome do Banco é obrigatório.")
         String nome,
-        @NotNull(message = "Banco é obrigatório.")
+        @Positive(message = "Banco deve ser positivo e maior que zero.")
         double saldo
 
 ) {
