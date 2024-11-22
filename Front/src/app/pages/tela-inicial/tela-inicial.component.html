@@ -2,25 +2,45 @@
   <div class="containter-dashboard">
     <section id="informations-container">
       <div class="informations">
-        <div class="info-card receita">
-          <div class="icon">💰</div>
-          <div class="info-text">
-            <h3>R$ {{ receita.totalReceitas }}</h3>
-            <span>Receita do Mês</span>
+        <div class="header-info">
+          <span>Resumo Financeiro</span>
+          <div class="period-selector">
+            <mat-form-field appearance="fill">
+              <mat-label>Selecionar período</mat-label>
+              <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange">
+                <input matStartDate formControlName="start" placeholder="Data Inicial">
+                <input matEndDate formControlName="end" placeholder="Data Final">
+              </mat-date-range-input>
+              <mat-date-range-picker
+                #picker
+                (opened)="onDateRangePickerOpened()"
+                (closed)="onDateRangePickerClosed()">
+              </mat-date-range-picker>
+              <mat-icon matSuffix (click)="picker.open()">calendar_today</mat-icon>
+            </mat-form-field>
           </div>
         </div>
-        <div class="info-card despesa">
-          <div class="icon">💰</div>
-          <div class="info-text">
-            <h3>R$ {{ receita.totalDespesas }}</h3>
-            <span>Despesas do Mês</span>
+        <div class="cards-container">
+          <div class="info-card receita">
+            <div class="icon">💰</div>
+            <div class="info-text">
+              <h3>{{ formatarValor(receita.totalReceitas) }}</h3>
+              <span>Receita do Mês</span>
+            </div>
           </div>
-        </div>
-        <div class="info-card saldo-mes">
-          <div class="icon">💰</div>
-          <div class="info-text">
-            <h3>R$ {{ receita.saldo }}</h3>
-            <span>Saldo do Mês</span>
+          <div class="info-card despesa">
+            <div class="icon">💰</div>
+            <div class="info-text">
+              <h3>{{ formatarValor(receita.totalDespesas) }}</h3>
+              <span>Despesas do Mês</span>
+            </div>
+          </div>
+          <div class="info-card saldo-mes">
+            <div class="icon">💰</div>
+            <div class="info-text">
+              <h3>{{ formatarValor(receita.saldo) }}</h3>
+              <span>Saldo do Mês</span>
+            </div>
           </div>
         </div>
       </div>
@@ -28,7 +48,7 @@
         <span>Desempenho do mês</span>
         <div class="category-charts">
           <div *ngFor="let chartData of chartsData" class="category-chart">
-            <div class="chart-title">{{chartData.name}}</div>
+            <div class="chart-title">{{ chartData.name }}</div>
             <p-chart type="doughnut" [data]="chartData.data" [options]="chartData.options"></p-chart>
           </div>
         </div>
@@ -37,15 +57,16 @@
   </div>
   <section id="bank-accounts-container">
     <div class="bank-accounts">
+      <span>Minhas contas</span>
       <div *ngFor="let banco of bancos" class="account">
-        <span>{{banco.nome}} - R$ {{banco.saldo}}</span>
+        <span>{{ banco.nome }} - {{ formatarValor(banco.saldo) }}</span>
       </div>
     </div>
     <section id="last-transactions-receita-container">
       <div class="last-transactions-receita">
         <span>Maiores receitas</span>
         <div *ngFor="let receita of maioresReceitas" class="receitas">
-          <span>{{ receita.data }} - {{ receita.nomeCategoria }} - {{ receita.nomeSubcategoria }} - R$ {{ receita.valor }}</span>
+          <span>{{ receita.data }} - {{ receita.nomeCategoria }} - {{ receita.nomeSubcategoria }} - {{ formatarValor(receita.valor) }}</span>
         </div>
       </div>
     </section>
@@ -53,10 +74,20 @@
       <div class="last-transactions-despesa">
         <span>Maiores despesas</span>
         <div *ngFor="let despesa of maioresDespesas" class="despesas">
-          <span>{{ despesa.data }} - {{ despesa.nomeCategoria }} - {{ despesa.nomeSubcategoria }} - R$ {{ despesa.valor }}</span>
+          <span>{{ despesa.data }} - {{ despesa.nomeCategoria }} - {{ despesa.nomeSubcategoria }} - {{ formatarValor(despesa.valor) }}</span>
         </div>
       </div>
     </section>
   </section>
+  <div *ngIf="showPresetOptions" class="preset-options">
+    <button mat-button (click)="setPresetPeriod('hoje')">Hoje</button>
+    <button mat-button (click)="setPresetPeriod('ontem')">Ontem</button>
+    <button mat-button (click)="setPresetPeriod('esta-semana')">Esta semana</button>
+    <button mat-button (click)="setPresetPeriod('semana-passada')">Semana passada</button>
+    <button mat-button (click)="setPresetPeriod('este-mes')">Este mês</button>
+    <button mat-button (click)="setPresetPeriod('mes-passado')">Mês passado</button>
+    <button mat-button (click)="setPresetPeriod('ultimos-2-meses')">Últimos 2 meses</button>
+    <button mat-button (click)="setPresetPeriod('ultimos-3-meses')">Últimos 3 meses</button>
+    <button mat-button (click)="setPresetPeriod('ultimos-6-meses')">Últimos 6 meses</button>
+  </div>
 </main>
-

@@ -10,20 +10,35 @@ export class DashboardService {
 
   constructor(private http: HttpClient, @Inject(API_BASE_URL) private apiUrl: string) { }
 
-  getResumo(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/dashboard/resumo`);
+  getResumo(dataInicio: string, dataFim: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/dashboard/resumo`, {
+      params: {
+        dataInicio: dataInicio,
+        dataFim: dataFim
+      }
+    });
   }
 
   getBancos(): Observable<any> {
     return this.http.get(`${this.apiUrl}/dashboard/bancos`);
   }
 
-  getMaioresReceitas():  Observable<any> {
-    return this.http.get(`${this.apiUrl}/dashboard/receitas`);
+  getMaioresReceitas(dataInicio: string, dataFim: string):  Observable<any> {
+    return this.http.get(`${this.apiUrl}/dashboard/receitas`, {
+      params: {
+        dataInicio: dataInicio,
+        dataFim: dataFim
+      }
+    });
   }
 
-  getMaioresDespesas():  Observable<any> {
-    return this.http.get(`${this.apiUrl}/dashboard/despesas`);
+  getMaioresDespesas(dataInicio: string, dataFim: string):  Observable<any> {
+    return this.http.get(`${this.apiUrl}/dashboard/despesas`, {
+      params: {
+        dataInicio: dataInicio,
+        dataFim: dataFim
+      }
+    });
   }
 
 }

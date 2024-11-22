@@ -4,6 +4,7 @@
   width: 100vw;
   padding: 2rem 0 2rem 5.5rem;
   gap: 2rem;
+  box-sizing: border-box;
 }
 
 .containter-dashboard {
@@ -16,179 +17,48 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .informations {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 20%;
-  align-items: center;
-  justify-content: space-between;
+  height: 22%;
+  align-items: flex-start;
+  gap: 1rem;
   background: rgba(106, 17, 203, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  gap: 10px;
   padding: 20px;
   border-radius: 20px;
 }
 
-#bank-accounts-container {
-  min-width: 30%;
+.header-info {
   display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 0 1rem 0 0;
-  flex: 0 0 auto;
-}
-
-.bank-accounts {
-  padding: 0.5rem;
-  height: 20%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  background: rgba(103, 246, 165, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
-}
-
-.bank-accounts-title {
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #fff;
-}
-
-.account {
-  color: #ffffff;
-  padding: 0.5rem;
-  text-align: center;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: start;
-  height: 20%;
-  background: rgba(10, 189, 91, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 5%;
+  padding: 5px 15px;
+  margin-bottom: 1rem;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
-.graphics {
-  display: block;
-  height: 80%;
-  padding: 1.2rem;
-  background: rgba(213, 161, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
-}
-
-.category-charts {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.category-chart {
-  position: relative;
-  width: 180px;
-  height: 180px;
-}
-
-.chart-title {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-#last-transactions-receita-container {
-  min-width: 30%;
-  height: 40%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 0 1rem 0 0;
-}
-
-.last-transactions-receita {
-  padding: 0.5rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  background: rgba(103, 246, 165, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
-}
-
-.receitas {
+.header-info span {
+  font-size: 1em;
+  margin: 0;
   color: #ffffff;
-  padding: 1rem;
-  margin-top: 0.5rem;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  height: 20%;
-  font-size: 0.85rem;
-  background: rgba(10, 189, 91, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
 }
 
-#last-transactions-despesa-container {
-  min-width: 30%;
-  height: 40%;
+.cards-container {
   display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 0 1rem 0 0;
-}
-
-.last-transactions-despesa {
-  padding: 0.5rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  background: rgba(248, 89, 89, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
-}
-
-.despesas {
-  color: #ffffff;
-  padding: 1rem;
-  margin-top: 0.5rem;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  height: 20%;
-  font-size: 0.85rem;
-  background: rgba(189, 10, 10, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
+  gap: 1rem;
+  width: 100%;
 }
 
 .info-card {
@@ -257,9 +127,222 @@
   border-radius: 15px;
 }
 
+#bank-accounts-container {
+  min-width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 0 1rem 0 0;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.bank-accounts {
+  padding: 0.5rem;
+  height: 22%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(103, 246, 165, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.bank-accounts span {
+  font-size: 1em;
+  margin: 0;
+  color: #ffffff;
+}
+
+.bank-accounts-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.account {
+  color: #ffffff;
+  padding: 0.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 17%;
+  background: rgba(10, 189, 91, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.graphics {
+  display: block;
+  padding: 1.2rem;
+  height: 78%;
+  background: rgba(213, 161, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.category-charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.category-chart {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.chart-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#last-transactions-receita-container {
+  min-width: 30%;
+  width: 100%;
+  height: 37%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-sizing: border-box;
+}
+
+.last-transactions-receita {
+  padding: 0.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(103, 246, 165, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+}
+
+.receitas {
+  color: #ffffff;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 15%;
+  font-size: 0.85rem;
+  background: rgba(10, 189, 91, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
+#last-transactions-despesa-container {
+  min-width: 30%;
+  width: 100%;
+  height: 37%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-sizing: border-box;
+}
+
+.last-transactions-despesa {
+  padding: 0.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(248, 89, 89, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+}
+
+.despesas {
+  color: #ffffff;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 15%;
+  font-size: 0.85rem;
+  background: rgba(189, 10, 10, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
 #informations-container span,
 .graphics span,
 #last-transactions-receita-container span,
 #last-transactions-despesa-container span {
   color: #ffffff;
 }
+
+.period-selector {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.preset-options {
+  position: fixed;
+  top:8%;
+  left: 53rem;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  width: 10rem;
+  z-index: 9999;
+  height: auto;
+}
+
+.preset-options ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.preset-options li {
+  margin: 2px 0;
+}
+
+.preset-options button {
+  text-align: left;
+  width: 100%;
+  font-size: 0.9em;
+}
+

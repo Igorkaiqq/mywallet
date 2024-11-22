@@ -1,7 +1,7 @@
 export interface Receita {
 
-  totalReceitas: string;
-  totalDespesas: string;
-  saldo: string;
+  totalReceitas: number;
+  totalDespesas: number;
+  saldo: number;
 
 }
