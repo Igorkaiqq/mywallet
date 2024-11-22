@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import unipar.integrador.mywallet.application.dto.categoriaUsuario.CategoriaUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.dashboard.BancosDTO;
 import unipar.integrador.mywallet.application.dto.dashboard.ReceitasDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoUsuarioDTO;
@@ -108,4 +109,5 @@ public class DashboardService implements IDashboard {
                         transacao.getValor()))
                 .collect(Collectors.toList());
     }
+
 }

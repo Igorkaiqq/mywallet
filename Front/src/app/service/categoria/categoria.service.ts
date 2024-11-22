@@ -27,4 +27,5 @@ export class CategoriaService {
   registrarCategoria(novaCategoria: Categoria) {
     return this.http.post(`${this.apiUrl}/categoria-usuario`, novaCategoria);
   }
+
 }

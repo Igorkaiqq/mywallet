@@ -26,5 +26,4 @@ export class MetasService {
   getMetas(id: String): Observable<any> {
     return this.http.get(`${this.apiUrl}/metas-usuario/categoria/${id}`);
   }
-
 }

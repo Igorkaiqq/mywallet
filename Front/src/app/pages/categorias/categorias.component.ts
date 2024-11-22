@@ -13,7 +13,7 @@ import {CriarCategoriaComponent} from "../../overlay/criar-categoria/criar-categ
 import {CriarSubcategoriaComponent} from "../../overlay/criar-subcategoria/criar-subcategoria.component";
 import {MetasFinanceiras} from "../../models/metas/metas";
 import {CriarMetasComponent} from "../../overlay/criar-metas/criar-metas.component";
-import {MetasService} from "../../service/metas/metasService";
+import {MetasService} from "../../service/metas/metas.service";
 
 @Component({
   selector: 'app-categorias',

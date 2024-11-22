@@ -18,4 +18,5 @@ public interface ITransacao {
     List<TransacaoEntity> findByusuarioIdAndCategoriaId(UUID usuarioId, UUID categoriaId);
     List<TransacaoUsuarioDTO> findByUsuarioId();
 
+
 }
