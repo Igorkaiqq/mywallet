@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {ContaBancariaService} from '../../../service/contaBancaria/conta-bancaria.service';
 import {FormsModule} from '@angular/forms';
 import {CustomCurrencyMaskConfig} from '../../../config/currency-mask';
+import {NotificationService} from "../../../service/notification/notification.service";
 
 interface ContaBancaria {
   id: string;
@@ -36,12 +37,17 @@ export class CadastroContaBancariaComponent {
   successMessage: string = '';
   errorMessages: string[] = [];
 
-  constructor(private contaBancariaService: ContaBancariaService, private router: Router) { }
+  constructor(
+    private contaBancariaService: ContaBancariaService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) { }
 
   salvarContaBancaria(): void {
     this.contaBancariaService.criarContaBancaria(this.contaBancaria).subscribe({
       next: (response) => {
         this.successMessage = 'Conta bancária cadastrada com sucesso!';
+        this.notificationService.showSuccess(this.successMessage);
         this.errorMessages = [];
         setTimeout(() => {
           this.router.navigate(['/realizar-transacao']);
@@ -54,7 +60,7 @@ export class CadastroContaBancariaComponent {
         } else {
           this.errorMessages = ['Erro ao cadastrar a conta bancária. Tente novamente.'];
         }
-        this.successMessage = '';
+        this.notificationService.showError(this.formatErrorMessages(this.errorMessages));
       }
     });
   }
@@ -64,6 +70,10 @@ export class CadastroContaBancariaComponent {
     if (!regex.test(event.key)) {
       event.preventDefault();
     }
+  }
+
+  private formatErrorMessages(errorMessages: string[]): string {
+    return errorMessages.join('\n');
   }
 
 }

@@ -4,6 +4,7 @@ import {LoginService} from '../../service/login/login.service';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {LoginCredentials} from "../../models/usuario/login";
 import {NgIf} from "@angular/common";
+import {NotificationService} from "../../service/notification/notification.service";
 
 @Component({
   selector: 'login',
@@ -16,7 +17,12 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) {
     this.loginForm = this.formBuilder.group({
       emailOuUsername: ['', Validators.required],
       senha: ['', Validators.required]
@@ -34,11 +40,11 @@ export class LoginComponent {
 
     this.loginService.login(credentials).subscribe(
       response => {
-
+        this.notificationService.showSuccess('Login efetuado com sucesso');
         this.router.navigate(['/tela-inicial']);
       },
       error => {
-        alert('Usuário ou senha inválidos');
+        this.notificationService.showError('Usuário ou senha inválidos');
       }
     );
   }

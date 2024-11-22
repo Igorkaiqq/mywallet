@@ -22,6 +22,7 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
+import {NotificationService} from "../../service/notification/notification.service";
 
 @Component({
   selector: 'app-realizar-transacao',
@@ -80,7 +81,7 @@ export class RealizarTransacaoComponent implements OnInit {
     private tipotransacaoService: TipoTransacaoService,
     private contaBancariaService: ContaBancariaService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -174,12 +175,7 @@ export class RealizarTransacaoComponent implements OnInit {
   salvarTransacao(): void {
     this.transacaoService.salvarTransacao(this.transacao).subscribe({
       next: (response) => {
-        this.snackBar.open('Transação realizada com sucesso!', 'Fechar', {
-          duration: 3000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right',
-          panelClass: ['success-snackbar']
-        });
+        this.notificationService.showSuccess('Transação realizada com sucesso!');
         this.errorMessages = [];
         setTimeout(() => {
           this.router.navigate(['/tela-inicial']);
@@ -193,12 +189,7 @@ export class RealizarTransacaoComponent implements OnInit {
           this.errorMessages = ['Erro ao realizar a transação. Tente novamente.'];
         }
 
-        this.snackBar.open(this.formatErrorMessages(this.errorMessages), 'Fechar', {
-          duration: 5000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right',
-          panelClass: ['error-snackbar']
-        });
+        this.notificationService.showError(this.formatErrorMessages(this.errorMessages));
       }
     });
   }
