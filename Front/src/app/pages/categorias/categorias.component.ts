@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from '../../service/categoria/categoria.service';
-import { SubcategoriaService } from '../../service/subcategoria/subcategoria.service';
-import { TipoTransacaoService } from '../../service/tipoTransacao/tipo-transacao.service';
-import { Categoria } from '../../models/categoria/categoria';
-import { Subcategoria } from '../../models/subcategoria/subcategoria';
-import { TipoTransacao } from '../../models/tipoTransacao/tipo-transacao';
-import { NgClass, NgForOf, NgIf } from "@angular/common";
-import { ActionButtonsComponent } from "../../components/actions/actions-buttons/actions-buttons.component";
-import { EditarCategoriaComponent } from "../../overlay/editar-categoria/editar-categoria.component";
-import { MatDialog } from "@angular/material/dialog";
-import { CriarCategoriaComponent } from "../../overlay/criar-categoria/criar-categoria.component";
-import { CriarSubcategoriaComponent } from "../../overlay/criar-subcategoria/criar-subcategoria.component";
-import { Meta } from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {CategoriaService} from '../../service/categoria/categoria.service';
+import {SubcategoriaService} from '../../service/subcategoria/subcategoria.service';
+import {TipoTransacaoService} from '../../service/tipoTransacao/tipo-transacao.service';
+import {Categoria} from '../../models/categoria/categoria';
+import {Subcategoria} from '../../models/subcategoria/subcategoria';
+import {TipoTransacao} from '../../models/tipoTransacao/tipo-transacao';
+import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {ActionButtonsComponent} from "../../components/actions/actions-buttons/actions-buttons.component";
+import {EditarCategoriaComponent} from "../../overlay/editar-categoria/editar-categoria.component";
+import {MatDialog} from "@angular/material/dialog";
+import {CriarCategoriaComponent} from "../../overlay/criar-categoria/criar-categoria.component";
+import {CriarSubcategoriaComponent} from "../../overlay/criar-subcategoria/criar-subcategoria.component";
 import {MetasFinanceiras} from "../../models/metas/metas";
 import {CriarMetasComponent} from "../../overlay/criar-metas/criar-metas.component";
 import {MetasService} from "../../service/metas/metasService";
@@ -32,6 +31,9 @@ export class CategoriasComponent implements OnInit {
   categoriasReceita: Categoria[] = [];
   categoriasDespesa: Categoria[] = [];
   subcategoriasMap: { [key: string]: Subcategoria[] } = {};
+
+  metasMap: { [key: string]: number | undefined } = {};
+
   expandedCategories: Set<string> = new Set<string>();
 
   constructor(
@@ -40,7 +42,8 @@ export class CategoriasComponent implements OnInit {
     private tipoTransacaoService: TipoTransacaoService,
     private metasService: MetasService,
     private dialog: MatDialog
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.buscarTiposTransacao();
@@ -51,6 +54,7 @@ export class CategoriasComponent implements OnInit {
       tipos.forEach((tipo: TipoTransacao) => {
         this.categoriaService.getCategoriasPorUsuarioId(tipo.id).subscribe((categorias: Categoria[]) => {
           categorias.forEach((categoria: Categoria) => {
+            this.buscarMeta(categoria.id);
             this.subcategoriaService.getSubcategoriasPorCategoriaId(categoria.id).subscribe((subcategorias: Subcategoria[]) => {
               this.subcategoriasMap[categoria.id] = subcategorias;
             });
@@ -73,6 +77,7 @@ export class CategoriasComponent implements OnInit {
       this.expandedCategories.delete(categoriaId);
     } else {
       this.expandedCategories.add(categoriaId);
+
     }
   }
 
@@ -82,7 +87,7 @@ export class CategoriasComponent implements OnInit {
 
   registrarCategoria(tipoTransacao: 'RECEITA' | 'DESPESA'): void {
     const dialogRef = this.dialog.open(CriarCategoriaComponent, {
-      data: { tipoTransacao }
+      data: {tipoTransacao}
     });
 
     dialogRef.afterClosed().subscribe((novaCategoria: Categoria | undefined) => {
@@ -98,12 +103,12 @@ export class CategoriasComponent implements OnInit {
 
   editarCategoria(categoria: Categoria): void {
     const dialogRef = this.dialog.open(EditarCategoriaComponent, {
-      data: { currentName: categoria.nome }
+      data: {currentName: categoria.nome}
     });
 
     dialogRef.afterClosed().subscribe((novoNome: string | undefined) => {
       if (novoNome) {
-        const categoriaAtualizada = { ...categoria, nome: novoNome };
+        const categoriaAtualizada = {...categoria, nome: novoNome};
         this.categoriaService.atualizarCategoria(categoriaAtualizada).subscribe(() => {
           this.buscarTiposTransacao();
         }, error => {
@@ -123,7 +128,7 @@ export class CategoriasComponent implements OnInit {
 
   registrarSubcategoria(categoria: Categoria): void {
     const dialogRef = this.dialog.open(CriarSubcategoriaComponent, {
-      data: { categoriaNome: categoria.nome }
+      data: {categoriaNome: categoria.nome}
     });
 
     dialogRef.afterClosed().subscribe((novaSubcategoria: Subcategoria | undefined) => {
@@ -138,14 +143,14 @@ export class CategoriasComponent implements OnInit {
     });
   }
 
-  registrarMeta(meta : MetasFinanceiras): void{
+  registrarMeta(categoria: Categoria): void {
     const dialogRef = this.dialog.open(CriarMetasComponent, {
-      data: { valorMeta: meta.valor }
+      data: {categoriaNome: categoria.nome}
     });
 
     dialogRef.afterClosed().subscribe((novaMeta: MetasFinanceiras | undefined) => {
       if (novaMeta) {
-        novaMeta.valor = meta.valor;
+        novaMeta.categoriaId = categoria.id;
         this.metasService.registrarMeta(novaMeta).subscribe(() => {
           this.buscarTiposTransacao();
         }, error => {
@@ -157,12 +162,12 @@ export class CategoriasComponent implements OnInit {
 
   editarSubcategoria(subcategoria: Subcategoria): void {
     const dialogRef = this.dialog.open(EditarCategoriaComponent, {
-      data: { currentName: subcategoria.nome }
+      data: {currentName: subcategoria.nome}
     });
 
     dialogRef.afterClosed().subscribe((novoNome: string | undefined) => {
       if (novoNome) {
-        const subCategoriaAtualizada = { ...subcategoria, nome: novoNome };
+        const subCategoriaAtualizada = {...subcategoria, nome: novoNome};
         this.subcategoriaService.atualizarsubCategoria(subCategoriaAtualizada).subscribe(() => {
           this.buscarTiposTransacao();
         }, error => {
@@ -179,4 +184,14 @@ export class CategoriasComponent implements OnInit {
       console.error('Erro ao excluir subcategoria:', error);
     });
   }
+
+  buscarMeta(id: string): void {
+    if (!this.metasMap[id]) {
+      this.metasService.getMetas(id).subscribe((metas) => {
+        this.metasMap[id] = metas?.valor;
+      });
+    }
+  }
+
+
 }

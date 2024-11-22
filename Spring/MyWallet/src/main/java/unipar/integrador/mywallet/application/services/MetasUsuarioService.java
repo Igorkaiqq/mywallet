@@ -6,14 +6,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import unipar.integrador.mywallet.application.dto.metas.MetasUsuarioDTO;
 import unipar.integrador.mywallet.application.dto.transacao.TransacaoDTO;
-import unipar.integrador.mywallet.application.entities.CategoriaUsuarioEntity;
-import unipar.integrador.mywallet.application.entities.MetasUsuarioEntity;
-import unipar.integrador.mywallet.application.entities.TransacaoEntity;
-import unipar.integrador.mywallet.application.entities.UsuarioEntity;
+import unipar.integrador.mywallet.application.entities.*;
 import unipar.integrador.mywallet.application.enums.StatusRegistroEnum;
+import unipar.integrador.mywallet.application.enums.TipoTransacaoEnum;
 import unipar.integrador.mywallet.application.exception.EntityNotFoundException;
 import unipar.integrador.mywallet.application.interfaces.IMetasUsuario;
 import unipar.integrador.mywallet.infrastructure.repository.MetasUsuarioRepository;
+import unipar.integrador.mywallet.infrastructure.repository.TipoTransacaoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,14 +23,16 @@ public class MetasUsuarioService implements IMetasUsuario {
 
 
     private final MetasUsuarioRepository metasUsuarioRepository;
+    private final TipoTransacaoRepository tipoTransacaoRepository;
 
     public UUID getUsuarioAutenticadoId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return UUID.fromString(authentication.getName());
     }
 
-    public MetasUsuarioService(MetasUsuarioRepository metasUsuarioRepository) {
+    public MetasUsuarioService(MetasUsuarioRepository metasUsuarioRepository, TipoTransacaoRepository tipoTransacaoRepository) {
         this.metasUsuarioRepository = metasUsuarioRepository;
+        this.tipoTransacaoRepository = tipoTransacaoRepository;
     }
 
     @Override
@@ -75,5 +76,13 @@ public class MetasUsuarioService implements IMetasUsuario {
         return metasUsuarioRepository.save(existing);
     }
 
+    @Override
+    public MetasUsuarioEntity findByCategoriaId(UUID categoriaId) {
+
+        TipoTransacaoEntity despesa = tipoTransacaoRepository.findByTipoTransacaoEnum(TipoTransacaoEnum.DESPESA);
+
+        return metasUsuarioRepository.findByCategoriaId_IdAndCategoriaId_TipoTransacaoEntity_Id(categoriaId, despesa.getId());
+
+    }
 
 }

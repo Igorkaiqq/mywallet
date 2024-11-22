@@ -17,11 +17,14 @@ export class MetasService {
   }
 
   registrarMeta(meta: MetasFinanceiras): Observable<any> {
+
+    console.log(meta);
     return this.http.post<Meta>(`${this.apiUrl}/metas-usuario`, meta);
+
   }
 
-  getMetas(meta: MetasFinanceiras): Observable<any> {
-    return this.http.get(`${this.apiUrl}/metas-usuario/`)
+  getMetas(id: String): Observable<any> {
+    return this.http.get(`${this.apiUrl}/metas-usuario/categoria/${id}`);
   }
 
 }
