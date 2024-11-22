@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {HighchartsChartModule} from "highcharts-angular";
 import {ChartModule} from "primeng/chart";
+import {LOCALE_CONFIG, NgxDaterangepickerMd} from "ngx-daterangepicker-material";
 
 @NgModule({
   declarations: [
@@ -21,9 +22,17 @@ import {ChartModule} from "primeng/chart";
     MatFormFieldModule,
     MatInputModule,
     HighchartsChartModule,
-    ChartModule
+    ChartModule,
+    NgxDaterangepickerMd.forRoot({
+      format: 'DD/MM/YYYY',
+      firstDay: 1,
+      applyLabel: 'OK',
+      customRangeLabel: 'Customizado'
+    })
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_CONFIG, useValue: { format: 'DD/MM/YYYY', firstDay: 1 } }
+  ],
   bootstrap: []
 })
 export class AppModule { }

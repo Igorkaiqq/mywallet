@@ -39,12 +39,6 @@ public class DashboardService implements IDashboard {
     }
 
     @Override
-    public ReceitasDTO findResumo() {
-        LocalDateTime dataInicio = LocalDate.now().withDayOfMonth(1).atStartOfDay();
-        LocalDateTime dataFim = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth()).atTime(23, 59, 59);
-        return findResumo(dataInicio, dataFim);
-    }
-
     public ReceitasDTO findResumo(LocalDateTime dataInicio, LocalDateTime dataFim) {
         UUID usuarioId = getUsuarioAutenticadoId();
 
@@ -75,15 +69,12 @@ public class DashboardService implements IDashboard {
     }
 
     @Override
-    public List<TransacaoUsuarioDTO> findMaioresReceitas() {
-
-        LocalDateTime dataInicio = LocalDate.now().withDayOfMonth(1).atStartOfDay();
-        LocalDateTime dataFim = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth()).atTime(23, 59, 59);
+    public List<TransacaoUsuarioDTO> findMaioresReceitas(LocalDateTime dataInicio, LocalDateTime dataFim) {
 
         UUID usuarioId = getUsuarioAutenticadoId();
         TipoTransacaoEntity receita = tipoTransacaoRepository.findByTipoTransacaoEnum(TipoTransacaoEnum.RECEITA);
         List<TransacaoEntity> transacoes = transacaoRepository.
-                findTop4ByUsuarioIdAndTipoTransacao_IdAndDataBetweenOrderByValorDesc(usuarioId, receita.getId(), dataInicio, dataFim);
+                findTop5ByUsuarioIdAndTipoTransacao_IdAndDataBetweenOrderByValorDesc(usuarioId, receita.getId(), dataInicio, dataFim);
         
         return transacoes.stream()
                 .map(transacao -> new TransacaoUsuarioDTO(
@@ -98,16 +89,13 @@ public class DashboardService implements IDashboard {
     }
 
     @Override
-    public List<TransacaoUsuarioDTO> findMaioresDespesas() {
-
-        LocalDateTime dataInicio = LocalDate.now().withDayOfMonth(1).atStartOfDay();
-        LocalDateTime dataFim = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth()).atTime(23, 59, 59);
+    public List<TransacaoUsuarioDTO> findMaioresDespesas(LocalDateTime dataInicio, LocalDateTime dataFim) {
 
         TipoTransacaoEntity despesa = tipoTransacaoRepository.findByTipoTransacaoEnum(TipoTransacaoEnum.DESPESA);
 
         UUID usuarioId = getUsuarioAutenticadoId();
         List<TransacaoEntity> transacoes = transacaoRepository.
-                findTop4ByUsuarioIdAndTipoTransacao_IdAndDataBetweenOrderByValorDesc(usuarioId, despesa.getId(), dataInicio, dataFim);
+                findTop5ByUsuarioIdAndTipoTransacao_IdAndDataBetweenOrderByValorDesc(usuarioId, despesa.getId(), dataInicio, dataFim);
 
         return transacoes.stream()
                 .map(transacao -> new TransacaoUsuarioDTO(
